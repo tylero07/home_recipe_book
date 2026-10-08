@@ -3,55 +3,169 @@ ingredients:
 - id: butter
   name: butter, salted or unsalted
   category: dairy
-  grams_per_cup: 227
+  grams_per_cup: 227.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 717
-    protein_g: 0.9
-    carbohydrate_g: 0.1
-    fat_g: 81.1
-    source: Approximate typical values; not verified against a label.
+    status: source_provided
+    calories_kcal: 717.0
+    protein_g: 0.85
+    carbohydrate_g: 0.06
+    fat_g: 81.11
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173410: Butter, salted'
+  usda:
+    fdc_id: 173410
+    dataset: SR Legacy
+    description: Butter, salted
+  notes:
+  - Cup weight from USDA portion '1 cup' (227 g).
 - id: ultrafiltered-milk-2pct
-  name: ultra-filtered 2% milk
+  name: ultra-filtered 2% milk (fairlife)
   category: dairy
   grams_per_cup: 246
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 48.8
-    protein_g: 5.3
-    carbohydrate_g: 2.4
-    fat_g: 1.8
-    source: Converted from typical label values of 120 kcal, 13 g protein, 6 g carbohydrate, and 4.5 g fat per cup.
+    status: source_provided
+    calories_kcal: 48.78
+    protein_g: 5.285
+    carbohydrate_g: 2.439
+    fat_g: 1.829
+    source: 'fairlife 2% Reduced Fat Ultra-Filtered Milk label, 1 cup (240 ml): 120 kcal, 13 g protein,
+      6 g carbohydrate, 4.5 g fat (fairlife.com, checked 2026-10-08).'
+  notes:
+  - 'Not linked to USDA: ultra-filtered milk has about 60% more protein than regular 2% milk.'
 - id: cheddar-cheese
   name: cheddar cheese, shredded
   category: dairy
-  grams_per_cup: 113
+  grams_per_cup: 113.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 403
-    protein_g: 24.9
-    carbohydrate_g: 1.3
-    fat_g: 33.1
-    source: Approximate typical values; not verified against a label.
+    status: source_provided
+    calories_kcal: 403.0
+    protein_g: 22.87
+    carbohydrate_g: 3.37
+    fat_g: 33.31
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173414: Cheese, cheddar (Includes foods for USDA''s
+      Food Distribution Program)'
+  usda:
+    fdc_id: 173414
+    dataset: SR Legacy
+    description: Cheese, cheddar (Includes foods for USDA's Food Distribution Program)
+  notes:
+  - Cup weight from USDA portion '1 cup, shredded' (113 g).
 - id: sour-cream
   name: sour cream
   category: dairy
-  grams_per_cup: 230
+  grams_per_cup: 230.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 198
-    protein_g: 2.4
-    carbohydrate_g: 4.6
-    fat_g: 19.4
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 198.0
+    protein_g: 2.44
+    carbohydrate_g: 4.63
+    fat_g: 19.35
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171257: Cream, sour, cultured'
+  usda:
+    fdc_id: 171257
+    dataset: SR Legacy
+    description: Cream, sour, cultured
+  notes:
+  - Cup weight from USDA portion '1 cup' (230 g).
 - id: greek-yogurt-nonfat
   name: nonfat plain Greek yogurt
   category: dairy
   grams_per_cup: 245
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 59
-    protein_g: 10.2
+    status: source_provided
+    calories_kcal: 59.0
+    protein_g: 10.19
     carbohydrate_g: 3.6
-    fat_g: 0.4
-    source: Approximate typical values.
+    fat_g: 0.39
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170894: Yogurt, Greek, plain, nonfat (Includes
+      foods for USDA''s Food Distribution Program)'
+  usda:
+    fdc_id: 170894
+    dataset: SR Legacy
+    description: Yogurt, Greek, plain, nonfat (Includes foods for USDA's Food Distribution Program)
+  notes:
+  - Cup weight is estimated; USDA lists only a 170 g container.
+- id: sour-cream-light
+  name: light sour cream
+  category: dairy
+  usda:
+    fdc_id: 173443
+    dataset: SR Legacy
+    description: Sour cream, light
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 136.0
+    protein_g: 3.5
+    carbohydrate_g: 7.1
+    fat_g: 10.6
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173443: Sour cream, light'
+  grams_per_cup: 230.0
+  notes:
+  - Cup weight from USDA portion '1 cup' (230 g).
+- id: sour-cream-fat-free
+  name: fat-free sour cream
+  category: dairy
+  usda:
+    fdc_id: 173444
+    dataset: SR Legacy
+    description: Sour cream, fat free
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 74.0
+    protein_g: 3.1
+    carbohydrate_g: 15.6
+    fat_g: 0.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173444: Sour cream, fat free'
+  grams_per_cup: 230.0
+  notes:
+  - Cup weight from USDA portion '1 cup' (230 g).
+- id: greek-yogurt-lowfat
+  name: low-fat plain Greek yogurt
+  category: dairy
+  usda:
+    fdc_id: 170903
+    dataset: SR Legacy
+    description: Yogurt, Greek, plain, lowfat
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 73.0
+    protein_g: 9.95
+    carbohydrate_g: 3.94
+    fat_g: 1.92
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170903: Yogurt, Greek, plain, lowfat'
+  grams_per_cup: 245
+  notes:
+  - Cup weight is estimated; USDA lists no cup portion.
+- id: greek-yogurt-whole
+  name: whole-milk plain Greek yogurt
+  category: dairy
+  usda:
+    fdc_id: 171304
+    dataset: SR Legacy
+    description: Yogurt, Greek, plain, whole milk
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 97.0
+    protein_g: 9.0
+    carbohydrate_g: 3.98
+    fat_g: 5.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171304: Yogurt, Greek, plain, whole milk'
+  grams_per_cup: 245
+  notes:
+  - Cup weight is estimated; USDA lists no cup portion.
+- id: plain-yogurt-whole
+  name: whole-milk plain yogurt
+  category: dairy
+  usda:
+    fdc_id: 171284
+    dataset: SR Legacy
+    description: Yogurt, plain, whole milk
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 61.0
+    protein_g: 3.47
+    carbohydrate_g: 4.66
+    fat_g: 3.25
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171284: Yogurt, plain, whole milk'
+  grams_per_cup: 245.0
+  notes:
+  - Cup weight from USDA portion '1 cup (8 fl oz)' (245 g).

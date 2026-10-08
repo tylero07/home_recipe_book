@@ -3,87 +3,133 @@ ingredients:
 - id: carrot
   name: carrot, diced
   category: vegetable
-  grams_per_cup: 128
-  grams_each: 61
+  grams_per_cup: 128.0
+  grams_each: 61.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 41
-    protein_g: 0.9
-    carbohydrate_g: 9.6
-    fat_g: 0.2
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 41.0
+    protein_g: 0.93
+    carbohydrate_g: 9.58
+    fat_g: 0.24
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170393: Carrots, raw'
+  usda:
+    fdc_id: 170393
+    dataset: SR Legacy
+    description: Carrots, raw
+  notes:
+  - Cup weight from USDA portion '1 cup chopped' (128 g).
+  - Each weight from USDA portion '1 medium' (61 g).
 - id: onion
   name: onion, chopped
   category: vegetable
-  grams_per_cup: 160
-  grams_each: 110
+  grams_per_cup: 160.0
+  grams_each: 110.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 40
+    status: source_provided
+    calories_kcal: 40.0
     protein_g: 1.1
-    carbohydrate_g: 9.3
+    carbohydrate_g: 9.34
     fat_g: 0.1
-    source: Approximate typical values.
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170000: Onions, raw'
+  usda:
+    fdc_id: 170000
+    dataset: SR Legacy
+    description: Onions, raw
+  notes:
+  - Cup weight from USDA portion '1 cup, chopped' (160 g).
+  - Each weight from USDA portion '1 medium (2-1/2" dia)' (110 g).
 - id: celery
   name: celery, diced
   category: vegetable
-  grams_per_cup: 101
-  grams_each: 40
+  grams_per_cup: 101.0
+  grams_each: 40.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 14
-    protein_g: 0.7
-    carbohydrate_g: 3
-    fat_g: 0.2
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 14.0
+    protein_g: 0.69
+    carbohydrate_g: 2.97
+    fat_g: 0.17
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169988: Celery, raw'
+  usda:
+    fdc_id: 169988
+    dataset: SR Legacy
+    description: Celery, raw
+  notes:
+  - Cup weight from USDA portion '1 cup chopped' (101 g).
+  - Each weight from USDA portion '1 stalk, medium (7-1/2" - 8" long)' (40 g).
 - id: garlic
   name: garlic
   category: vegetable
-  grams_each: 3
+  grams_each: 3.0
   notes:
   - One count is one clove.
+  - Each weight from USDA portion '1 clove' (3 g).
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 149
-    protein_g: 6.4
-    carbohydrate_g: 33.1
+    status: source_provided
+    calories_kcal: 149.0
+    protein_g: 6.36
+    carbohydrate_g: 33.06
     fat_g: 0.5
-    source: Approximate typical values.
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169230: Garlic, raw'
+  usda:
+    fdc_id: 169230
+    dataset: SR Legacy
+    description: Garlic, raw
 - id: lemon-juice
   name: lemon juice
   category: fruit
-  grams_per_cup: 244
+  grams_per_cup: 244.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 22
-    protein_g: 0.4
+    status: source_provided
+    calories_kcal: 22.0
+    protein_g: 0.35
     carbohydrate_g: 6.9
-    fat_g: 0.2
-    source: Approximate typical values.
+    fat_g: 0.24
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 167747: Lemon juice, raw'
+  usda:
+    fdc_id: 167747
+    dataset: SR Legacy
+    description: Lemon juice, raw
+  notes:
+  - Cup weight from USDA portion '1 cup' (244 g).
 - id: tomato-paste
   name: tomato paste
   category: tomato
-  grams_per_cup: 262
+  grams_per_cup: 262.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 82
-    protein_g: 4.3
-    carbohydrate_g: 18.9
-    fat_g: 0.5
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 82.0
+    protein_g: 4.32
+    carbohydrate_g: 18.91
+    fat_g: 0.47
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170459: Tomato products, canned, paste, without
+      salt added (Includes foods for USDA''s Food Distribution Program)'
+  usda:
+    fdc_id: 170459
+    dataset: SR Legacy
+    description: Tomato products, canned, paste, without salt added (Includes foods for USDA's Food Distribution
+      Program)
+  notes:
+  - Cup weight from USDA portion '1 cup' (262 g).
 - id: poblano-pepper
   name: poblano pepper
   category: vegetable
   grams_each: 110
   notes:
-  - One count is one medium pepper.
+  - Proxy nutrition from green bell pepper; USDA has no poblano entry. One count is one medium pepper
+    (about 110 g, estimated).
   nutrition_per_100g:
     status: estimated
-    calories_kcal: 20
-    protein_g: 0.9
-    carbohydrate_g: 4.6
-    fat_g: 0.2
-    source: Approximate typical values.
+    calories_kcal: 20.0
+    protein_g: 0.86
+    carbohydrate_g: 4.64
+    fat_g: 0.17
+    source: 'Proxy from a similar food: USDA FoodData Central (SR Legacy), FDC ID 170427: Peppers, sweet,
+      green, raw'
+  usda:
+    fdc_id: 170427
+    dataset: SR Legacy
+    description: Peppers, sweet, green, raw
 - id: bell-pepper
   name: bell pepper (yellow, orange, or red)
   category: vegetable
@@ -91,81 +137,122 @@ ingredients:
   notes:
   - One count is one medium pepper.
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 27
-    protein_g: 1
-    carbohydrate_g: 6.3
-    fat_g: 0.2
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 27.0
+    protein_g: 1.0
+    carbohydrate_g: 6.32
+    fat_g: 0.21
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169383: Peppers, sweet, yellow, raw'
+  usda:
+    fdc_id: 169383
+    dataset: SR Legacy
+    description: Peppers, sweet, yellow, raw
 - id: cubanelle-pepper
   name: cubanelle pepper
   category: vegetable
   grams_each: 70
   notes:
-  - One count is one medium pepper.
+  - Proxy nutrition from green bell pepper; USDA has no cubanelle entry. One count is one medium pepper
+    (about 70 g, estimated).
   nutrition_per_100g:
     status: estimated
-    calories_kcal: 27
-    protein_g: 1
-    carbohydrate_g: 6
-    fat_g: 0.3
-    source: Approximate typical values.
+    calories_kcal: 20.0
+    protein_g: 0.86
+    carbohydrate_g: 4.64
+    fat_g: 0.17
+    source: 'Proxy from a similar food: USDA FoodData Central (SR Legacy), FDC ID 170427: Peppers, sweet,
+      green, raw'
+  usda:
+    fdc_id: 170427
+    dataset: SR Legacy
+    description: Peppers, sweet, green, raw
 - id: jalapeno
   name: jalapeño or Fresno chili
   category: vegetable
-  grams_each: 14
+  grams_each: 14.0
   notes:
   - One count is one chile.
+  - Each weight from USDA portion '1 pepper' (14 g).
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 29
-    protein_g: 0.9
+    status: source_provided
+    calories_kcal: 29.0
+    protein_g: 0.91
     carbohydrate_g: 6.5
-    fat_g: 0.4
-    source: Approximate typical values.
+    fat_g: 0.37
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 168576: Peppers, jalapeno, raw'
+  usda:
+    fdc_id: 168576
+    dataset: SR Legacy
+    description: Peppers, jalapeno, raw
 - id: tomato-puree
   name: tomato puree, canned
   category: tomato
-  grams_per_cup: 250
+  grams_per_cup: 250.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 38
-    protein_g: 1.7
-    carbohydrate_g: 9
-    fat_g: 0.2
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 38.0
+    protein_g: 1.65
+    carbohydrate_g: 8.98
+    fat_g: 0.21
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170460: Tomato products, canned, puree, without
+      salt added'
+  usda:
+    fdc_id: 170460
+    dataset: SR Legacy
+    description: Tomato products, canned, puree, without salt added
+  notes:
+  - Cup weight from USDA portion '1 cup' (250 g).
 - id: cilantro
   name: fresh cilantro
   category: herb
-  grams_per_cup: 16
+  grams_per_cup: 16.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 23
-    protein_g: 2.1
-    carbohydrate_g: 3.7
-    fat_g: 0.5
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 23.0
+    protein_g: 2.13
+    carbohydrate_g: 3.67
+    fat_g: 0.52
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169997: Coriander (cilantro) leaves, raw'
+  usda:
+    fdc_id: 169997
+    dataset: SR Legacy
+    description: Coriander (cilantro) leaves, raw
+  notes:
+  - Cup weight from USDA portion '0.25 cup' (4 g).
+  negligible: true
 - id: pickled-jalapenos
   name: pickled jalapeños
   category: vegetable
-  grams_per_cup: 140
+  grams_per_cup: 136.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 27
-    protein_g: 0.9
-    carbohydrate_g: 4.7
-    fat_g: 0.9
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 27.0
+    protein_g: 0.92
+    carbohydrate_g: 4.74
+    fat_g: 0.94
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170080: Peppers, jalapeno, canned, solids and liquids'
+  usda:
+    fdc_id: 170080
+    dataset: SR Legacy
+    description: Peppers, jalapeno, canned, solids and liquids
+  notes:
+  - Cup weight from USDA portion '1 cup, chopped' (136 g).
+  negligible: true
 - id: corn-tortilla
   name: corn tortilla
   category: grain
-  grams_each: 26
+  grams_each: 24.0
   notes:
   - One count is one 6-inch tortilla.
+  - Each weight from USDA portion '1 tortilla' (24 g).
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 218
+    status: source_provided
+    calories_kcal: 218.0
     protein_g: 5.7
-    carbohydrate_g: 44.6
-    fat_g: 2.9
-    source: Approximate typical values.
+    carbohydrate_g: 44.64
+    fat_g: 2.85
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 175036: Tortillas, ready-to-bake or -fry, corn'
+  usda:
+    fdc_id: 175036
+    dataset: SR Legacy
+    description: Tortillas, ready-to-bake or -fry, corn

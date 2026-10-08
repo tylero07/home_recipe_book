@@ -2,246 +2,472 @@ schema_version: 1
 ingredients:
 - id: all-purpose-flour
   name: all-purpose flour
-  aliases: [flour]
+  aliases:
+  - flour
   category: flour
-  grams_per_cup: 125
+  grams_per_cup: 125.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 364
-    protein_g: 10.3
-    carbohydrate_g: 76.3
-    fat_g: 1
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 364.0
+    protein_g: 10.33
+    carbohydrate_g: 76.31
+    fat_g: 0.98
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 168894: Wheat flour, white, all-purpose, enriched,
+      bleached'
+  usda:
+    fdc_id: 168894
+    dataset: SR Legacy
+    description: Wheat flour, white, all-purpose, enriched, bleached
+  notes:
+  - Cup weight from USDA portion '1 cup' (125 g).
 - id: white-rice-dry
   name: white rice, long-grain, dry
-  aliases: [rice]
+  aliases:
+  - rice
   category: grain
-  grams_per_cup: 185
+  grams_per_cup: 185.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 365
-    protein_g: 7.1
-    carbohydrate_g: 80
-    fat_g: 0.7
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 365.0
+    protein_g: 7.13
+    carbohydrate_g: 79.95
+    fat_g: 0.66
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 168877: Rice, white, long-grain, regular, raw,
+      enriched'
+  usda:
+    fdc_id: 168877
+    dataset: SR Legacy
+    description: Rice, white, long-grain, regular, raw, enriched
+  notes:
+  - Cup weight from USDA portion '1 cup' (185 g).
 - id: brown-sugar
   name: brown sugar, packed
   category: sweetener
-  grams_per_cup: 220
+  grams_per_cup: 220.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 380
-    protein_g: 0.1
-    carbohydrate_g: 98.1
-    fat_g: 0
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 380.0
+    protein_g: 0.12
+    carbohydrate_g: 98.09
+    fat_g: 0.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 168833: Sugars, brown'
+  usda:
+    fdc_id: 168833
+    dataset: SR Legacy
+    description: Sugars, brown
+  notes:
+  - Cup weight from USDA portion '1 cup packed' (220 g).
 - id: dark-chocolate
   name: dark chocolate, 70–85% cacao
   category: chocolate
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 598
-    protein_g: 7.8
+    status: source_provided
+    calories_kcal: 598.0
+    protein_g: 7.79
     carbohydrate_g: 45.9
-    fat_g: 42.6
-    source: Approximate typical values.
+    fat_g: 42.63
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170273: Chocolate, dark, 70-85% cacao solids'
+  usda:
+    fdc_id: 170273
+    dataset: SR Legacy
+    description: Chocolate, dark, 70-85% cacao solids
 - id: cheddar-bay-biscuit-mix
   name: Cheddar Bay Biscuit Mix
   category: baking mix
   notes:
-  - Box size and nutrition label not recovered; add grams_each (box weight) and label values to count it.
+  - One count is one 11.36 oz (322 g) box, about 10 biscuits. Counts the dry mix only; the cheddar, butter,
+    and water the box calls for are separate.
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 437.5
+    protein_g: 6.25
+    carbohydrate_g: 59.375
+    fat_g: 18.75
+    source: 'Red Lobster Cheddar Bay Biscuit Mix retailer label, 32 g mix and seasoning (1 biscuit): 140
+      kcal, 19 g carbohydrate, 6 g fat, 2 g protein (shoprite.com, checked 2026-10-08).'
+  grams_each: 322
 - id: olive-oil
   name: olive oil
   category: oil
-  grams_per_cup: 216
+  grams_per_cup: 216.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 884
-    protein_g: 0
-    carbohydrate_g: 0
-    fat_g: 100
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171413: Oil, olive, salad or cooking'
+  usda:
+    fdc_id: 171413
+    dataset: SR Legacy
+    description: Oil, olive, salad or cooking
+  notes:
+  - Cup weight from USDA portion '1 cup' (216 g).
 - id: salt
   name: table salt
   category: seasoning
-  grams_per_cup: 292
+  grams_per_cup: 292.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 0
-    protein_g: 0
-    carbohydrate_g: 0
-    fat_g: 0
-    source: Salt has no macronutrients.
+    status: source_provided
+    calories_kcal: 0.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 0.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173468: Salt, table'
+  usda:
+    fdc_id: 173468
+    dataset: SR Legacy
+    description: Salt, table
+  notes:
+  - Cup weight from USDA portion '1 cup' (292 g).
+  negligible: true
 - id: black-pepper
   name: black pepper, ground
   category: seasoning
-  grams_per_cup: 110
+  grams_per_cup: 110.4
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 251
-    protein_g: 10.4
-    carbohydrate_g: 64
-    fat_g: 3.3
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 251.0
+    protein_g: 10.39
+    carbohydrate_g: 63.95
+    fat_g: 3.26
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170931: Spices, pepper, black'
+  usda:
+    fdc_id: 170931
+    dataset: SR Legacy
+    description: Spices, pepper, black
+  notes:
+  - Cup weight from USDA portion '1 tbsp, ground' (6.9 g).
+  negligible: true
 - id: worcestershire-sauce
   name: Worcestershire sauce
   category: condiment
-  grams_per_cup: 275
+  grams_per_cup: 275.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 78
-    protein_g: 0
-    carbohydrate_g: 19.5
-    fat_g: 0
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 77.0
+    protein_g: 0.0
+    carbohydrate_g: 19.17
+    fat_g: 0.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171610: Sauce, worcestershire'
+  usda:
+    fdc_id: 171610
+    dataset: SR Legacy
+    description: Sauce, worcestershire
+  notes:
+  - Cup weight from USDA portion '1 cup' (275 g).
+  negligible: true
 - id: hot-sauce
   name: hot sauce, vinegar-based (e.g. Cholula)
   category: condiment
-  grams_per_cup: 240
+  grams_per_cup: 225.6
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 10
-    protein_g: 0.5
-    carbohydrate_g: 1.5
-    fat_g: 0.3
-    source: Approximate typical values for vinegar-based hot sauce.
+    status: source_provided
+    calories_kcal: 11.0
+    protein_g: 0.51
+    carbohydrate_g: 1.75
+    fat_g: 0.37
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174527: Sauce, ready-to-serve, pepper or hot'
+  usda:
+    fdc_id: 174527
+    dataset: SR Legacy
+    description: Sauce, ready-to-serve, pepper or hot
+  notes:
+  - Cup weight from USDA portion '1 tsp' (4.7 g).
+  negligible: true
 - id: mexican-chocolate
   name: Mexican chocolate
   category: chocolate
   grams_each: 90
   notes:
-  - One count is one disc (tablet); 90 g assumed, typical of common brands.
+  - Tablet size differs by brand (about 60–90 g), so the recipe counts it once you pick one.
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 420
-    protein_g: 3
-    carbohydrate_g: 75
-    fat_g: 13
-    source: Rough estimate for sweetened Mexican chocolate tablets; brand not confirmed.
+    status: source_provided
+    calories_kcal: 426.0
+    protein_g: 3.64
+    carbohydrate_g: 77.41
+    fat_g: 15.59
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 167999: Baking chocolate, mexican, squares'
+  usda:
+    fdc_id: 167999
+    dataset: SR Legacy
+    description: Baking chocolate, mexican, squares
+  requires_product: true
+  products:
+  - id: abuelita
+    name: Nestlé Abuelita
+    grams_each: 89.8
+    notes:
+    - 'One tablet is about 89.8 g: a 19 oz box of 6 tablets.'
+    nutrition_per_100g:
+      status: source_provided
+      calories_kcal: 434.783
+      protein_g: 4.348
+      carbohydrate_g: 78.261
+      fat_g: 15.217
+      source: 'Retailer nutrition label, ¼ tablet (23 g): 100 kcal, 18 g carbohydrate, 3.5 g fat, 1 g
+        protein (foodlion.com, checked 2026-10-08).'
+  - id: ibarra
+    name: Ibarra
+    grams_each: 59.5
+    notes:
+    - 'One tablet is about 59.5 g: a 12.6 oz package of 6 tablets. The label''s ⅓-tablet serving weight
+      is estimated at 19.8 g.'
+    nutrition_per_100g:
+      status: estimated
+      calories_kcal: 505.051
+      protein_g: 5.051
+      carbohydrate_g: 85.859
+      fat_g: 17.677
+      source: 'Retailer nutrition label, ⅓ tablet: 100 kcal, 17 g carbohydrate, 3.5 g fat, 1 g protein;
+        serving weight estimated (heb.com, checked 2026-10-08).'
+  - id: other-mexican-chocolate
+    name: Other Brand (USDA Mexican Chocolate, 90 g Tablet)
+    grams_each: 90
+    nutrition_per_100g:
+      status: estimated
+      calories_kcal: 426.0
+      protein_g: 3.64
+      carbohydrate_g: 77.41
+      fat_g: 15.59
+      source: 'Proxy: USDA FoodData Central (SR Legacy), FDC ID 167999: Baking chocolate, mexican, squares;
+        90 g tablet assumed.'
 - id: vegetable-oil
   name: neutral oil for frying
   category: oil
-  grams_per_cup: 218
+  grams_per_cup: 218.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 884
-    protein_g: 0
-    carbohydrate_g: 0
-    fat_g: 100
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 172336: Oil, canola'
+  usda:
+    fdc_id: 172336
+    dataset: SR Legacy
+    description: Oil, canola
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
 - id: ancho-chili-powder
   name: ancho chili powder
   category: spice
   grams_per_cup: 120
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 281
-    protein_g: 11.9
-    carbohydrate_g: 51.4
+    status: source_provided
+    calories_kcal: 281.0
+    protein_g: 11.86
+    carbohydrate_g: 51.42
     fat_g: 8.2
-    source: Approximate typical values.
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169396: Peppers, ancho, dried'
+  usda:
+    fdc_id: 169396
+    dataset: SR Legacy
+    description: Peppers, ancho, dried
+  notes:
+  - USDA values are for whole dried ancho peppers; ground powder is the same food. Cup weight is estimated.
+  negligible: true
 - id: chili-powder
   name: chili powder
   category: spice
-  grams_per_cup: 128
+  grams_per_cup: 128.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 282
-    protein_g: 13.5
+    status: source_provided
+    calories_kcal: 282.0
+    protein_g: 13.46
     carbohydrate_g: 49.7
-    fat_g: 14.3
-    source: Approximate typical values.
+    fat_g: 14.28
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171319: Spices, chili powder'
+  usda:
+    fdc_id: 171319
+    dataset: SR Legacy
+    description: Spices, chili powder
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (8 g).
+  negligible: true
 - id: cumin
   name: ground cumin
   category: spice
-  grams_per_cup: 96
+  grams_per_cup: 96.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 375
-    protein_g: 17.8
-    carbohydrate_g: 44.2
-    fat_g: 22.3
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 375.0
+    protein_g: 17.81
+    carbohydrate_g: 44.24
+    fat_g: 22.27
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170923: Spices, cumin seed'
+  usda:
+    fdc_id: 170923
+    dataset: SR Legacy
+    description: Spices, cumin seed
+  notes:
+  - Cup weight from USDA portion '1 tbsp, whole' (6 g).
+  negligible: true
 - id: coriander
   name: ground coriander
   category: spice
-  grams_per_cup: 80
+  grams_per_cup: 80.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 298
-    protein_g: 12.4
-    carbohydrate_g: 55
-    fat_g: 17.8
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 298.0
+    protein_g: 12.37
+    carbohydrate_g: 54.99
+    fat_g: 17.77
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170922: Spices, coriander seed'
+  usda:
+    fdc_id: 170922
+    dataset: SR Legacy
+    description: Spices, coriander seed
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (5 g).
+  negligible: true
 - id: onion-powder
   name: onion powder
   category: spice
-  grams_per_cup: 115
+  grams_per_cup: 110.4
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 341
-    protein_g: 10.4
-    carbohydrate_g: 79.1
-    fat_g: 1
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 341.0
+    protein_g: 10.41
+    carbohydrate_g: 79.12
+    fat_g: 1.04
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171327: Spices, onion powder'
+  usda:
+    fdc_id: 171327
+    dataset: SR Legacy
+    description: Spices, onion powder
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (6.9 g).
+  negligible: true
 - id: garlic-powder
   name: garlic powder
   category: spice
-  grams_per_cup: 149
+  grams_per_cup: 155.2
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 331
-    protein_g: 16.6
-    carbohydrate_g: 72.7
-    fat_g: 0.7
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 331.0
+    protein_g: 16.55
+    carbohydrate_g: 72.73
+    fat_g: 0.73
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171325: Spices, garlic powder'
+  usda:
+    fdc_id: 171325
+    dataset: SR Legacy
+    description: Spices, garlic powder
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (9.7 g).
+  negligible: true
 - id: paprika
   name: paprika
   category: spice
-  grams_per_cup: 110
+  grams_per_cup: 108.8
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 282
-    protein_g: 14.1
-    carbohydrate_g: 54
-    fat_g: 12.9
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 282.0
+    protein_g: 14.14
+    carbohydrate_g: 53.99
+    fat_g: 12.89
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171329: Spices, paprika'
+  usda:
+    fdc_id: 171329
+    dataset: SR Legacy
+    description: Spices, paprika
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (6.8 g).
+  negligible: true
 - id: cayenne
   name: cayenne pepper
   category: spice
-  grams_per_cup: 86
+  grams_per_cup: 84.8
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 318
-    protein_g: 12
-    carbohydrate_g: 56.6
-    fat_g: 17.3
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 318.0
+    protein_g: 12.01
+    carbohydrate_g: 56.63
+    fat_g: 17.27
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 170932: Spices, pepper, red or cayenne'
+  usda:
+    fdc_id: 170932
+    dataset: SR Legacy
+    description: Spices, pepper, red or cayenne
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (5.3 g).
+  negligible: true
 - id: red-pepper-flakes
   name: red pepper flakes
   category: spice
   grams_per_cup: 86
   nutrition_per_100g:
     status: estimated
-    calories_kcal: 318
-    protein_g: 12
-    carbohydrate_g: 56.6
-    fat_g: 17.3
-    source: Approximate typical values.
+    calories_kcal: 318.0
+    protein_g: 12.01
+    carbohydrate_g: 56.63
+    fat_g: 17.27
+    source: 'Proxy from a similar food: USDA FoodData Central (SR Legacy), FDC ID 170932: Spices, pepper,
+      red or cayenne'
+  usda:
+    fdc_id: 170932
+    dataset: SR Legacy
+    description: Spices, pepper, red or cayenne
+  notes:
+  - Proxy nutrition from ground cayenne. Flakes are lighter by volume; cup weight is estimated.
+  negligible: true
 - id: sumac
   name: ground sumac
   category: spice
   grams_per_cup: 112
   notes:
-  - Nutrition not entered.
+  - Not in USDA FoodData Central; nutrition not entered. It is optional in current recipes.
+  negligible: true
 - id: cinnamon
   name: ground cinnamon
   category: spice
-  grams_per_cup: 125
+  grams_per_cup: 124.8
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 247
-    protein_g: 4
-    carbohydrate_g: 80.6
-    fat_g: 1.2
-    source: Approximate typical values.
+    status: source_provided
+    calories_kcal: 247.0
+    protein_g: 3.99
+    carbohydrate_g: 80.59
+    fat_g: 1.24
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171320: Spices, cinnamon, ground'
+  usda:
+    fdc_id: 171320
+    dataset: SR Legacy
+    description: Spices, cinnamon, ground
+  notes:
+  - Cup weight from USDA portion '1 tbsp' (7.8 g).
+  negligible: true
+- id: granulated-sugar
+  name: granulated sugar
+  category: sweetener
+  usda:
+    fdc_id: 169655
+    dataset: SR Legacy
+    description: Sugars, granulated
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 387.0
+    protein_g: 0.0
+    carbohydrate_g: 99.98
+    fat_g: 0.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169655: Sugars, granulated'
+  grams_per_cup: 200.0
+  notes:
+  - Cup weight from USDA portion '1 cup' (200 g).
+- id: avocado-oil
+  name: avocado oil
+  category: oil
+  usda:
+    fdc_id: 173573
+    dataset: SR Legacy
+    description: Oil, avocado
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173573: Oil, avocado'
+  grams_per_cup: 218.0
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).

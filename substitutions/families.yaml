@@ -1,0 +1,167 @@
+schema_version: 1
+families:
+- id: ground-meat
+  title: Ground Meat
+  ratio_basis: weight
+  suitability:
+    seared: works
+    simmered: works
+    binding: works
+    raw: unsuitable
+  reasons:
+    raw: Ground meat must be fully cooked.
+  members:
+  - ref: ground-beef-70
+    title: Ground Beef (70% Lean)
+    ingredient: ground beef (70% lean)
+    instruction_notes: &id001
+      seared: 'Fattier meat releases more fat: spoon off all but a couple of tablespoons before adding
+        the spices.'
+    effects: Richest and fattiest; lots of rendered fat.
+  - ref: ground-beef-75
+    title: Ground Beef (75% Lean)
+    ingredient: ground beef (75% lean)
+    instruction_notes: *id001
+    effects: Rich, with plenty of rendered fat.
+  - ref: ground-beef-80
+    title: Ground Beef (80% Lean)
+    ingredient: ground beef (80% lean)
+    instruction_notes: *id001
+    effects: Juicy and beefy; the classic burger blend.
+  - ref: ground-beef-85
+    title: Ground Beef (85% Lean)
+    ingredient: ground beef (85% lean)
+    effects: Balanced flavor and fat.
+  - ref: ground-beef-90
+    title: Ground Beef (90% Lean)
+    ingredient: ground beef (90% lean)
+    effects: Leaner, still beefy.
+  - ref: ground-beef-93
+    title: Ground Beef (93% Lean)
+    ingredient: ground beef (93% lean)
+    instruction_notes: &id002
+      seared: 'Leaner meat browns less and leaves less fond: add a tablespoon of oil and allow extra browning
+        time.'
+    effects: Lean; can turn dry if overcooked.
+  - ref: ground-beef-95
+    title: Ground Beef (95% Lean)
+    ingredient: ground beef (95% lean)
+    instruction_notes: *id002
+    effects: Very lean; can turn dry if overcooked.
+  - ref: ground-beef-97
+    title: Ground Beef (97% Lean)
+    ingredient: ground beef (97% lean)
+    instruction_notes: *id002
+    effects: Leanest beef; best in saucy dishes.
+  - ref: ground-turkey-85
+    title: Ground Turkey (85% Lean)
+    ingredient: ground turkey (85% lean)
+    effects: Milder than beef, similar fat to 85% beef.
+  - ref: ground-turkey-93
+    title: Ground Turkey (93% Lean)
+    ingredient: ground turkey (93% lean)
+    instruction_notes: *id002
+    effects: Milder flavor with less fat and fewer calories.
+  - ref: ground-turkey-99
+    title: Ground Turkey (Fat Free)
+    ingredient: fat-free ground turkey
+    instruction_notes: *id002
+    effects: Very lean and mild; season generously.
+  - ref: ground-chicken
+    title: Ground Chicken
+    ingredient: ground chicken
+    instruction_notes: *id002
+    effects: Mild and tender; season generously.
+  - ref: ground-pork
+    title: Ground Pork
+    ingredient: ground pork
+    instruction_notes: *id001
+    effects: Rich and slightly sweet.
+  - ref: ground-pork-84
+    title: Ground Pork (84% Lean)
+    ingredient: ground pork (84% lean)
+    effects: Rich and slightly sweet, moderately lean.
+  - ref: ground-pork-96
+    title: Ground Pork (96% Lean)
+    ingredient: ground pork (96% lean)
+    instruction_notes: *id002
+    effects: Very lean and mild.
+  - ref: ground-veal
+    title: Ground Veal
+    ingredient: ground veal
+    effects: Mild and tender, with fat close to 85% beef.
+  - ref: ground-lamb
+    title: Ground Lamb
+    ingredient: ground lamb
+    instruction_notes: *id001
+    effects: Distinctly rich, gamy flavor.
+  - ref: ground-bison
+    title: Ground Bison
+    ingredient: ground bison
+    instruction_notes: *id002
+    effects: Lean and slightly sweet; cook gently so it stays moist.
+- id: sour-cream-and-yogurt
+  title: Sour Cream and Yogurt
+  ratio_basis: volume
+  suitability:
+    raw: works
+    finishing: works
+    simmered: caution
+    baked-structure: caution
+    hard-boil-reduce: unsuitable
+  reasons:
+    simmered: Cultured dairy can curdle when boiled; stir it in off the heat.
+    baked-structure: Fat and moisture differ, which changes texture.
+    hard-boil-reduce: It splits at a boil.
+  members:
+  - ref: sour-cream
+    title: Sour Cream
+    ingredient: sour cream
+    effects: Rich and mildly tangy.
+  - ref: sour-cream-light
+    title: Light Sour Cream
+    ingredient: light sour cream
+    effects: A little thinner, with about a third fewer calories.
+  - ref: sour-cream-fat-free
+    title: Fat-Free Sour Cream
+    ingredient: fat-free sour cream
+    effects: Thinner and slightly sweet; thickened with starch.
+  - ref: greek-yogurt-nonfat
+    title: Nonfat Greek Yogurt
+    ingredient: nonfat Greek yogurt
+    effects: Tangier, with much more protein and almost no fat.
+  - ref: greek-yogurt-lowfat
+    title: Low-Fat Greek Yogurt
+    ingredient: low-fat Greek yogurt
+    effects: Thick and tangy, with lots of protein.
+  - ref: greek-yogurt-whole
+    title: Whole-Milk Greek Yogurt
+    ingredient: whole-milk Greek yogurt
+    effects: Thick and rich; the closest yogurt match.
+  - ref: plain-yogurt-whole
+    title: Whole-Milk Plain Yogurt
+    ingredient: whole-milk plain yogurt
+    effects: Thinner and tangier; strain it for a thicker topping.
+- id: cooking-oils
+  title: Cooking Oils
+  ratio_basis: volume
+  suitability:
+    fat-for-cooking: works
+    finishing: caution
+    baked-structure: caution
+  reasons:
+    finishing: Flavors differ noticeably when the oil isn't cooked.
+    baked-structure: Flavor carries into baked goods.
+  members:
+  - ref: olive-oil
+    title: Olive Oil
+    ingredient: olive oil
+    effects: Fruity flavor; extra-virgin smokes at high heat.
+  - ref: vegetable-oil
+    title: Canola Oil
+    ingredient: canola oil
+    effects: Neutral flavor and a high smoke point.
+  - ref: avocado-oil
+    title: Avocado Oil
+    ingredient: avocado oil
+    effects: Neutral flavor and the highest smoke point.

@@ -85,8 +85,8 @@ def test_read_only_api_and_html(library):
         page = client.get("/recipe/lemon-chickpea-bowl?variation=extra-chickpeas")
         assert page.status_code == 200
         assert "360 g" in page.text
-        assert "Estimated from the ingredient library" in page.text
-        assert "≈ 572 kcal" in page.text and "Salt (amount unknown)" in page.text
+        assert "Calculated from ingredient nutrition" in page.text
+        assert "≈ 572 kcal" in page.text and "negligible calories (seasonings and garnishes):</strong> Salt." in page.text
         assert client.get("/static/style.css").status_code == 200
 
 

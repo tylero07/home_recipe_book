@@ -119,6 +119,17 @@
           "default": null,
           "title": "Category"
         },
+        "usda": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UsdaLink"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "grams_per_cup": {
           "anyOf": [
             {
@@ -156,6 +167,23 @@
           ],
           "default": null
         },
+        "negligible": {
+          "default": false,
+          "title": "Negligible",
+          "type": "boolean"
+        },
+        "products": {
+          "items": {
+            "$ref": "#/$defs/Product"
+          },
+          "title": "Products",
+          "type": "array"
+        },
+        "requires_product": {
+          "default": false,
+          "title": "Requires Product",
+          "type": "boolean"
+        },
         "notes": {
           "items": {
             "minLength": 1,
@@ -170,6 +198,97 @@
         "name"
       ],
       "title": "LibraryIngredient",
+      "type": "object"
+    },
+    "Product": {
+      "additionalProperties": false,
+      "description": "A specific brand or style whose nutrition (and sizes) differ from the generic entry.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "nutrition_per_100g": {
+          "$ref": "#/$defs/IngredientNutrition"
+        },
+        "grams_per_cup": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grams Per Cup"
+        },
+        "grams_each": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grams Each"
+        },
+        "notes": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "nutrition_per_100g"
+      ],
+      "title": "Product",
+      "type": "object"
+    },
+    "UsdaLink": {
+      "additionalProperties": false,
+      "description": "The USDA FoodData Central food the nutrition values were copied from.",
+      "properties": {
+        "fdc_id": {
+          "exclusiveMinimum": 0,
+          "title": "Fdc Id",
+          "type": "integer"
+        },
+        "dataset": {
+          "enum": [
+            "SR Legacy",
+            "Foundation"
+          ],
+          "title": "Dataset",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fdc_id",
+        "dataset",
+        "description"
+      ],
+      "title": "UsdaLink",
       "type": "object"
     }
   },

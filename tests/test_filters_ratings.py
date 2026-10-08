@@ -157,6 +157,6 @@ def test_shipped_chili_renders_groups_ranges_and_estimate(tmp_path):
     with TestClient(create_app(ROOT / "recipes", tmp_path / "i.sqlite3", ROOT / "ingredients", tmp_path / "p")) as client:
         page = client.get("/recipe/wheat-beer-chili").text
     assert '<h3 class="group-heading">Chili Spice Mix</h3>' in page
-    assert "<strong>1–2</strong> Poblano Pepper" in page
+    assert "1–2</strong>" in page and "Poblano Pepper" in page
     assert "¼–½ cup (2–4 fl oz)" in page
     assert "ranges use their middle amount" in page

@@ -14,24 +14,90 @@ ingredients:
 - id: beef-stock
   name: beef stock or broth
   category: broth
-  grams_per_cup: 240
+  grams_per_cup: 240.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 7
-    protein_g: 1.1
-    carbohydrate_g: 0.4
-    fat_g: 0.2
-    source: Approximate typical values; varies widely by brand.
+    status: source_provided
+    calories_kcal: 7.0
+    protein_g: 1.14
+    carbohydrate_g: 0.04
+    fat_g: 0.22
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171538: Soup, beef broth or bouillon canned, ready-to-serve'
+  usda:
+    fdc_id: 171538
+    dataset: SR Legacy
+    description: Soup, beef broth or bouillon canned, ready-to-serve
+  notes:
+  - Cup weight from USDA portion '1 cup' (240 g).
 - id: wheat-beer
   name: wheat beer
   category: alcohol
-  grams_per_cup: 240
+  grams_per_cup: 237.6
   notes:
-  - Calories include alcohol, part of which cooks off; protein, carbohydrate, and fat do not account for it.
+  - Wheat beers range from about 150 to 190 kcal per 12 fl oz, so the recipe counts the beer once you
+    pick one.
+  - Calories include alcohol, part of which cooks off; protein, carbohydrate, and fat do not account for
+    it.
   nutrition_per_100g:
     status: estimated
-    calories_kcal: 45
-    protein_g: 0.5
-    carbohydrate_g: 3.6
-    fat_g: 0
-    source: Approximate typical values.
+    calories_kcal: 43.0
+    protein_g: 0.46
+    carbohydrate_g: 3.55
+    fat_g: 0.0
+    source: 'Proxy from a similar food: USDA FoodData Central (SR Legacy), FDC ID 168746: Alcoholic beverage,
+      beer, regular, all'
+  usda:
+    fdc_id: 168746
+    dataset: SR Legacy
+    description: Alcoholic beverage, beer, regular, all
+  requires_product: true
+  products:
+  - id: blue-moon-belgian-white
+    name: Blue Moon Belgian White
+    nutrition_per_100g:
+      status: source_provided
+      calories_kcal: 46.667
+      protein_g: 0.528
+      carbohydrate_g: 3.889
+      fat_g: 0.0
+      source: 'Retailer nutrition label, 12 fl oz: 168 kcal, 14 g carbohydrate, 1.9 g protein, 0 g fat
+        (stopandshop.com, checked 2026-10-08).'
+  - id: bells-oberon
+    name: Bell's Oberon
+    nutrition_per_100g:
+      status: source_provided
+      calories_kcal: 51.944
+      carbohydrate_g: 4.5
+      source: 'Bell''s Brewery, 12 fl oz: 187 kcal, 16.2 g carbohydrate; protein and fat not published
+        (bellsbeer.com, checked 2026-10-08).'
+  - id: shock-top-belgian-white
+    name: Shock Top Belgian White
+    nutrition_per_100g:
+      status: estimated
+      calories_kcal: 51.667
+      carbohydrate_g: 3.611
+      source: 'Third-party figure, 12 fl oz: about 186 kcal, 13 g carbohydrate; not from the brewer (checked
+        2026-10-08).'
+  - id: hoegaarden
+    name: Hoegaarden Witbier
+    nutrition_per_100g:
+      status: estimated
+      calories_kcal: 42.5
+      carbohydrate_g: 3.611
+      source: 'Food-database entry, 12 fl oz: 153 kcal, 13 g carbohydrate (fatsecret.com, checked 2026-10-08).'
+  - id: allagash-white
+    name: Allagash White
+    nutrition_per_100g:
+      status: estimated
+      calories_kcal: 48.611
+      carbohydrate_g: 5.556
+      source: 'Food-database entry, 12 fl oz: 175 kcal, 20 g carbohydrate (fatsecret.com, checked 2026-10-08).'
+  - id: usda-average-beer
+    name: Other Wheat Beer (USDA Average Beer)
+    nutrition_per_100g:
+      status: estimated
+      calories_kcal: 43.0
+      protein_g: 0.46
+      carbohydrate_g: 3.55
+      fat_g: 0.0
+      source: 'Proxy: USDA FoodData Central (SR Legacy), FDC ID 168746: Alcoholic beverage, beer, regular,
+        all.'

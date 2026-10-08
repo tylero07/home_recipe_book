@@ -1,0 +1,62 @@
+schema_version: 1
+substitutions:
+- id: mexican-chocolate-to-dark-chocolate
+  title: Dark Chocolate and Sugar
+  replaces: mexican-chocolate
+  with:
+  - ref: dark-chocolate
+    ingredient: dark chocolate
+    ratio: 0.5
+    preparation: 70–85% cacao, chopped
+  - ref: granulated-sugar
+    ingredient: sugar
+    ratio: 0.45
+  ratio_basis: weight
+  suitability:
+    simmered: works
+    finishing: caution
+    raw: caution
+  reasons:
+    finishing: Granulated sugar may stay gritty without heat.
+    raw: Granulated sugar may stay gritty without heat.
+  instruction_notes:
+    simmered: Add a pinch of cinnamon (about ¼ tsp per disc replaced) with the chocolate to match Mexican
+      chocolate's spice.
+  effects: Smoother and slightly more bitter; Mexican chocolate's cinnamon comes only from the pinch you
+    add.
+- id: wheat-beer-to-beef-stock
+  title: Beef Stock (No Alcohol)
+  replaces: wheat-beer
+  with:
+  - ref: beef-stock
+    ingredient: beef stock
+    ratio: 1
+  ratio_basis: volume
+  suitability:
+    deglaze: works
+    simmered: works
+    marinade: caution
+    flambe: unsuitable
+  reasons:
+    marinade: Stock lacks the beer's acidity and carbonation.
+    flambe: Stock has no alcohol to ignite.
+  effects: Loses the beer's malty bitterness; the chili will taste meatier and a little sweeter.
+- id: butter-to-olive-oil
+  title: Olive Oil
+  replaces: butter
+  with:
+  - ref: olive-oil
+    ingredient: olive oil
+    ratio: 0.75
+  ratio_basis: volume
+  suitability:
+    fat-for-cooking: works
+    thickening: works
+    finishing: caution
+    baked-structure: unsuitable
+    whipped: unsuitable
+  reasons:
+    finishing: Adds olive flavor and none of butter's richness.
+    baked-structure: Liquid oil can't be creamed or cut in, so texture changes completely.
+    whipped: Oil doesn't hold air.
+  effects: Use about three quarters as much because butter is roughly 20% water. No butter flavor.

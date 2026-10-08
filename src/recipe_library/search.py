@@ -5,7 +5,7 @@ import json
 import re
 import sqlite3
 
-from .loader import load_catalog, load_ingredients
+from .loader import load_catalog, load_ingredients, load_substitutions
 from .models import Recipe
 from .nutrition import per_serving_macros
 
@@ -14,10 +14,12 @@ class SearchError(ValueError):
     pass
 
 
-def rebuild_index(recipes: Path, database: Path, ingredients: Path = Path("ingredients")) -> int:
+def rebuild_index(recipes: Path, database: Path, ingredients: Path = Path("ingredients"),
+                  substitutions: Path | None = None) -> int:
     # Never touch the current index on invalid input.
     library = load_ingredients(ingredients)
-    catalog = load_catalog(recipes, library)
+    rules = load_substitutions(substitutions or ingredients.parent / "substitutions", library)
+    catalog = load_catalog(recipes, library, rules)
     database.parent.mkdir(parents=True, exist_ok=True)
     try:
         with closing(sqlite3.connect(database)) as db, db:

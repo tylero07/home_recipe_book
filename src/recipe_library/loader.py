@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 from pydantic import ValidationError
 
-from .models import IngredientFile, LibraryIngredient, Recipe
+from .models import IngredientFile, LibraryIngredient, Recipe, SubstitutionFile, SubstitutionRule
 
 
 class CatalogError(ValueError):
@@ -72,8 +72,34 @@ def load_ingredients(directory: Path) -> dict[str, LibraryIngredient]:
     return library
 
 
-def load_catalog(directory: Path, ingredients: dict[str, LibraryIngredient] | None = None) -> dict[str, Recipe]:
-    """Load every recipe; when a library is given, every ingredient ref must exist in it."""
+def load_substitutions(directory: Path, ingredients: dict[str, LibraryIngredient]) -> dict[str, SubstitutionRule]:
+    """Load universal substitution rules; every ingredient they mention must be in the library."""
+    if not directory.exists():
+        return {}
+    if not directory.is_dir():
+        raise CatalogError(f"{directory}: substitution library is not a directory")
+    rules, origins, errors = {}, {}, []
+    for path in _yaml_files(directory):
+        data = _read(path, SubstitutionFile, errors)
+        expanded = (data.substitutions + [r for family in data.families for r in family.rules()]) if data else []
+        for rule in expanded:
+            if rule.id in rules:
+                errors.append(f"{path}: duplicate substitution ID '{rule.id}' (also in {origins[rule.id]})")
+                continue
+            rules[rule.id] = rule
+            origins[rule.id] = path
+            for ref in [rule.replaces] + [item.ref for item in rule.with_]:
+                if ref not in ingredients:
+                    errors.append(f"{path}: substitution {rule.id}: unknown library ingredient '{ref}'")
+    if errors:
+        raise CatalogError("\n".join(errors))
+    return rules
+
+
+def load_catalog(directory: Path, ingredients: dict[str, LibraryIngredient] | None = None,
+                 substitutions: dict[str, SubstitutionRule] | None = None) -> dict[str, Recipe]:
+    """Load every recipe; when libraries are given, every ingredient ref and every
+    substitution a recipe vetoes or annotates must exist in them."""
     if not directory.is_dir():
         raise CatalogError(f"{directory}: recipe directory does not exist")
     files = _yaml_files(directory)
@@ -97,6 +123,20 @@ def load_catalog(directory: Path, ingredients: dict[str, LibraryIngredient] | No
                      for v in recipe.variations for key, o in v.ingredient_overrides.items()]
             errors += [f"{path}: {field}.ref: unknown library ingredient '{ref}'"
                        for field, ref in refs if ref is not None and ref not in ingredients]
+        if ingredients is not None:
+            for item in recipe.ingredients:
+                entry = ingredients.get(item.ref) if item.ref else None
+                if item.product and (entry is None or entry.product(item.product) is None):
+                    errors.append(f"{path}: ingredients.{item.id}.product: '{item.product}' is not a product of {item.ref}")
+        if substitutions is not None:
+            for item in recipe.ingredients:
+                for kind in ("veto", "notes"):
+                    for rule_id in getattr(item.substitutions, kind, {}) if item.substitutions else {}:
+                        rule = substitutions.get(rule_id)
+                        if rule is None:
+                            errors.append(f"{path}: ingredients.{item.id}.substitutions.{kind}: unknown substitution '{rule_id}'")
+                        elif rule.replaces != item.ref:
+                            errors.append(f"{path}: ingredients.{item.id}.substitutions.{kind}: '{rule_id}' replaces {rule.replaces}, not {item.ref}")
     if errors:
         raise CatalogError("\n".join(errors))
     return recipes

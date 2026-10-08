@@ -300,5 +300,8 @@ rule needs, the display falls back to a fraction with "≈".
 
 ## Open questions
 
-None outstanding. Step 1 is implemented: the library has nutrition and
-conversions only; `form`, `properties`, and `measure` arrive with steps 3–4.
+None outstanding. Steps 1–3 are implemented: the ingredient library (now
+USDA-backed), amount edits with reset and cart carry-through, and the
+substitution library with ratings, vetoes, notes, and step placeholders.
+Rules use `uses` ratings rather than ingredient `properties`; the flambé
+alcohol check and measurement profiles (step 4) remain.

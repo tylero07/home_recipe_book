@@ -292,19 +292,19 @@ instructions:
   (peppers; onion with garlic; carrot), pulse each in a food processor until finely
   minced, close to the texture of ground beef. Combine in one bowl.
 - Stir together the Chili Spice Mix ingredients.
-- 'Make the Cholula sour cream: stir the sour cream with the Cholula and a pinch of
+- 'Make the Cholula sour cream: stir the {sour-cream} with the Cholula and a pinch of
   salt. Refrigerate until serving.'
 - Heat a large heavy-bottomed pot over medium-high heat and coat the bottom with olive
   oil. Add the vegetables, season well with salt and pepper, and cook about 20 minutes,
   until their moisture has cooked off and light browning forms on the bottom of the pot.
-- Add the beef, break it up, and season it. Cook until its moisture is gone and a
+- Add the {beef}, break it up, and season it. Cook until its moisture is gone and a
   light brown fond forms on the bottom of the pot.
 - Stir in the spice mix and toast for 1–2 minutes. Add the tomato paste, lower the
   heat, and cook 3–5 minutes, stirring, until the fond darkens to a deep brown. Don't
   let it turn black; that tastes burnt.
-- Pour in the beer and scrape the fond off the bottom with a wooden spoon. Reduce by
+- Pour in the {beer} and scrape the fond off the bottom with a wooden spoon. Reduce by
   about half, then taste and adjust the seasoning.
-- Add the Cholula, Worcestershire, tomato puree, beef stock, brown sugar, and chocolate.
+- Add the Cholula, Worcestershire, tomato puree, beef stock, brown sugar, and {chocolate}.
   Bring to a simmer and cook about 3 hours, stirring occasionally, until thick and
   deeply flavored. Adjust the seasoning.
 - 'For the tortilla strips: cut the corn tortillas into strips and fry them in oil
@@ -316,8 +316,10 @@ notes:
   pots of chili. Double them to keep half for next time.
 - Servings, prep time, and cook time are estimates until confirmed. Cook time adds
   up the stated steps; prep covers chopping, processing, and mixing.
-- 'Assumed until confirmed: 85% lean beef, a 12 fl oz beer bottle, and a 90 g chocolate
-  disc. Garnish amounts aren''t given, so they aren''t in the macro estimate.'
+- 85% lean beef is the default; pick another blend or meat under the beef's swaps.
+  Choose your beer and chocolate brand to count them, since they vary widely.
+- A 12 fl oz beer bottle is assumed. Garnish amounts aren't given, so they aren't
+  in the nutrition totals.
 nutrition:
   basis: per_serving
   status: unknown

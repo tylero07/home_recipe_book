@@ -21,21 +21,42 @@ def ingredient_grams(ingredient: Ingredient, item: LibraryIngredient) -> tuple[f
     return quantity * item.grams_each, None
 
 
+def effective_item(ingredient: Ingredient, library: dict[str, LibraryIngredient]) -> LibraryIngredient | None:
+    """The library entry for a line, with its chosen product's nutrition and sizes applied."""
+    item = library.get(ingredient.ref) if ingredient.ref else None
+    product = item.product(ingredient.product) if item else None
+    if product is None:
+        return item
+    return item.model_copy(update={
+        "nutrition_per_100g": product.nutrition_per_100g, "requires_product": False,
+        "grams_per_cup": product.grams_per_cup or item.grams_per_cup,
+        "grams_each": product.grams_each or item.grams_each,
+    })
+
+
+# Why a line isn't counted, in the order the page lists them.
+EXCLUSION_KINDS = ("choice", "amount", "optional", "data", "negligible")
+
+
 def estimate_nutrition(recipe: Recipe, library: dict[str, LibraryIngredient]) -> dict | None:
     """Per-serving macros with every line that could not be counted listed by reason.
 
     Returns None when no line could be counted. A macro is listed in ``incomplete``
-    with the counted ingredients that lack a value for it.
+    with the counted ingredients that lack a value for it; ``estimated`` names counted
+    ingredients whose library values are estimates rather than USDA or label data.
     """
     totals = dict.fromkeys(MACROS, 0.0)
     incomplete = {macro: [] for macro in MACROS}
-    excluded, counted, statuses = [], [], set()
+    excluded, counted, estimated = [], [], []
     for ingredient in recipe.ingredients:
-        item = library.get(ingredient.ref) if ingredient.ref else None
+        item = effective_item(ingredient, library)
+        kind = None
         if ingredient.optional:
-            reason = "optional"
+            reason, kind = "optional", "optional"
+        elif item is not None and item.requires_product:
+            reason, kind = "choose a product to count it", "choice"
         elif ingredient.quantity is None:
-            reason = "amount unknown"
+            reason, kind = "amount unknown", "amount"
         elif item is None:
             reason = "not in the ingredient library"
         elif item.nutrition_per_100g is None:
@@ -43,11 +64,15 @@ def estimate_nutrition(recipe: Recipe, library: dict[str, LibraryIngredient]) ->
         else:
             grams, reason = ingredient_grams(ingredient, item)
         if reason:
-            excluded.append({"ingredient": ingredient.ingredient, "reason": reason})
+            if item is not None and item.negligible:
+                kind = "negligible"  # Spices and seasonings: not worth counting either way.
+            excluded.append({"id": ingredient.id, "ingredient": ingredient.ingredient, "reason": reason,
+                             "kind": kind or "data"})
             continue
         nutrition = item.nutrition_per_100g
-        statuses.add(nutrition.status)
         counted.append(ingredient.ingredient)
+        if nutrition.status == "estimated":
+            estimated.append(ingredient.ingredient)
         for macro in MACROS:
             value = getattr(nutrition, macro)
             if value is None:
@@ -58,10 +83,13 @@ def estimate_nutrition(recipe: Recipe, library: dict[str, LibraryIngredient]) ->
         return None
     return {
         "basis": "per_serving",
-        "status": "estimated" if "estimated" in statuses else "source_provided",
+        "status": "estimated" if estimated else "source_provided",
+        "estimated": estimated,
         "per_serving": {macro: totals[macro] / recipe.servings for macro in MACROS},
         "counted": counted,
         "excluded": excluded,
+        "excluded_by_kind": {kind: [e for e in excluded if e["kind"] == kind]
+                             for kind in EXCLUSION_KINDS if any(e["kind"] == kind for e in excluded)},
         "incomplete": {macro: names for macro, names in incomplete.items() if names},
     }
 
@@ -76,4 +104,24 @@ def per_serving_macros(recipe: Recipe, library: dict[str, LibraryIngredient]) ->
     estimate = estimate_nutrition(recipe, library)
     if estimate is None:
         return {}
+    if "choice" in estimate["excluded_by_kind"]:
+        # Unchosen products: bound the filters safely. Calories assume the highest-calorie
+        # product and protein the lowest-protein one, so filters never rely on an undercount.
+        def pick(key, choose):
+            lines = []
+            for line in recipe.ingredients:
+                item = library.get(line.ref) if line.ref else None
+                if item is not None and item.requires_product and not line.product:
+                    def amount(product, line=line):
+                        # What this product adds at the line's amount: sizes differ by brand.
+                        chosen = line.model_copy(update={"product": product.id})
+                        grams = ingredient_grams(chosen, effective_item(chosen, library))[0] if line.quantity else None
+                        return (grams or 0) * (getattr(product.nutrition_per_100g, key) or 0)
+                    known = [p for p in item.products if getattr(p.nutrition_per_100g, key) is not None]
+                    line = line.model_copy(update={"product": choose(known or item.products, key=amount).id})
+                lines.append(line)
+            bounded = estimate_nutrition(recipe.model_copy(update={"ingredients": lines}), library)
+            return None if key in bounded["incomplete"] else bounded["per_serving"][key]
+        values = {"calories_kcal": pick("calories_kcal", max), "protein_g": pick("protein_g", min)}
+        return {m: v for m, v in values.items() if v is not None}
     return {m: v for m, v in estimate["per_serving"].items() if m not in estimate["incomplete"]}

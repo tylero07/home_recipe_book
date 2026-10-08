@@ -7,9 +7,10 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from .loader import load_ingredients
+from .customize import CustomizationError, customize, editable_ratio, options, rate
+from .loader import load_ingredients, load_substitutions
 from .models import CATEGORY_LABELS
-from .nutrition import estimate_nutrition, per_serving_macros
+from .nutrition import effective_item, estimate_nutrition, ingredient_grams, per_serving_macros
 from .ratings import Rating, RatingsError, load_ratings, matching_ids, save_rating
 from .search import SearchIndex, rebuild_index
 from .shopping import ShoppingRequest, generate_list
@@ -52,11 +53,46 @@ def parse_filters(params) -> dict:
     }
 
 
+def _scale(recipe, servings):
+    """Scale every amount (and whole-recipe nutrition) to a new number of servings."""
+    if servings is None:
+        return recipe
+    recipe = recipe.model_copy(deep=True)
+    factor = servings / recipe.servings
+    for ingredient in recipe.ingredients:
+        if ingredient.quantity is not None:
+            ingredient.quantity *= factor
+        if ingredient.quantity_max is not None:
+            ingredient.quantity_max *= factor
+    if recipe.nutrition and recipe.nutrition.basis == "whole_recipe":
+        for field in ("calories_kcal", "protein_g", "carbohydrate_g", "fat_g"):
+            value = getattr(recipe.nutrition, field)
+            if value is not None:
+                setattr(recipe.nutrition, field, value * factor)
+    recipe.servings = servings
+    return recipe
+
+
+def _positive(raw):
+    try:
+        return 0 < float(raw) < float("inf")
+    except ValueError:
+        return False
+
+
+def _input_value(value):
+    """Prefill for an amount box: exact enough to round-trip, without float noise."""
+    return f"{round(value, 4):g}"
+
+
 def create_app(recipes: Path = Path("recipes"), database: Path = Path("data/recipes.sqlite3"),
-               ingredients: Path = Path("ingredients"), personal: Path = Path("personal")) -> FastAPI:
-    rebuild_index(recipes, database, ingredients)
+               ingredients: Path = Path("ingredients"), personal: Path = Path("personal"),
+               substitutions: Path | None = None) -> FastAPI:
+    substitutions = substitutions or ingredients.parent / "substitutions"  # Libraries live side by side.
+    rebuild_index(recipes, database, ingredients, substitutions)
     ratings_path = personal / "ratings.yaml"
     library = load_ingredients(ingredients)
+    rules = load_substitutions(substitutions, library)
     index = SearchIndex(database)
     app = FastAPI(title="Recipe Library", version="0.1.0")
     web = Path(__file__).parent / "web"
@@ -99,7 +135,7 @@ def create_app(recipes: Path = Path("recipes"), database: Path = Path("data/reci
 
     @app.get("/recipes/{recipe_id}")
     def recipe_api(recipe_id: str, variation: str | None = None):
-        return detail(recipe_id, variation)[1]
+        return customize(detail(recipe_id, variation)[1], {}, {}, library, rules)[0]
 
     @app.get("/tags")
     def tags_api():
@@ -122,28 +158,136 @@ def create_app(recipes: Path = Path("recipes"), database: Path = Path("data/reci
             "next": page_url(page + 1) if results["total"] > page * 12 else None,
         })
 
+    def canonical_url(recipe_id, variation, servings, amounts, swaps, original=None, products=None):
+        if servings is not None and servings == original:
+            servings = None
+        query = ([("servings", f"{servings:g}")] if servings is not None else []) + \
+                ([("variation", variation)] if variation else []) + \
+                [(f"a.{k}", f"{round(v, 6):g}") for k, v in sorted(amounts.items())] + \
+                [(f"s.{k}", v) for k, v in sorted(swaps.items())] + \
+                [(f"p.{k}", v) for k, v in sorted((products or {}).items())]
+        return f"/recipe/{recipe_id}" + ("?" + urlencode(query) if query else "")
+
+    def submitted_customization(params, recipe):
+        """Turn the page's form (amounts as shown at the `at` servings) into original-batch edits."""
+        at = _number(params, "at", "Servings shown")
+        if not at:
+            raise HTTPException(422, "Servings shown must be positive")
+        lines = {line.id: line for line in recipe.ingredients}
+        swaps = {key[2:]: value for key, value in params.items() if key.startswith("s.") and value}
+        products = {key[2:]: value for key, value in params.items() if key.startswith("p.") and value}
+        amounts = {key[2:]: float(value) for key, value in params.items()
+                   if key.startswith("a.") and key[2:] in lines and _positive(value)}
+        for key, raw in params.items():
+            if not key.startswith("amount.") or not raw.strip():
+                continue
+            line = lines.get(key[7:])
+            if line is None or line.quantity is None:
+                continue
+            try:
+                shown = float(raw)
+                if not 0 < shown < float("inf"):
+                    raise ValueError
+            except ValueError:
+                raise HTTPException(422, f"Enter a positive amount for {line.ingredient}")
+            rule = rules.get(swaps.get(line.id, ""))
+            ratio = editable_ratio(rule, line) if rule else 1
+            value = shown * recipe.servings / at / (ratio or 1)
+            if abs(value - line.quantity) > line.quantity * 0.001:
+                amounts[line.id] = value
+            else:
+                amounts.pop(line.id, None)
+        return amounts, swaps, products
+
+    def requested_customization(params, recipe):
+        """Edits from the URL; any that don't fit this version are dropped and reported."""
+        lines = {line.id: line for line in recipe.ingredients}
+        amounts, swaps, products, dropped = {}, {}, {}, []
+        for key, raw in params.items():
+            if key.startswith("a."):
+                line = lines.get(key[2:])
+                try:
+                    value = float(raw)
+                except ValueError:
+                    value = 0
+                if line is not None and line.quantity is not None and 0 < value < float("inf"):
+                    amounts[line.id] = value
+                else:
+                    dropped.append(key[2:])
+            elif key.startswith("s.") and raw:
+                line, rule = lines.get(key[2:]), rules.get(raw)
+                if line is not None and rule is not None and rule.replaces == line.ref and rate(rule, line)["rating"] != "unsuitable":
+                    swaps[line.id] = raw
+                else:
+                    dropped.append(key[2:])
+            elif key.startswith("p.") and raw:
+                line = lines.get(key[2:])
+                item = library.get(line.ref) if line is not None and line.ref else None
+                if item is not None and item.product(raw) is not None:
+                    products[line.id] = raw
+                else:
+                    dropped.append(key[2:])
+        return amounts, swaps, products, dropped
+
+    def product_choices(line, item, servings):
+        """Each product with what it adds per serving at this line's amount, sorted by name."""
+        choices = []
+        for product in sorted(item.products, key=lambda p: p.name.casefold()):
+            chosen = effective_item(line.model_copy(update={"product": product.id}), library)
+            grams = ingredient_grams(line, chosen)[0] if line.quantity is not None else None
+            kcal = product.nutrition_per_100g.calories_kcal
+            per_serving = grams * kcal / 100 / servings if grams is not None and kcal is not None else None
+            choices.append({"product": product, "per_serving": per_serving})
+        return choices
+
     @app.get("/recipe/{recipe_id}", response_class=HTMLResponse)
     def recipe_page(request: Request, recipe_id: str, variation: str | None = None,
-                    servings: float | None = Query(None, gt=0, allow_inf_nan=False)):
-        base, recipe = detail(recipe_id, variation)
-        original_servings = recipe.servings
-        if servings is not None:
-            recipe = recipe.model_copy(deep=True)
-            factor = servings / original_servings
-            for ingredient in recipe.ingredients:
-                if ingredient.quantity is not None:
-                    ingredient.quantity *= factor
-                if ingredient.quantity_max is not None:
-                    ingredient.quantity_max *= factor
-            if recipe.nutrition and recipe.nutrition.basis == 'whole_recipe':
-                for field in ('calories_kcal', 'protein_g', 'carbohydrate_g', 'fat_g'):
-                    value = getattr(recipe.nutrition, field)
-                    if value is not None:
-                        setattr(recipe.nutrition, field, value * factor)
-            recipe.servings = servings
+                    servings: str | None = Query(None)):
+        base, recipe = detail(recipe_id, variation or None)
+        params = request.query_params
+        servings_value = _number(params, "servings", "Servings")
+        if servings_value == 0:
+            raise HTTPException(422, "Servings must be positive")
+        if "at" in params:
+            amounts, swaps, products = submitted_customization(params, recipe)
+            return RedirectResponse(canonical_url(base.id, variation, servings_value, amounts, swaps, recipe.servings, products),
+                                    status_code=303)
+        amounts, swaps, products, dropped = requested_customization(params, recipe)
+        custom, changes = customize(recipe, amounts, swaps, library, rules, products)
+        url = lambda a, s, p: canonical_url(base.id, variation, servings_value, a, s, recipe.servings, p)
+        shown = _scale(custom, servings_value)
+        factor = shown.servings / recipe.servings
+        originals = {line.id: line for line in recipe.ingredients}
+        rows, previous = [], None
+        for line in shown.ingredients:
+            origin = originals.get(line.id)
+            change = changes.get(line.id, {})
+            rule = change.get("rule")
+            item = library.get(line.ref) if line.ref else None
+            row = {"line": line, "controls": origin is not None, "id": line.id, "swap": rule.id if rule else "",
+                   "options": options(origin, rules, library) if origin is not None else [], "was": None, "input": None,
+                   "products": product_choices(line, item, shown.servings) if item and item.products else [],
+                   "product": item.product(line.product) if item and line.product else None,
+                   "needs_product": bool(item and item.requires_product and not line.product and not line.optional),
+                   "reset": None, "continued": origin is None and previous is not None and previous["was"] is not None}
+            if origin is not None and origin.quantity is not None and (rule is None or editable_ratio(rule, origin)):
+                row["input"] = _input_value(line.quantity)
+            if change:
+                was = _scale(recipe.model_copy(update={"ingredients": [origin]}), servings_value).ingredients[0]
+                row["was"] = was
+                row["reset"] = url({k: v for k, v in amounts.items() if k != line.id},
+                                   {k: v for k, v in swaps.items() if k != line.id}, products)
+            rows.append(row)
+            previous = row if origin is not None else previous
+        default_estimate = estimate_nutrition(recipe, library) if changes else None
         return templates.TemplateResponse(request=request, name="recipe.html", context={
-            "recipe": recipe, "base": base, "variation": variation, "original_servings": original_servings,
-            "estimate": estimate_nutrition(recipe, library), "rating": ratings().get(base.id),
+            "recipe": shown, "base": base, "variation": variation, "original_servings": recipe.servings,
+            "rows": rows, "changes": changes, "dropped": dropped, "amounts": amounts, "swaps": swaps, "products": products,
+            "estimate": estimate_nutrition(custom, library), "default_estimate": default_estimate,
+            "rating": ratings().get(base.id), "factor": factor,
+            "reset_all": url({}, {}, products),
+            "current_url": url(amounts, swaps, products),
+            "custom_title": shown.title + (" — Customized" if changes else ""),
         })
 
     @app.post("/recipe/{recipe_id}/rating")
@@ -180,7 +324,7 @@ def create_app(recipes: Path = Path("recipes"), database: Path = Path("data/reci
     @app.post("/shopping/generate")
     def shopping_generate(request: ShoppingRequest):
         try:
-            return generate_list(index, request)
+            return generate_list(index, request, library, rules)
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
 

@@ -25,3 +25,30 @@
 .stars label{flex-direction:row;font-size:15px;font-weight:400;gap:4px;align-items:center}
 .stars input{width:18px;min-height:18px}
 @media(max-width:560px){.pill span{padding:7px 12px}}
+.ingredients-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.edit-toggle{flex-direction:row;align-items:center;font-size:13px}
+.edit-toggle input{width:18px;min-height:18px}
+.amount-edit,.edit-help{display:none}
+.ingredients:has(#edit-mode:checked) .amount-edit{display:inline-flex;align-items:center;gap:4px;font-size:13px}
+.ingredients:has(#edit-mode:checked) .amount-text{display:none}
+.ingredients:has(#edit-mode:checked) .edit-help{display:block}
+.amount-edit input{width:92px;min-height:36px;padding:6px 8px}
+.ingredients li.changed{background:#fff8e6;margin:0 -12px;padding:12px}
+.was{display:block;font-size:12px;color:var(--muted)}
+.changed-note{background:#fff8e6;border-radius:8px;padding:10px 12px;font-size:14px}
+.choice{margin-top:8px;font-size:13px}
+.choice summary{cursor:pointer;display:inline-block;color:var(--green);font-weight:650;border:1px solid #c9d1bd;border-radius:999px;padding:3px 10px;background:#fff}
+.choice[open] summary{margin-bottom:8px}
+.choice.needs summary{background:#fff0cf;border-color:#c9a14a;color:#6b4a0c}
+.choice label{font-size:11px}
+.choice select{min-height:36px;padding:6px 8px;font-size:13px;width:100%}
+.product-select option{padding:4px}
+.swap-notes{list-style:none;padding:0;margin:8px 0 0}
+.swap-notes li{padding:6px 0;border-bottom:1px dashed var(--line)}
+.swap-notes li.unsuitable{color:#8a8f86}
+.badge{font-size:10px;font-weight:700;border-radius:999px;padding:1px 7px;background:#e3ecd9;color:var(--green)}
+.caution .badge{background:#fff0cf;color:#6b4a0c}
+.unsuitable .badge{background:#ececec;color:#6d6d6d}
+.not-counted{font-size:13px;color:var(--muted);padding-left:18px}
+.not-counted li{margin:4px 0}
+.swap-notes{max-height:320px;overflow-y:auto}

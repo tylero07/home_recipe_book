@@ -4,6 +4,7 @@ from decimal import Decimal
 
 from pydantic import Field
 
+from .customize import customize
 from .models import Identifier, Model, Positive
 from .formatting import format_amount, title_case
 from .variations import resolve_variation
@@ -13,6 +14,9 @@ class Selection(Model):
     recipe_id: Identifier
     servings: Positive
     variation: Identifier | None = None
+    amounts: dict[Identifier, Positive] = Field(default_factory=dict)        # original-batch amounts
+    substitutions: dict[Identifier, Identifier] = Field(default_factory=dict)  # line ID -> rule ID
+    products: dict[Identifier, Identifier] = Field(default_factory=dict)       # line ID -> product ID
 
 
 class ShoppingRequest(Model):
@@ -20,7 +24,7 @@ class ShoppingRequest(Model):
     include_optional: bool = False
 
 
-def generate_list(index, request: ShoppingRequest) -> dict:
+def generate_list(index, request: ShoppingRequest, library=None, rules=None) -> dict:
     grouped = {}
     warnings = []
     for selection in request.selections:
@@ -29,6 +33,8 @@ def generate_list(index, request: ShoppingRequest) -> dict:
             raise ValueError(f"Recipe not found: {selection.recipe_id}")
         if selection.variation:
             recipe = resolve_variation(recipe, selection.variation)
+        recipe = customize(recipe, selection.amounts, selection.substitutions, library or {}, rules or {},
+                           selection.products)[0]
         if 'needs-review' in recipe.tags:
             warnings.append(f"{recipe.title}: incomplete or unconfirmed recipe details; review ingredient notes before shopping.")
         scale = Decimal(str(selection.servings)) / Decimal(str(recipe.servings))
@@ -36,11 +42,14 @@ def generate_list(index, request: ShoppingRequest) -> dict:
             if ingredient.optional and not request.include_optional:
                 continue
             # Preparation remains part of identity: dry and cooked rice must not merge.
-            key = (ingredient.ingredient.strip().casefold(), ingredient.unit,
+            entry = (library or {}).get(ingredient.ref) if ingredient.ref else None
+            product = entry.product(ingredient.product) if entry and ingredient.product else None
+            name = f"{title_case(ingredient.ingredient)} ({product.name})" if product else title_case(ingredient.ingredient)
+            key = (name.casefold(), ingredient.unit,
                    (ingredient.preparation or '').strip().casefold(), ingredient.quantity is None, ingredient.liquid)
             if key not in grouped:
                 grouped[key] = dict(id=hashlib.sha256(repr(key).encode()).hexdigest()[:20],
-                    ingredient=title_case(ingredient.ingredient), unit=ingredient.unit, liquid=ingredient.liquid,
+                    ingredient=name, unit=ingredient.unit, liquid=ingredient.liquid,
                     quantity=None if ingredient.quantity is None else Decimal(0),
                     preparation=ingredient.preparation, sources=[], from_range=False)
             item = grouped[key]

@@ -1,0 +1,502 @@
+{
+  "$defs": {
+    "FamilyMember": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "ingredient": {
+          "minLength": 1,
+          "title": "Ingredient",
+          "type": "string"
+        },
+        "suitability": {
+          "additionalProperties": {
+            "enum": [
+              "works",
+              "caution",
+              "unsuitable"
+            ],
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Suitability",
+          "type": "object"
+        },
+        "reasons": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Reasons",
+          "type": "object"
+        },
+        "instruction_notes": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Instruction Notes",
+          "type": "object"
+        },
+        "effects": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effects"
+        }
+      },
+      "required": [
+        "ref",
+        "title",
+        "ingredient"
+      ],
+      "title": "FamilyMember",
+      "type": "object"
+    },
+    "SubstituteItem": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "ingredient": {
+          "minLength": 1,
+          "title": "Ingredient",
+          "type": "string"
+        },
+        "ratio": {
+          "exclusiveMinimum": 0,
+          "title": "Ratio",
+          "type": "number"
+        },
+        "preparation": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preparation"
+        }
+      },
+      "required": [
+        "ref",
+        "ingredient",
+        "ratio"
+      ],
+      "title": "SubstituteItem",
+      "type": "object"
+    },
+    "SubstitutionFamily": {
+      "additionalProperties": false,
+      "description": "Interchangeable ingredients: any member replaces any other one-for-one.\nThe replacement's own suitability, notes, and effects apply.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "ratio_basis": {
+          "enum": [
+            "volume",
+            "weight"
+          ],
+          "title": "Ratio Basis",
+          "type": "string"
+        },
+        "suitability": {
+          "additionalProperties": {
+            "enum": [
+              "works",
+              "caution",
+              "unsuitable"
+            ],
+            "type": "string"
+          },
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Suitability",
+          "type": "object"
+        },
+        "reasons": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Reasons",
+          "type": "object"
+        },
+        "instruction_notes": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Instruction Notes",
+          "type": "object"
+        },
+        "confidence": {
+          "default": "common-practice",
+          "enum": [
+            "common-practice",
+            "tested",
+            "user-verified"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/$defs/FamilyMember"
+          },
+          "minItems": 2,
+          "title": "Members",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "ratio_basis",
+        "suitability",
+        "members"
+      ],
+      "title": "SubstitutionFamily",
+      "type": "object"
+    },
+    "SubstitutionRule": {
+      "additionalProperties": false,
+      "description": "A universal swap, rated per use: what works in a sauce may fail when whipped.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "family": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Family"
+        },
+        "replaces": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Replaces",
+          "type": "string"
+        },
+        "with": {
+          "items": {
+            "$ref": "#/$defs/SubstituteItem"
+          },
+          "minItems": 1,
+          "title": "With",
+          "type": "array"
+        },
+        "ratio_basis": {
+          "enum": [
+            "volume",
+            "weight"
+          ],
+          "title": "Ratio Basis",
+          "type": "string"
+        },
+        "suitability": {
+          "additionalProperties": {
+            "enum": [
+              "works",
+              "caution",
+              "unsuitable"
+            ],
+            "type": "string"
+          },
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Suitability",
+          "type": "object"
+        },
+        "reasons": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Reasons",
+          "type": "object"
+        },
+        "instruction_notes": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ]
+          },
+          "title": "Instruction Notes",
+          "type": "object"
+        },
+        "effects": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effects"
+        },
+        "confidence": {
+          "default": "common-practice",
+          "enum": [
+            "common-practice",
+            "tested",
+            "user-verified"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "replaces",
+        "with",
+        "ratio_basis",
+        "suitability"
+      ],
+      "title": "SubstitutionRule",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "substitutions": {
+      "items": {
+        "$ref": "#/$defs/SubstitutionRule"
+      },
+      "title": "Substitutions",
+      "type": "array"
+    },
+    "families": {
+      "items": {
+        "$ref": "#/$defs/SubstitutionFamily"
+      },
+      "title": "Families",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version"
+  ],
+  "title": "SubstitutionFile",
+  "type": "object"
+}

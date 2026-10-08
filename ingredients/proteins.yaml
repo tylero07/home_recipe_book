@@ -4,40 +4,290 @@ ingredients:
   name: chicken breast, boneless and skinless, raw
   category: poultry
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 120
+    status: source_provided
+    calories_kcal: 120.0
     protein_g: 22.5
-    carbohydrate_g: 0
-    fat_g: 2.6
-    source: Approximate typical values; not verified against a label.
+    carbohydrate_g: 0.0
+    fat_g: 2.62
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171077: Chicken, broiler or fryers, breast, skinless,
+      boneless, meat only, raw'
+  usda:
+    fdc_id: 171077
+    dataset: SR Legacy
+    description: Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw
 - id: ground-turkey-93
   name: ground turkey, 93% lean, raw
   category: poultry
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 152
-    protein_g: 18.8
-    carbohydrate_g: 0
-    fat_g: 8
-    source: Approximate typical 93/7 label values; fat percentage of your turkey unconfirmed.
+    status: source_provided
+    calories_kcal: 150.0
+    protein_g: 18.73
+    carbohydrate_g: 0.0
+    fat_g: 8.34
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 172850: Turkey, ground, 93% lean, 7% fat, raw'
+  usda:
+    fdc_id: 172850
+    dataset: SR Legacy
+    description: Turkey, ground, 93% lean, 7% fat, raw
 - id: chickpeas-cooked
   name: chickpeas, cooked or canned, drained
   category: legumes
-  grams_per_cup: 164
+  grams_per_cup: 164.0
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 164
-    protein_g: 8.9
-    carbohydrate_g: 27.4
-    fat_g: 2.6
-    source: Approximate typical values; not verified against a label.
+    status: source_provided
+    calories_kcal: 164.0
+    protein_g: 8.86
+    carbohydrate_g: 27.42
+    fat_g: 2.59
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173757: Chickpeas (garbanzo beans, bengal gram),
+      mature seeds, cooked, boiled, without salt'
+  usda:
+    fdc_id: 173757
+    dataset: SR Legacy
+    description: Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt
+  notes:
+  - Cup weight from USDA portion '1 cup' (164 g).
 - id: ground-beef-85
   name: ground beef, 85% lean, raw
   category: beef
   nutrition_per_100g:
-    status: estimated
-    calories_kcal: 215
-    protein_g: 18.6
-    carbohydrate_g: 0
-    fat_g: 15
-    source: Approximate typical 85/15 values; lean percentage of your beef unconfirmed.
+    status: source_provided
+    calories_kcal: 215.0
+    protein_g: 18.59
+    carbohydrate_g: 0.0
+    fat_g: 15.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171796: Beef, ground, 85% lean meat / 15% fat,
+      raw (Includes foods for USDA''s Food Distribution Program)'
+  usda:
+    fdc_id: 171796
+    dataset: SR Legacy
+    description: Beef, ground, 85% lean meat / 15% fat, raw (Includes foods for USDA's Food Distribution
+      Program)
+- id: ground-beef-70
+  name: ground beef, 70% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 168652
+    dataset: SR Legacy
+    description: Beef, ground, 70% lean meat / 30% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 332.0
+    protein_g: 14.35
+    carbohydrate_g: 0.0
+    fat_g: 30.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 168652: Beef, ground, 70% lean meat / 30% fat,
+      raw'
+- id: ground-beef-75
+  name: ground beef, 75% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 174037
+    dataset: SR Legacy
+    description: Beef, ground, 75% lean meat / 25% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 293.0
+    protein_g: 15.76
+    carbohydrate_g: 0.0
+    fat_g: 25.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174037: Beef, ground, 75% lean meat / 25% fat,
+      raw'
+- id: ground-beef-80
+  name: ground beef, 80% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 174036
+    dataset: SR Legacy
+    description: Beef, ground, 80% lean meat / 20% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 254.0
+    protein_g: 17.17
+    carbohydrate_g: 0.0
+    fat_g: 20.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174036: Beef, ground, 80% lean meat / 20% fat,
+      raw'
+- id: ground-beef-90
+  name: ground beef, 90% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 174030
+    dataset: SR Legacy
+    description: Beef, ground, 90% lean meat / 10% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 176.0
+    protein_g: 20.0
+    carbohydrate_g: 0.0
+    fat_g: 10.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174030: Beef, ground, 90% lean meat / 10% fat,
+      raw'
+- id: ground-beef-93
+  name: ground beef, 93% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 173110
+    dataset: SR Legacy
+    description: Beef, ground, 93% lean meat / 7% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 152.0
+    protein_g: 20.85
+    carbohydrate_g: 0.0
+    fat_g: 7.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173110: Beef, ground, 93% lean meat / 7% fat, raw'
+- id: ground-beef-95
+  name: ground beef, 95% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 171790
+    dataset: SR Legacy
+    description: Beef, ground, 95% lean meat / 5% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 137.0
+    protein_g: 21.41
+    carbohydrate_g: 0.0
+    fat_g: 5.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171790: Beef, ground, 95% lean meat / 5% fat, raw'
+- id: ground-beef-97
+  name: ground beef, 97% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 173111
+    dataset: SR Legacy
+    description: Beef, ground, 97% lean meat / 3% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 121.0
+    protein_g: 21.98
+    carbohydrate_g: 0.0
+    fat_g: 3.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173111: Beef, ground, 97% lean meat / 3% fat, raw'
+- id: ground-turkey-85
+  name: ground turkey, 85% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 174493
+    dataset: SR Legacy
+    description: Turkey, ground, 85% lean, 15% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 180.0
+    protein_g: 16.9
+    carbohydrate_g: 0.0
+    fat_g: 12.54
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174493: Turkey, ground, 85% lean, 15% fat, raw'
+- id: ground-turkey-99
+  name: ground turkey, fat free, raw
+  category: ground meat
+  usda:
+    fdc_id: 172847
+    dataset: SR Legacy
+    description: Turkey, ground, fat free, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 112.0
+    protein_g: 23.57
+    carbohydrate_g: 0.0
+    fat_g: 1.95
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 172847: Turkey, ground, fat free, raw'
+- id: ground-chicken
+  name: ground chicken, raw
+  category: ground meat
+  usda:
+    fdc_id: 171116
+    dataset: SR Legacy
+    description: Chicken, ground, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 143.0
+    protein_g: 17.44
+    carbohydrate_g: 0.04
+    fat_g: 8.1
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171116: Chicken, ground, raw'
+- id: ground-pork
+  name: ground pork, raw (about 72% lean)
+  category: ground meat
+  usda:
+    fdc_id: 167902
+    dataset: SR Legacy
+    description: Pork, fresh, ground, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 263.0
+    protein_g: 16.88
+    carbohydrate_g: 0.0
+    fat_g: 21.19
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 167902: Pork, fresh, ground, raw'
+- id: ground-pork-84
+  name: ground pork, 84% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 168372
+    dataset: SR Legacy
+    description: Pork, ground, 84% lean / 16% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 218.0
+    protein_g: 17.99
+    carbohydrate_g: 0.44
+    fat_g: 16.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 168372: Pork, ground, 84% lean / 16% fat, raw'
+- id: ground-pork-96
+  name: ground pork, 96% lean, raw
+  category: ground meat
+  usda:
+    fdc_id: 169190
+    dataset: SR Legacy
+    description: Pork, ground, 96% lean / 4% fat, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 121.0
+    protein_g: 21.1
+    carbohydrate_g: 0.21
+    fat_g: 4.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 169190: Pork, ground, 96% lean / 4% fat, raw'
+- id: ground-veal
+  name: ground veal, raw
+  category: ground meat
+  usda:
+    fdc_id: 175290
+    dataset: SR Legacy
+    description: Veal, ground, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 197.0
+    protein_g: 18.58
+    carbohydrate_g: 0.0
+    fat_g: 13.06
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 175290: Veal, ground, raw'
+- id: ground-lamb
+  name: ground lamb, raw
+  category: ground meat
+  usda:
+    fdc_id: 174370
+    dataset: SR Legacy
+    description: Lamb, ground, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 282.0
+    protein_g: 16.56
+    carbohydrate_g: 0.0
+    fat_g: 23.41
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174370: Lamb, ground, raw'
+- id: ground-bison
+  name: ground bison, grass-fed, raw
+  category: ground meat
+  usda:
+    fdc_id: 175293
+    dataset: SR Legacy
+    description: Bison, ground, grass-fed, raw
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 146.0
+    protein_g: 20.23
+    carbohydrate_g: 0.05
+    fat_g: 7.21
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 175293: Bison, ground, grass-fed, raw'

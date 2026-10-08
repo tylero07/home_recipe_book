@@ -97,3 +97,54 @@ Step 1 of [the customization design](customization-design.md).
   beef lean percentage, beer bottle size, and chocolate disc weight are
   provisional. Turkey-for-beef, nonfat Greek yogurt-for-sour cream, and dark
   chocolate-for-Mexican chocolate are queued as the first substitution rules.
+
+## 2026-10-08 — USDA nutrition, amount edits, and substitutions
+
+Steps 2 and 3 of [the customization design](customization-design.md).
+
+- Nutrition comes from USDA FoodData Central's public-domain SR Legacy and
+  Foundation downloads, read straight from their zips into a disposable lookup
+  database under ignored `data/usda/`. Library entries record the FDC ID they
+  were copied from. Energy falls back to Atwater values and carbohydrate to
+  "by summation" where Foundation foods lack the usual nutrient.
+- 43 of 50 library entries now use USDA values. Proxies (poblano, cubanelle,
+  chili flakes, wheat beer, biscuit mix) are labeled estimated; ultra-filtered
+  milk stays on its label estimate because generic 2% milk has half the protein;
+  the bone broth keeps the user's label; sumac has no USDA entry.
+- Customizations live in the URL (`a.<line>` original-batch amounts, `s.<line>`
+  rule IDs), so pages stay bookmarkable and nothing is written to `personal/`.
+  The page form submits amounts as shown plus the servings they were shown at;
+  the server converts them and redirects to the canonical URL.
+- Order: variation, then amount edits, then swaps, then servings scaling.
+  Edits that don't fit a version are dropped with a notice on the page; the
+  shopping API rejects them instead.
+- A line's rating for a rule is its worst across its `uses`; unrated uses count
+  as caution; recipe vetoes make a rule unsuitable for that line.
+- Swapped lines are editable only for one-for-one swaps in the same unit; other
+  swaps scale from the original line's amount.
+- Cart entries carry amounts and swaps; the same recipe with different
+  customizations is a separate entry. Older saved carts load with none.
+
+## 2026-10-08 — Substitution families, products, and not-counted reporting
+
+- Substitution families expand to every ordered pair at load time
+  (`<from>-to-<to>` IDs). The replacement's suitability overrides, reasons,
+  cooking notes, and effects apply, since what changes is what goes into the pot.
+  Ground meat (18 members), sour cream and yogurt (7), and cooking oils (3) yield
+  348 rules alongside 3 one-off rules. All new meats and dairy are USDA-linked.
+- Swap explanations include the per-100 g change in calories, protein, and fat
+  for weight-based swaps, computed from the library rather than written by hand.
+- Products: library entries can list brand/style products with their own
+  nutrition and sizes. `requires_product` keeps an ingredient out of totals
+  until one is chosen (wheat beer, Mexican chocolate) rather than guessing.
+  Choices live in the URL (`p.<line>`), carry into the cart, and name the
+  product on the shopping list.
+- Product data came from label panels found on 2026-10-08: Blue Moon (retailer
+  label), Bell's Oberon (brewery), Nestlé Abuelita (retailer label); Shock Top,
+  Hoegaarden, Allagash, and Ibarra's serving weight are third-party or derived
+  and marked estimated. The fairlife 2% and Cheddar Bay Biscuit Mix entries now
+  use their labels (box confirmed at 11.36 oz).
+- Filters bound unchosen products by what each adds at the recipe's amount, so a
+  heavier tablet with fewer calories per gram still counts as the larger one.
+- Not-counted lines are grouped by why; seasonings flagged `negligible` are
+  listed as negligible rather than missing.

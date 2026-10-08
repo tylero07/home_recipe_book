@@ -137,6 +137,30 @@
           "default": false,
           "title": "Optional",
           "type": "boolean"
+        },
+        "substitutions": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IngredientSubstitutions"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "product": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Product"
         }
       },
       "required": [
@@ -308,9 +332,50 @@
           ],
           "default": null,
           "title": "Optional"
+        },
+        "product": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Product"
         }
       },
       "title": "IngredientOverride",
+      "type": "object"
+    },
+    "IngredientSubstitutions": {
+      "additionalProperties": false,
+      "description": "Per-line adjustments to the universal substitution library.",
+      "properties": {
+        "veto": {
+          "patternProperties": {
+            "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "title": "Veto",
+          "type": "object"
+        },
+        "notes": {
+          "patternProperties": {
+            "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "title": "Notes",
+          "type": "object"
+        }
+      },
+      "title": "IngredientSubstitutions",
       "type": "object"
     },
     "Nutrition": {

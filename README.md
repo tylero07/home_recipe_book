@@ -63,6 +63,7 @@ The generated editor schemas are in `schemas/`. Regenerate after changing the mo
 ```sh
 recipe-library schema > schemas/recipe.schema.json
 recipe-library schema ingredients > schemas/ingredients.schema.json
+recipe-library schema substitutions > schemas/substitutions.schema.json
 ```
 
 ## Ingredient library
@@ -76,8 +77,83 @@ Recipe pages without hand-entered nutrition show a per-serving estimate summed
 from linked ingredients. Lines that can't be counted are listed with the reason
 (amount unknown, optional, not in the library, no nutrition data, or no
 weight conversion). Macros a counted ingredient lacks are marked as excluding it.
-Library values are approximate typical values marked `estimated` unless they
-come from a label (`source_provided`); check labels for your brands.
+### USDA nutrition
+
+Library nutrition comes from USDA FoodData Central where possible. The
+public-domain SR Legacy (CSV) and Foundation Foods (JSON) downloads live in the
+ignored `data/usda/` folder; build a local lookup once, then search and link:
+
+```sh
+recipe-library usda build
+recipe-library usda search cheddar cheese
+recipe-library usda show 173414
+recipe-library usda link cheddar-cheese 173414 --cup 3
+```
+
+`link` writes the food's macros per 100 g with its FDC ID as the source, plus
+optional portion weights: `--cup N` / `--each N` pick numbered portions from
+`show`, and `--per-cup` says how many cups that portion holds (1/16 for a
+tablespoon). `--proxy` marks a similar food standing in for one USDA doesn't
+list; those values are labeled estimated. Label data you enter by hand is
+`source_provided` with your label as the source. Recipe pages name any
+ingredient that still uses estimated values.
+
+### Products
+
+Some ingredients vary too much by brand for a generic value: wheat beers run
+about 150–190 kcal per bottle, and Mexican chocolate tablets weigh 60–90 g.
+Their library entries list `products` with label data (or estimates, marked)
+and set `requires_product`. On the recipe page they're highlighted with
+**Choose a Product to Count Nutrition**; type to search the list (e.g. "blue
+moon") and the totals update. Until then they're left out of the totals and
+named in a warning above them. Recipe and catalog filters use safe bounds for
+unchosen products: the highest-calorie choice for the calorie limit and the
+lowest-protein choice for the protein minimum. A recipe can preset `product:`.
+
+Below the totals, everything not counted is grouped: needs a product choice,
+no amount given, optional, no nutrition data, and negligible. Mark seasonings
+and garnishes `negligible: true` in the library so they're listed as negligible
+rather than missing.
+
+When an ingredient has no reliable data and isn't negligible, look up current
+label data (manufacturer or retailer nutrition panels first) and add it as a
+product with its source and the date checked.
+
+## Amount changes and substitutions
+
+On a recipe page, switch on **Edit Amounts**, change any ingredient, and select
+**Update Amounts**. Everything else stays as written and nutrition updates.
+Changed lines show their original amount with a per-line **Reset**, and
+**Reset to Original** clears every change while keeping servings and version.
+Amounts are stored for the original batch, so changing servings afterwards
+scales them too.
+
+Ingredients with substitutions show a **⇄ Swaps Available** marker; open it for
+the menu and an explanation of every option, including how calories, protein,
+and fat change per 100 g. Rules live in `substitutions/*.yaml`. Each rates itself
+per use (`works`, `caution`, `unsuitable`, with reasons), and an ingredient line
+takes the worst rating among its `uses`. Unsuitable swaps are greyed out with the
+reason shown.
+
+A **family** makes a group interchangeable without writing every pair: each
+member can replace any other one-for-one, and the replacement brings its own
+cautions, cooking notes, and effects. Families cover ground meats (beef from 70%
+to 97% lean, turkey, chicken, pork, veal, lamb, bison), sour cream and yogurts,
+and cooking oils. A recipe can rule a swap out for one line or add its own note:
+
+```yaml
+substitutions:
+  veto:
+    sour-cream-to-greek-yogurt: The topping must stay rich here.
+  notes:
+    ground-beef-to-ground-turkey: Use 85% lean turkey if you can find it.
+```
+
+Swaps convert amounts by volume or weight, can split into several ingredients
+(Mexican chocolate becomes dark chocolate plus sugar), add the rule's cooking
+notes, and rename the ingredient in any step written with a placeholder such as
+`Add the {beef}`. Changes live in the page address, so a customized version can
+be bookmarked, and **Add to Shopping List** carries them into the cart and list.
 
 Catalog-wide uniqueness and variation references are checked by the validation
 command, beyond what JSON Schema can express.
