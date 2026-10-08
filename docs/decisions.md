@@ -148,3 +148,18 @@ Steps 2 and 3 of [the customization design](customization-design.md).
   heavier tablet with fewer calories per gram still counts as the larger one.
 - Not-counted lines are grouped by why; seasonings flagged `negligible` are
   listed as negligible rather than missing.
+
+## 2026-10-08 — Chicken and dumplings rewrite
+
+- The dumpling recipe was rebuilt from the full cooking conversation, replacing
+  the partial reconstruction and its recovery notes. It records the cooked
+  version: 2 lb chicken breast, bone broth, ultra-filtered 2% milk, the boxed
+  Cheddar Bay mix with added cheddar, and no finishing butter.
+- Vegetables use the source counts (1 onion, 3 carrots, 3 celery stalks) instead
+  of the earlier estimated cup amounts. Thyme, rosemary, and bay leaves have no
+  library entry and stay out of macro totals.
+- The 4 tbsp of roux butter was never confirmed and is assumed used.
+- No hand-entered nutrition. The conversation's rough 511 kcal / 47 g protein
+  per serving guessed at the biscuit mix; the library estimate uses its label
+  and comes out near 626 kcal / 50 g protein per serving.
+- The `needs-review` tag was dropped since the method is now complete.

@@ -45,7 +45,7 @@ def test_serving_update_scales_from_original_without_changing_catalog(tmp_path):
         page = client.get('/recipe/chicken-cheddar-bay-dumplings?servings=3')
         assert page.status_code == 200
         assert '2½ cups (20 fl oz)' in page.text
-        assert '¾ cup' in page.text
+        assert '⅜ cup (3 fl oz)' in page.text
         assert 'Update Amounts' in page.text
         assert client.get('/recipes/chicken-cheddar-bay-dumplings').json()['servings'] == 6
         for value in ('0', '-1', 'nan'):
