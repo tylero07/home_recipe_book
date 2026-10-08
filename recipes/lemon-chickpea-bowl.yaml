@@ -3,9 +3,10 @@ id: lemon-chickpea-bowl
 title: Lemon Chickpea Bowl
 description: A simple grain bowl with chickpeas and lemon.
 servings: 2
+category: lunch-dinner
+served: [hot]
 tags:
 - vegetarian
-- lunch
 - quick
 times:
   prep_minutes: 10
@@ -16,24 +17,32 @@ source:
 ingredients:
 - id: chickpeas
   ingredient: chickpeas
+  ref: chickpeas-cooked
+  uses: [finishing]
   quantity: 240
   unit: g
   preparation: cooked and drained
   optional: false
 - id: rice
   ingredient: rice
+  ref: white-rice-dry
+  uses: [simmered]
   quantity: 150
   unit: g
   preparation: dry
   optional: false
 - id: lemon-juice
   ingredient: lemon juice
+  ref: lemon-juice
+  uses: [finishing]
   quantity: 30
   unit: ml
   optional: false
   liquid: true
 - id: salt
   ingredient: salt
+  ref: salt
+  uses: [finishing]
   quantity: null
   unit: null
   preparation: to taste

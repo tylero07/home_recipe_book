@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 from pydantic import ValidationError
 
-from .models import Recipe
+from .models import IngredientFile, LibraryIngredient, Recipe
 
 
 class CatalogError(ValueError):
@@ -36,29 +36,67 @@ def _mapping(loader, node, deep=False):
 UniqueKeyLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _mapping)
 
 
-def load_catalog(directory: Path) -> dict[str, Recipe]:
+def _yaml_files(directory: Path) -> list[Path]:
+    return sorted(p for p in directory.rglob("*") if p.suffix.lower() in {".yaml", ".yml"} and p.is_file())
+
+
+def _read(path: Path, model, errors: list[str]):
+    try:
+        return model.model_validate(yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader))
+    except ValidationError as exc:
+        for error in exc.errors():
+            field = ".".join(str(part) for part in error["loc"]) or "file"
+            errors.append(f"{path}: {field}: {error['msg']}")
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        errors.append(f"{path}: {exc}")
+    return None
+
+
+def load_ingredients(directory: Path) -> dict[str, LibraryIngredient]:
+    """Load the shared ingredient library; a missing directory is an empty library."""
+    if not directory.exists():
+        return {}
+    if not directory.is_dir():
+        raise CatalogError(f"{directory}: ingredient library is not a directory")
+    library, origins, errors = {}, {}, []
+    for path in _yaml_files(directory):
+        data = _read(path, IngredientFile, errors)
+        for item in data.ingredients if data else []:
+            if item.id in library:
+                errors.append(f"{path}: duplicate ingredient ID '{item.id}' (also in {origins[item.id]})")
+            else:
+                library[item.id] = item
+                origins[item.id] = path
+    if errors:
+        raise CatalogError("\n".join(errors))
+    return library
+
+
+def load_catalog(directory: Path, ingredients: dict[str, LibraryIngredient] | None = None) -> dict[str, Recipe]:
+    """Load every recipe; when a library is given, every ingredient ref must exist in it."""
     if not directory.is_dir():
         raise CatalogError(f"{directory}: recipe directory does not exist")
-    files = sorted(p for p in directory.rglob("*") if p.suffix.lower() in {".yaml", ".yml"} and p.is_file())
+    files = _yaml_files(directory)
     if not files:
         raise CatalogError(f"{directory}: no YAML recipes found")
     recipes = {}
     origins = {}
     errors = []
     for path in files:
-        try:
-            recipe = Recipe.model_validate(yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader))
-            if recipe.id in recipes:
-                errors.append(f"{path}: duplicate recipe ID '{recipe.id}' (also in {origins[recipe.id]})")
-            else:
-                recipes[recipe.id] = recipe
-                origins[recipe.id] = path
-        except ValidationError as exc:
-            for error in exc.errors():
-                field = ".".join(str(part) for part in error["loc"]) or "recipe"
-                errors.append(f"{path}: {field}: {error['msg']}")
-        except (OSError, UnicodeError, yaml.YAMLError) as exc:
-            errors.append(f"{path}: {exc}")
+        recipe = _read(path, Recipe, errors)
+        if recipe is None:
+            continue
+        if recipe.id in recipes:
+            errors.append(f"{path}: duplicate recipe ID '{recipe.id}' (also in {origins[recipe.id]})")
+            continue
+        recipes[recipe.id] = recipe
+        origins[recipe.id] = path
+        if ingredients is not None:
+            refs = [(f"ingredients.{i.id}", i.ref) for i in recipe.ingredients]
+            refs += [(f"variations.{v.id}.ingredient_overrides.{key}", o.ref)
+                     for v in recipe.variations for key, o in v.ingredient_overrides.items()]
+            errors += [f"{path}: {field}.ref: unknown library ingredient '{ref}'"
+                       for field, ref in refs if ref is not None and ref not in ingredients]
     if errors:
         raise CatalogError("\n".join(errors))
     return recipes

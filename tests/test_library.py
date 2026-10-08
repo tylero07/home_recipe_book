@@ -137,7 +137,7 @@ def test_personal_initialization_preserves_existing_data(tmp_path):
     for path in created:
         data = yaml.safe_load(path.read_text())
         assert data["schema_version"] == 1
-        assert [] in data.values()
+        assert [] in data.values() or {} in data.values()
     history = personal / "cooking-history.yaml"
     history.write_text("my existing history\n")
     assert initialize_personal(personal) == []

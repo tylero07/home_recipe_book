@@ -1,0 +1,171 @@
+schema_version: 1
+ingredients:
+- id: carrot
+  name: carrot, diced
+  category: vegetable
+  grams_per_cup: 128
+  grams_each: 61
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 41
+    protein_g: 0.9
+    carbohydrate_g: 9.6
+    fat_g: 0.2
+    source: Approximate typical values.
+- id: onion
+  name: onion, chopped
+  category: vegetable
+  grams_per_cup: 160
+  grams_each: 110
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 40
+    protein_g: 1.1
+    carbohydrate_g: 9.3
+    fat_g: 0.1
+    source: Approximate typical values.
+- id: celery
+  name: celery, diced
+  category: vegetable
+  grams_per_cup: 101
+  grams_each: 40
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 14
+    protein_g: 0.7
+    carbohydrate_g: 3
+    fat_g: 0.2
+    source: Approximate typical values.
+- id: garlic
+  name: garlic
+  category: vegetable
+  grams_each: 3
+  notes:
+  - One count is one clove.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 149
+    protein_g: 6.4
+    carbohydrate_g: 33.1
+    fat_g: 0.5
+    source: Approximate typical values.
+- id: lemon-juice
+  name: lemon juice
+  category: fruit
+  grams_per_cup: 244
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 22
+    protein_g: 0.4
+    carbohydrate_g: 6.9
+    fat_g: 0.2
+    source: Approximate typical values.
+- id: tomato-paste
+  name: tomato paste
+  category: tomato
+  grams_per_cup: 262
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 82
+    protein_g: 4.3
+    carbohydrate_g: 18.9
+    fat_g: 0.5
+    source: Approximate typical values.
+- id: poblano-pepper
+  name: poblano pepper
+  category: vegetable
+  grams_each: 110
+  notes:
+  - One count is one medium pepper.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 20
+    protein_g: 0.9
+    carbohydrate_g: 4.6
+    fat_g: 0.2
+    source: Approximate typical values.
+- id: bell-pepper
+  name: bell pepper (yellow, orange, or red)
+  category: vegetable
+  grams_each: 120
+  notes:
+  - One count is one medium pepper.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 27
+    protein_g: 1
+    carbohydrate_g: 6.3
+    fat_g: 0.2
+    source: Approximate typical values.
+- id: cubanelle-pepper
+  name: cubanelle pepper
+  category: vegetable
+  grams_each: 70
+  notes:
+  - One count is one medium pepper.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 27
+    protein_g: 1
+    carbohydrate_g: 6
+    fat_g: 0.3
+    source: Approximate typical values.
+- id: jalapeno
+  name: jalapeño or Fresno chili
+  category: vegetable
+  grams_each: 14
+  notes:
+  - One count is one chile.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 29
+    protein_g: 0.9
+    carbohydrate_g: 6.5
+    fat_g: 0.4
+    source: Approximate typical values.
+- id: tomato-puree
+  name: tomato puree, canned
+  category: tomato
+  grams_per_cup: 250
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 38
+    protein_g: 1.7
+    carbohydrate_g: 9
+    fat_g: 0.2
+    source: Approximate typical values.
+- id: cilantro
+  name: fresh cilantro
+  category: herb
+  grams_per_cup: 16
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 23
+    protein_g: 2.1
+    carbohydrate_g: 3.7
+    fat_g: 0.5
+    source: Approximate typical values.
+- id: pickled-jalapenos
+  name: pickled jalapeños
+  category: vegetable
+  grams_per_cup: 140
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 27
+    protein_g: 0.9
+    carbohydrate_g: 4.7
+    fat_g: 0.9
+    source: Approximate typical values.
+- id: corn-tortilla
+  name: corn tortilla
+  category: grain
+  grams_each: 26
+  notes:
+  - One count is one 6-inch tortilla.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 218
+    protein_g: 5.7
+    carbohydrate_g: 44.6
+    fat_g: 2.9
+    source: Approximate typical values.

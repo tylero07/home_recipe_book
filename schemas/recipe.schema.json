@@ -13,6 +13,56 @@
           "title": "Ingredient",
           "type": "string"
         },
+        "ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "uses": {
+          "items": {
+            "enum": [
+              "raw",
+              "finishing",
+              "simmered",
+              "hard-boil-reduce",
+              "seared",
+              "fat-for-cooking",
+              "deglaze",
+              "flambe",
+              "marinade",
+              "whipped",
+              "emulsion",
+              "baked-structure",
+              "leavening",
+              "binding",
+              "thickening"
+            ],
+            "type": "string"
+          },
+          "title": "Uses",
+          "type": "array"
+        },
+        "group": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Group"
+        },
         "quantity": {
           "anyOf": [
             {
@@ -25,6 +75,19 @@
           ],
           "default": null,
           "title": "Quantity"
+        },
+        "quantity_max": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quantity Max"
         },
         "unit": {
           "anyOf": [
@@ -99,6 +162,64 @@
           "default": null,
           "title": "Ingredient"
         },
+        "ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "uses": {
+          "anyOf": [
+            {
+              "items": {
+                "enum": [
+                  "raw",
+                  "finishing",
+                  "simmered",
+                  "hard-boil-reduce",
+                  "seared",
+                  "fat-for-cooking",
+                  "deglaze",
+                  "flambe",
+                  "marinade",
+                  "whipped",
+                  "emulsion",
+                  "baked-structure",
+                  "leavening",
+                  "binding",
+                  "thickening"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uses"
+        },
+        "group": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Group"
+        },
         "quantity": {
           "anyOf": [
             {
@@ -111,6 +232,19 @@
           ],
           "default": null,
           "title": "Quantity"
+        },
+        "quantity_max": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quantity Max"
         },
         "unit": {
           "anyOf": [
@@ -415,6 +549,28 @@
       "default": null,
       "title": "Description"
     },
+    "category": {
+      "enum": [
+        "breakfast",
+        "snacks-apps",
+        "lunch-dinner",
+        "dessert"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "served": {
+      "items": {
+        "enum": [
+          "hot",
+          "cold",
+          "room-temperature"
+        ],
+        "type": "string"
+      },
+      "title": "Served",
+      "type": "array"
+    },
     "servings": {
       "exclusiveMinimum": 0,
       "title": "Servings",
@@ -490,6 +646,7 @@
     "schema_version",
     "id",
     "title",
+    "category",
     "servings",
     "ingredients",
     "instructions"

@@ -1,0 +1,323 @@
+schema_version: 1
+id: wheat-beer-chili
+title: Wheat Beer Chili with Mexican Chocolate
+description: Deep, mole-like beef chili with finely minced peppers, a wheat-beer deglaze,
+  and Mexican chocolate, finished with Cholula sour cream and crispy tortilla strips.
+category: lunch-dinner
+served: [hot]
+servings: 8
+tags:
+- beef
+- chili
+- comfort-food
+- spicy
+- needs-review
+times:
+  prep_minutes: 30
+  cook_minutes: 230
+source:
+  title: Not Another Cooking Show — Wheat Beer Chili with Mexican Chocolate
+  url: https://www.notanothercookingshow.tv/post/wheat-beer-chili-with-mexican-chocolate
+ingredients:
+- id: beef
+  ingredient: ground beef
+  ref: ground-beef-85
+  uses: [seared]
+  quantity: 2.5
+  unit: lb
+- id: onion
+  ingredient: onion
+  ref: onion
+  uses: [seared, simmered]
+  quantity: 1
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: carrot
+  ingredient: carrot
+  ref: carrot
+  uses: [seared, simmered]
+  quantity: 1
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: poblano
+  ingredient: poblano pepper
+  ref: poblano-pepper
+  uses: [seared, simmered]
+  quantity: 1
+  quantity_max: 2
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: yellow-pepper
+  ingredient: yellow bell pepper
+  ref: bell-pepper
+  uses: [seared, simmered]
+  quantity: 1
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: orange-pepper
+  ingredient: orange bell pepper
+  ref: bell-pepper
+  uses: [seared, simmered]
+  quantity: 1
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: cubanelle
+  ingredient: cubanelle pepper
+  ref: cubanelle-pepper
+  uses: [seared, simmered]
+  quantity: 1
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: hot-chiles
+  ingredient: jalapeño or Fresno chili
+  ref: jalapeno
+  uses: [seared, simmered]
+  quantity: 1
+  quantity_max: 2
+  unit: count
+  preparation: diced, then minced in a food processor
+- id: garlic
+  ingredient: garlic
+  ref: garlic
+  uses: [seared, simmered]
+  quantity: 6
+  unit: count
+  preparation: cloves, minced with the onion
+- id: olive-oil
+  ingredient: olive oil
+  ref: olive-oil
+  uses: [fat-for-cooking]
+  preparation: enough to coat the pan
+- id: tomato-paste
+  ingredient: tomato paste
+  ref: tomato-paste
+  uses: [seared, simmered]
+  quantity: 8
+  unit: oz
+  preparation: one can
+- id: beer
+  ingredient: wheat beer
+  ref: wheat-beer
+  uses: [deglaze, simmered]
+  quantity: 12
+  unit: fl_oz
+  liquid: true
+  preparation: one bottle; 12 fl oz assumed
+- id: cholula
+  ingredient: Cholula hot sauce
+  ref: hot-sauce
+  uses: [simmered]
+  quantity: 0.25
+  quantity_max: 0.5
+  unit: cup
+  liquid: true
+- id: worcestershire
+  ingredient: Worcestershire sauce
+  ref: worcestershire-sauce
+  uses: [simmered]
+  quantity: 3
+  unit: tbsp
+  liquid: true
+- id: tomato-puree
+  ingredient: tomato puree
+  ref: tomato-puree
+  uses: [simmered]
+  quantity: 24
+  unit: oz
+  preparation: one can
+- id: stock
+  ingredient: beef stock
+  ref: beef-stock
+  uses: [simmered]
+  quantity: 4
+  unit: cup
+  liquid: true
+- id: brown-sugar
+  ingredient: brown sugar
+  ref: brown-sugar
+  uses: [simmered]
+  quantity: 0.25
+  unit: cup
+- id: chocolate
+  ingredient: Mexican chocolate
+  ref: mexican-chocolate
+  uses: [simmered]
+  quantity: 1
+  unit: count
+  preparation: one disc
+- id: salt
+  ingredient: salt
+  ref: salt
+  uses: [seared, simmered]
+  preparation: to taste
+- id: pepper
+  ingredient: black pepper
+  ref: black-pepper
+  uses: [seared, simmered]
+  preparation: to taste
+- id: ancho
+  group: Chili Spice Mix
+  ingredient: ancho chili powder
+  ref: ancho-chili-powder
+  uses: [seared, simmered]
+  quantity: 2
+  unit: tbsp
+- id: spicy-chili-powder
+  group: Chili Spice Mix
+  ingredient: spicy chili powder
+  ref: chili-powder
+  uses: [seared, simmered]
+  quantity: 2
+  unit: tbsp
+  preparation: or another chili powder you like
+- id: cumin
+  group: Chili Spice Mix
+  ingredient: ground cumin
+  ref: cumin
+  uses: [seared, simmered]
+  quantity: 1
+  unit: tbsp
+- id: coriander
+  group: Chili Spice Mix
+  ingredient: ground coriander
+  ref: coriander
+  uses: [seared, simmered]
+  quantity: 1
+  unit: tbsp
+- id: onion-powder
+  group: Chili Spice Mix
+  ingredient: onion powder
+  ref: onion-powder
+  uses: [seared, simmered]
+  quantity: 1
+  unit: tbsp
+- id: garlic-powder
+  group: Chili Spice Mix
+  ingredient: garlic powder
+  ref: garlic-powder
+  uses: [seared, simmered]
+  quantity: 1
+  unit: tbsp
+- id: paprika
+  group: Chili Spice Mix
+  ingredient: paprika
+  ref: paprika
+  uses: [seared, simmered]
+  quantity: 1
+  unit: tbsp
+- id: cayenne
+  group: Chili Spice Mix
+  ingredient: cayenne
+  ref: cayenne
+  uses: [seared, simmered]
+  quantity: 0.5
+  unit: tsp
+- id: chili-flake
+  group: Chili Spice Mix
+  ingredient: chili flake
+  ref: red-pepper-flakes
+  uses: [seared, simmered]
+  quantity: 0.5
+  unit: tsp
+- id: sumac
+  group: Chili Spice Mix
+  ingredient: sumac
+  ref: sumac
+  uses: [seared, simmered]
+  quantity: 1
+  unit: tbsp
+  optional: true
+- id: cinnamon
+  group: Chili Spice Mix
+  ingredient: cinnamon
+  ref: cinnamon
+  uses: [seared, simmered]
+  quantity: 0.25
+  unit: tsp
+  optional: true
+- id: sour-cream
+  group: Cholula Sour Cream
+  ingredient: sour cream
+  ref: sour-cream
+  uses: [raw]
+  quantity: 0.5
+  unit: cup
+- id: sour-cream-cholula
+  group: Cholula Sour Cream
+  ingredient: Cholula hot sauce
+  ref: hot-sauce
+  uses: [raw]
+  quantity: 1
+  quantity_max: 2
+  unit: tbsp
+  liquid: true
+- id: sour-cream-salt
+  group: Cholula Sour Cream
+  ingredient: salt
+  ref: salt
+  uses: [raw]
+  preparation: a pinch
+- id: tortillas
+  group: Garnish
+  ingredient: corn tortillas
+  ref: corn-tortilla
+  uses: [fat-for-cooking]
+  preparation: cut into strips and fried crisp; amount not given
+- id: frying-oil
+  group: Garnish
+  ingredient: oil for frying
+  ref: vegetable-oil
+  uses: [fat-for-cooking]
+  preparation: amount absorbed unknown
+- id: cilantro
+  group: Garnish
+  ingredient: fresh cilantro
+  ref: cilantro
+  uses: [raw]
+  preparation: to serve
+- id: pickled-jalapenos
+  group: Garnish
+  ingredient: pickled jalapeños
+  ref: pickled-jalapenos
+  uses: [raw]
+  preparation: to serve
+- id: finishing-cholula
+  group: Garnish
+  ingredient: Cholula hot sauce
+  ref: hot-sauce
+  uses: [finishing]
+  preparation: a few shakes to finish
+instructions:
+- Roughly dice the onion, carrot, peppers, and chiles. Working in separate batches
+  (peppers; onion with garlic; carrot), pulse each in a food processor until finely
+  minced, close to the texture of ground beef. Combine in one bowl.
+- Stir together the Chili Spice Mix ingredients.
+- 'Make the Cholula sour cream: stir the sour cream with the Cholula and a pinch of
+  salt. Refrigerate until serving.'
+- Heat a large heavy-bottomed pot over medium-high heat and coat the bottom with olive
+  oil. Add the vegetables, season well with salt and pepper, and cook about 20 minutes,
+  until their moisture has cooked off and light browning forms on the bottom of the pot.
+- Add the beef, break it up, and season it. Cook until its moisture is gone and a
+  light brown fond forms on the bottom of the pot.
+- Stir in the spice mix and toast for 1–2 minutes. Add the tomato paste, lower the
+  heat, and cook 3–5 minutes, stirring, until the fond darkens to a deep brown. Don't
+  let it turn black; that tastes burnt.
+- Pour in the beer and scrape the fond off the bottom with a wooden spoon. Reduce by
+  about half, then taste and adjust the seasoning.
+- Add the Cholula, Worcestershire, tomato puree, beef stock, brown sugar, and chocolate.
+  Bring to a simmer and cook about 3 hours, stirring occasionally, until thick and
+  deeply flavored. Adjust the seasoning.
+- 'For the tortilla strips: cut the corn tortillas into strips and fry them in oil
+  over medium heat until crisp. Salt them as soon as they come out of the oil.'
+- Serve topped with Cholula sour cream, cilantro, tortilla strips, and pickled jalapeños,
+  with a few more shakes of Cholula.
+notes:
+- The Chili Spice Mix amounts are half of the source's 1-cup batch, which covers two
+  pots of chili. Double them to keep half for next time.
+- Servings, prep time, and cook time are estimates until confirmed. Cook time adds
+  up the stated steps; prep covers chopping, processing, and mixing.
+- 'Assumed until confirmed: 85% lean beef, a 12 fl oz beer bottle, and a 90 g chocolate
+  disc. Garnish amounts aren''t given, so they aren''t in the macro estimate.'
+nutrition:
+  basis: per_serving
+  status: unknown

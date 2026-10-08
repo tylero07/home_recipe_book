@@ -1,32 +1,41 @@
 """Disposable, transactional SQLite index of a validated catalog."""
 from contextlib import closing
 from pathlib import Path
+import json
 import re
 import sqlite3
 
-from .loader import load_catalog
+from .loader import load_catalog, load_ingredients
 from .models import Recipe
+from .nutrition import per_serving_macros
 
 
 class SearchError(ValueError):
     pass
 
 
-def rebuild_index(recipes: Path, database: Path) -> int:
-    catalog = load_catalog(recipes)  # Never touch the current index on invalid input.
+def rebuild_index(recipes: Path, database: Path, ingredients: Path = Path("ingredients")) -> int:
+    # Never touch the current index on invalid input.
+    library = load_ingredients(ingredients)
+    catalog = load_catalog(recipes, library)
     database.parent.mkdir(parents=True, exist_ok=True)
     try:
         with closing(sqlite3.connect(database)) as db, db:
             db.execute("BEGIN IMMEDIATE")
-            db.execute("CREATE TABLE IF NOT EXISTS recipes (id TEXT PRIMARY KEY, title TEXT, minutes REAL, payload TEXT)")
-            db.execute("CREATE VIRTUAL TABLE IF NOT EXISTS recipe_fts USING fts5(id UNINDEXED, title, ingredients, tags, description)")
-            db.execute("CREATE TABLE IF NOT EXISTS tags (recipe_id TEXT, tag TEXT, PRIMARY KEY(recipe_id, tag))")
+            # The index is disposable: recreate tables so new columns never need migrating.
             for table in ("recipe_fts", "tags", "recipes"):
-                db.execute(f"DELETE FROM {table}")
+                db.execute(f"DROP TABLE IF EXISTS {table}")
+            db.execute("CREATE TABLE recipes (id TEXT PRIMARY KEY, title TEXT, minutes REAL, category TEXT,"
+                       " served TEXT, calories REAL, protein REAL, payload TEXT)")
+            db.execute("CREATE VIRTUAL TABLE recipe_fts USING fts5(id UNINDEXED, title, ingredients, tags, description)")
+            db.execute("CREATE TABLE tags (recipe_id TEXT, tag TEXT, PRIMARY KEY(recipe_id, tag))")
             for recipe in catalog.values():
-                db.execute("INSERT INTO recipes VALUES (?, ?, ?, ?)", (
+                macros = per_serving_macros(recipe, library)
+                db.execute("INSERT INTO recipes VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (
                     recipe.id, recipe.title, (recipe.times.prep_minutes + recipe.times.cook_minutes)
                     if recipe.times.prep_minutes is not None and recipe.times.cook_minutes is not None else None,
+                    recipe.category, "".join(f",{value}," for value in recipe.served),
+                    macros.get("calories_kcal"), macros.get("protein_g"),
                     recipe.model_dump_json(exclude_unset=True),
                 ))
                 db.execute("INSERT INTO recipe_fts VALUES (?, ?, ?, ?, ?)", (
@@ -50,11 +59,17 @@ class SearchIndex:
             raise SearchError("Search index unavailable; run recipe-library index first.") from exc
 
     def search(self, query: str = "", tag: str | None = None,
-               max_minutes: float | None = None, limit: int = 50, offset: int = 0) -> dict:
+               max_minutes: float | None = None, limit: int = 50, offset: int = 0, *,
+               category: str | None = None, tags: tuple[str, ...] = (), served: tuple[str, ...] = (),
+               max_calories: float | None = None, min_protein: float | None = None,
+               ids: set[str] | None = None) -> dict:
+        """Filters combine with AND; every listed tag must match, any listed served value may.
+        Recipes without a time or macro value are excluded when that filter is used."""
         if len(query) > 200 or not 1 <= limit <= 100 or offset < 0:
             raise SearchError("Use a query up to 200 characters, limit 1–100, and nonnegative offset.")
-        if max_minutes is not None and (not 0 <= max_minutes < float("inf")):
-            raise SearchError("Maximum minutes must be finite and nonnegative.")
+        for label, value in (("Maximum minutes", max_minutes), ("Maximum calories", max_calories), ("Minimum protein", min_protein)):
+            if value is not None and (not 0 <= value < float("inf")):
+                raise SearchError(f"{label} must be finite and nonnegative.")
         tokens = re.findall(r"[^\W_]+", query, flags=re.UNICODE)
         clauses, params = [], []
         join = ""
@@ -67,12 +82,20 @@ class SearchIndex:
             order = "bm25(recipe_fts, 0, 5, 2, 1, 1), " + order
         elif query.strip():
             return {"items": [], "total": 0, "limit": limit, "offset": offset}
-        if tag:
+        for item in dict.fromkeys(([tag] if tag else []) + list(tags)):
             clauses.append("EXISTS (SELECT 1 FROM tags t WHERE t.recipe_id=r.id AND t.tag=?)")
-            params.append(tag)
-        if max_minutes is not None:
-            clauses.append("r.minutes <= ?")
-            params.append(max_minutes)
+            params.append(item)
+        if served:
+            clauses.append("(" + " OR ".join("instr(r.served, ?) > 0" for _ in served) + ")")
+            params += [f",{value}," for value in served]
+        for column, operator, value in (("minutes", "<=", max_minutes), ("calories", "<=", max_calories),
+                                        ("protein", ">=", min_protein), ("category", "=", category)):
+            if value is not None:
+                clauses.append(f"r.{column} {operator} ?")
+                params.append(value)
+        if ids is not None:
+            clauses.append("r.id IN (SELECT value FROM json_each(?))")
+            params.append(json.dumps(sorted(ids)))
         where = " WHERE " + " AND ".join(clauses) if clauses else ""
         with closing(self._connect()) as db:
             total = db.execute("SELECT count(*) FROM recipes r" + join + where, params).fetchone()[0]

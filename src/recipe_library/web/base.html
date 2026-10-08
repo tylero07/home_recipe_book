@@ -3,6 +3,6 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Recipe Library{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}"><script src="{{ url_for('static', path='cart.js') }}" defer></script></head>
-<body><header><a class="brand" href="/">Recipe Library<span>Something good to cook.</span></a><nav><a href="/">Recipes</a> · <a href="/shopping">Shopping list</a></nav></header>
-<main><details id="recipe-cart" class="recipe-cart"><summary>Recipe cart (<span id="cart-count">0</span>)</summary><p id="cart-empty">No recipes staged yet. Add a recipe to get started.</p><div id="cart-entries"></div><a href="/shopping">Review &amp; generate shopping list →</a></details><p id="cart-status" role="status" aria-live="polite"></p>{% block content %}{% endblock %}</main>
+<body><header><a class="brand" href="/">Recipe Library<span>Something good to cook.</span></a><nav><a href="/">Recipes</a> · <a href="/shopping">Shopping List</a></nav></header>
+<main><details id="recipe-cart" class="recipe-cart"><summary>Recipe Cart (<span id="cart-count">0</span>)</summary><p id="cart-empty">No recipes staged yet. Add a recipe to get started.</p><div id="cart-entries"></div><a href="/shopping">Review &amp; Generate Shopping List →</a></details><p id="cart-status" role="status" aria-live="polite"></p>{% block content %}{% endblock %}</main>
 <footer>Your collection, one recipe at a time.</footer></body></html>

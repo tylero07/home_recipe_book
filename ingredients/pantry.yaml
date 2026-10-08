@@ -1,0 +1,247 @@
+schema_version: 1
+ingredients:
+- id: all-purpose-flour
+  name: all-purpose flour
+  aliases: [flour]
+  category: flour
+  grams_per_cup: 125
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 364
+    protein_g: 10.3
+    carbohydrate_g: 76.3
+    fat_g: 1
+    source: Approximate typical values.
+- id: white-rice-dry
+  name: white rice, long-grain, dry
+  aliases: [rice]
+  category: grain
+  grams_per_cup: 185
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 365
+    protein_g: 7.1
+    carbohydrate_g: 80
+    fat_g: 0.7
+    source: Approximate typical values.
+- id: brown-sugar
+  name: brown sugar, packed
+  category: sweetener
+  grams_per_cup: 220
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 380
+    protein_g: 0.1
+    carbohydrate_g: 98.1
+    fat_g: 0
+    source: Approximate typical values.
+- id: dark-chocolate
+  name: dark chocolate, 70–85% cacao
+  category: chocolate
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 598
+    protein_g: 7.8
+    carbohydrate_g: 45.9
+    fat_g: 42.6
+    source: Approximate typical values.
+- id: cheddar-bay-biscuit-mix
+  name: Cheddar Bay Biscuit Mix
+  category: baking mix
+  notes:
+  - Box size and nutrition label not recovered; add grams_each (box weight) and label values to count it.
+- id: olive-oil
+  name: olive oil
+  category: oil
+  grams_per_cup: 216
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 884
+    protein_g: 0
+    carbohydrate_g: 0
+    fat_g: 100
+    source: Approximate typical values.
+- id: salt
+  name: table salt
+  category: seasoning
+  grams_per_cup: 292
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 0
+    protein_g: 0
+    carbohydrate_g: 0
+    fat_g: 0
+    source: Salt has no macronutrients.
+- id: black-pepper
+  name: black pepper, ground
+  category: seasoning
+  grams_per_cup: 110
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 251
+    protein_g: 10.4
+    carbohydrate_g: 64
+    fat_g: 3.3
+    source: Approximate typical values.
+- id: worcestershire-sauce
+  name: Worcestershire sauce
+  category: condiment
+  grams_per_cup: 275
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 78
+    protein_g: 0
+    carbohydrate_g: 19.5
+    fat_g: 0
+    source: Approximate typical values.
+- id: hot-sauce
+  name: hot sauce, vinegar-based (e.g. Cholula)
+  category: condiment
+  grams_per_cup: 240
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 10
+    protein_g: 0.5
+    carbohydrate_g: 1.5
+    fat_g: 0.3
+    source: Approximate typical values for vinegar-based hot sauce.
+- id: mexican-chocolate
+  name: Mexican chocolate
+  category: chocolate
+  grams_each: 90
+  notes:
+  - One count is one disc (tablet); 90 g assumed, typical of common brands.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 420
+    protein_g: 3
+    carbohydrate_g: 75
+    fat_g: 13
+    source: Rough estimate for sweetened Mexican chocolate tablets; brand not confirmed.
+- id: vegetable-oil
+  name: neutral oil for frying
+  category: oil
+  grams_per_cup: 218
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 884
+    protein_g: 0
+    carbohydrate_g: 0
+    fat_g: 100
+    source: Approximate typical values.
+- id: ancho-chili-powder
+  name: ancho chili powder
+  category: spice
+  grams_per_cup: 120
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 281
+    protein_g: 11.9
+    carbohydrate_g: 51.4
+    fat_g: 8.2
+    source: Approximate typical values.
+- id: chili-powder
+  name: chili powder
+  category: spice
+  grams_per_cup: 128
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 282
+    protein_g: 13.5
+    carbohydrate_g: 49.7
+    fat_g: 14.3
+    source: Approximate typical values.
+- id: cumin
+  name: ground cumin
+  category: spice
+  grams_per_cup: 96
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 375
+    protein_g: 17.8
+    carbohydrate_g: 44.2
+    fat_g: 22.3
+    source: Approximate typical values.
+- id: coriander
+  name: ground coriander
+  category: spice
+  grams_per_cup: 80
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 298
+    protein_g: 12.4
+    carbohydrate_g: 55
+    fat_g: 17.8
+    source: Approximate typical values.
+- id: onion-powder
+  name: onion powder
+  category: spice
+  grams_per_cup: 115
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 341
+    protein_g: 10.4
+    carbohydrate_g: 79.1
+    fat_g: 1
+    source: Approximate typical values.
+- id: garlic-powder
+  name: garlic powder
+  category: spice
+  grams_per_cup: 149
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 331
+    protein_g: 16.6
+    carbohydrate_g: 72.7
+    fat_g: 0.7
+    source: Approximate typical values.
+- id: paprika
+  name: paprika
+  category: spice
+  grams_per_cup: 110
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 282
+    protein_g: 14.1
+    carbohydrate_g: 54
+    fat_g: 12.9
+    source: Approximate typical values.
+- id: cayenne
+  name: cayenne pepper
+  category: spice
+  grams_per_cup: 86
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 318
+    protein_g: 12
+    carbohydrate_g: 56.6
+    fat_g: 17.3
+    source: Approximate typical values.
+- id: red-pepper-flakes
+  name: red pepper flakes
+  category: spice
+  grams_per_cup: 86
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 318
+    protein_g: 12
+    carbohydrate_g: 56.6
+    fat_g: 17.3
+    source: Approximate typical values.
+- id: sumac
+  name: ground sumac
+  category: spice
+  grams_per_cup: 112
+  notes:
+  - Nutrition not entered.
+- id: cinnamon
+  name: ground cinnamon
+  category: spice
+  grams_per_cup: 125
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 247
+    protein_g: 4
+    carbohydrate_g: 80.6
+    fat_g: 1.2
+    source: Approximate typical values.

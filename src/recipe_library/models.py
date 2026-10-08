@@ -8,6 +8,15 @@ Identifier = Annotated[str, StringConstraints(pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)
 Positive = Annotated[float, Field(gt=0, allow_inf_nan=False, strict=True)]
 Nonnegative = Annotated[float, Field(ge=0, allow_inf_nan=False, strict=True)]
 Unit = Literal["g", "kg", "mg", "ml", "l", "tsp", "tbsp", "cup", "oz", "lb", "count", "fl_oz"]
+# How an ingredient line is used; substitution suitability depends on it.
+Use = Literal[
+    "raw", "finishing", "simmered", "hard-boil-reduce", "seared", "fat-for-cooking", "deglaze",
+    "flambe", "marinade", "whipped", "emulsion", "baked-structure", "leavening", "binding", "thickening",
+]
+Category = Literal["breakfast", "snacks-apps", "lunch-dinner", "dessert"]
+CATEGORY_LABELS = {"breakfast": "Breakfast", "snacks-apps": "Snacks & Apps",
+                   "lunch-dinner": "Lunch & Dinner", "dessert": "Dessert"}
+Served = Literal["hot", "cold", "room-temperature"]
 
 
 class Model(BaseModel):
@@ -24,10 +33,20 @@ class Source(Model):
     url: HttpUrl | None = None
 
 
+def _unique_uses(uses):
+    if uses is not None and len(uses) != len(set(uses)):
+        raise ValueError("uses must not repeat")
+    return uses
+
+
 class Ingredient(Model):
     id: Identifier
     ingredient: Text
+    ref: Identifier | None = None
+    uses: list[Use] = Field(default_factory=list)
+    group: Text | None = None  # Section heading, e.g. "Chili Spice Mix"; null is the main list.
     quantity: Positive | None = None
+    quantity_max: Positive | None = None  # Upper end of a range such as 1–2 peppers.
     unit: Unit | None = None
     preparation: Text | None = None
     liquid: bool = Field(default=False, strict=True)
@@ -37,7 +56,17 @@ class Ingredient(Model):
     def quantity_has_unit(self) -> Self:
         if (self.quantity is None) != (self.unit is None):
             raise ValueError("quantity and unit must both be supplied, or both null")
+        if self.quantity_max is not None and (self.quantity is None or self.quantity_max <= self.quantity):
+            raise ValueError("quantity_max must be greater than quantity")
+        _unique_uses(self.uses)
         return self
+
+    @property
+    def typical_quantity(self) -> float | None:
+        """Midpoint of a range, used for estimates."""
+        if self.quantity is None or self.quantity_max is None:
+            return self.quantity
+        return (self.quantity + self.quantity_max) / 2
 
 
 class Nutrition(Model):
@@ -63,7 +92,11 @@ class Nutrition(Model):
 
 class IngredientOverride(Model):
     ingredient: Text | None = None
+    ref: Identifier | None = None
+    uses: list[Use] | None = None
+    group: Text | None = None
     quantity: Positive | None = None
+    quantity_max: Positive | None = None
     unit: Unit | None = None
     preparation: Text | None = None
     liquid: bool | None = Field(default=None, strict=True)
@@ -73,6 +106,7 @@ class IngredientOverride(Model):
     def nonempty_override(self) -> Self:
         if not self.model_fields_set:
             raise ValueError("an override must change at least one field")
+        _unique_uses(self.uses)
         return self
 
 
@@ -89,6 +123,8 @@ class Recipe(Model):
     id: Identifier
     title: Text
     description: Text | None = None
+    category: Category
+    served: list[Served] = Field(default_factory=list)
     servings: Positive
     tags: list[Text] = Field(default_factory=list)
     times: RecipeTimes = Field(default_factory=RecipeTimes)
@@ -125,3 +161,45 @@ class Recipe(Model):
                 except ValueError as exc:
                     raise ValueError(f"variation {variation.id}, ingredient {ingredient_id}: {exc}") from exc
         return self
+
+
+class IngredientNutrition(Model):
+    """Macros per 100 g of the ingredient as measured in recipes."""
+    status: Literal["estimated", "source_provided"]
+    calories_kcal: Nonnegative | None = None
+    protein_g: Nonnegative | None = None
+    carbohydrate_g: Nonnegative | None = None
+    fat_g: Nonnegative | None = None
+    source: Text | None = None
+
+    @model_validator(mode="after")
+    def has_values(self) -> Self:
+        if all(v is None for v in (self.calories_kcal, self.protein_g, self.carbohydrate_g, self.fat_g)):
+            raise ValueError("nutrition requires at least one value")
+        if self.status == "source_provided" and self.source is None:
+            raise ValueError("source_provided nutrition requires a source")
+        return self
+
+
+class LibraryIngredient(Model):
+    """A shared ingredient entry, reused by every recipe that references it."""
+    id: Identifier
+    name: Text
+    aliases: list[Text] = Field(default_factory=list)
+    category: Text | None = None
+    grams_per_cup: Positive | None = None
+    grams_each: Positive | None = None
+    nutrition_per_100g: IngredientNutrition | None = None
+    notes: list[Text] = Field(default_factory=list)
+
+
+class IngredientFile(Model):
+    schema_version: Literal[1]
+    ingredients: list[LibraryIngredient] = Field(min_length=1)
+
+    @model_validator(mode="before")
+    @classmethod
+    def strict_version(cls, data):
+        if isinstance(data, dict) and type(data.get("schema_version")) is not int:
+            raise ValueError("schema_version must be an integer")
+        return data

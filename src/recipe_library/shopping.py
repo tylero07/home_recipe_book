@@ -5,7 +5,7 @@ from decimal import Decimal
 from pydantic import Field
 
 from .models import Identifier, Model, Positive
-from .formatting import format_amount
+from .formatting import format_amount, title_case
 from .variations import resolve_variation
 
 
@@ -40,12 +40,15 @@ def generate_list(index, request: ShoppingRequest) -> dict:
                    (ingredient.preparation or '').strip().casefold(), ingredient.quantity is None, ingredient.liquid)
             if key not in grouped:
                 grouped[key] = dict(id=hashlib.sha256(repr(key).encode()).hexdigest()[:20],
-                    ingredient=ingredient.ingredient, unit=ingredient.unit, liquid=ingredient.liquid,
+                    ingredient=title_case(ingredient.ingredient), unit=ingredient.unit, liquid=ingredient.liquid,
                     quantity=None if ingredient.quantity is None else Decimal(0),
-                    preparation=ingredient.preparation, sources=[])
+                    preparation=ingredient.preparation, sources=[], from_range=False)
             item = grouped[key]
             if ingredient.quantity is not None:
-                item['quantity'] += Decimal(str(ingredient.quantity)) * scale
+                # Buy for the top of a range so there is enough either way.
+                amount = ingredient.quantity_max if ingredient.quantity_max is not None else ingredient.quantity
+                item['quantity'] += Decimal(str(amount)) * scale
+                item['from_range'] |= ingredient.quantity_max is not None
             if recipe.title not in item['sources']:
                 item['sources'].append(recipe.title)
     items = sorted(grouped.values(), key=lambda item: item['ingredient'].casefold())
@@ -55,4 +58,6 @@ def generate_list(index, request: ShoppingRequest) -> dict:
         item['text'] = f"{amount} — {item['ingredient']}"
         if item['preparation']:
             item['text'] += f" ({item['preparation']})"
+        if item.pop('from_range'):
+            item['text'] += " (top of the recipe's range)"
     return dict(items=items, warnings=list(dict.fromkeys(warnings)))

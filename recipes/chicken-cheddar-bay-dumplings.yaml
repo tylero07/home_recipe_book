@@ -4,8 +4,9 @@ title: Chicken & Cheddar Bay Dumplings
 description: 'Your cooked version: extra vegetables, celery instead of peas, and no
   finishing butter.'
 servings: 6
+category: lunch-dinner
+served: [hot]
 tags:
-- dinner
 - chicken
 - comfort-food
 - needs-review
@@ -17,11 +18,15 @@ source:
 ingredients:
 - id: chicken
   ingredient: chicken breast
+  ref: chicken-breast
+  uses: [simmered]
   quantity: 2
   unit: lb
   preparation: null
 - id: broth
   ingredient: bone broth
+  ref: bone-broth-label
+  uses: [simmered]
   quantity: 5
   unit: cup
   preparation: 'label reported by user: 45 kcal and 9 g protein per 8 fl oz; 5 cups
@@ -29,44 +34,59 @@ ingredients:
   liquid: true
 - id: biscuit-mix
   ingredient: Cheddar Bay Biscuit Mix
+  ref: cheddar-bay-biscuit-mix
   quantity: 1
   unit: count
   preparation: one full box; box size not recovered
 - id: butter
   ingredient: butter
+  ref: butter
+  uses: [fat-for-cooking, thickening]
   quantity: 4
   unit: tbsp
   preparation: for the vegetables and roux; no finishing butter
 - id: milk
   ingredient: ultra-filtered 2% milk
+  ref: ultrafiltered-milk-2pct
+  uses: [simmered]
   quantity: 0.75
   unit: cup
   preparation: null
   liquid: true
 - id: flour
   ingredient: flour
+  ref: all-purpose-flour
+  uses: [thickening]
   quantity: 0.3333333333333333
   unit: cup
   preparation: 1/3 cup for the roux; assumed amount in the supplied macro discussion,
     not separately confirmed
 - id: cheddar
   ingredient: cheddar cheese
+  ref: cheddar-cheese
+  uses: [simmered]
   quantity: 0.5
   unit: cup
   preparation: added cheddar; assumed amount in the supplied macro discussion, not
     separately confirmed
 - id: carrot
   ingredient: carrot
+  ref: carrot
+  uses: [simmered]
   quantity: 1.5
   unit: cup
   preparation: diced; estimated amount for the six-serving batch
 - id: onion
   ingredient: onion
+  ref: onion
+  uses: [simmered]
   quantity: 1.5
   unit: cup
   preparation: diced; estimated amount for the six-serving batch
 - id: celery
   ingredient: celery
+  ref: celery
+  uses: [simmered]
   quantity: 1.5
   unit: cup
   preparation: diced; estimated amount for the six-serving batch; replaces peas

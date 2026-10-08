@@ -8,7 +8,7 @@ from recipe_library.shopping import ShoppingRequest, generate_list
 class Index:
     def get(self, id):
         if id == 'missing': return None
-        return Recipe.model_validate(dict(schema_version=1,id=id,title=id,servings=2,
+        return Recipe.model_validate(dict(schema_version=1,id=id,title=id,category='lunch-dinner',servings=2,
             ingredients=[dict(id='rice',ingredient='rice',quantity=100,unit='g'),
                          dict(id='salt',ingredient='salt'),
                          dict(id='herbs',ingredient='herbs',optional=True)],instructions=['Cook.']))
@@ -31,7 +31,7 @@ def test_api_and_variation(tmp_path):
     with TestClient(create_app(root/'recipes',tmp_path/'index.sqlite3')) as client:
         response=client.post('/shopping/generate',json={'selections':[{'recipe_id':'lemon-chickpea-bowl','servings':4,'variation':'extra-chickpeas'}]})
         assert response.status_code == 200
-        chickpeas=next(i for i in response.json()['items'] if i['ingredient']=='chickpeas')
+        chickpeas=next(i for i in response.json()['items'] if i['ingredient']=='Chickpeas')
         assert chickpeas['quantity']=='720'
         for selections in ([],[{'recipe_id':'missing','servings':2}],[{'recipe_id':'lemon-chickpea-bowl','servings':0}]):
             assert client.post('/shopping/generate',json={'selections':selections}).status_code==422
@@ -46,7 +46,7 @@ def test_serving_update_scales_from_original_without_changing_catalog(tmp_path):
         assert page.status_code == 200
         assert '2½ cups (20 fl oz)' in page.text
         assert '¾ cup' in page.text
-        assert 'Update amounts' in page.text
+        assert 'Update Amounts' in page.text
         assert client.get('/recipes/chicken-cheddar-bay-dumplings').json()['servings'] == 6
         for value in ('0', '-1', 'nan'):
             assert client.get('/recipe/chicken-cheddar-bay-dumplings', params={'servings':value}).status_code == 422

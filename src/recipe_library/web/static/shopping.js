@@ -52,7 +52,7 @@ document.querySelector('#selection-form').addEventListener('submit', async event
 });
 document.querySelector('#export').addEventListener('click', () => {
   if (!state || state.signature !== currentSignature()) return;
-  const lines = ['Shopping list', '', 'Recipes:', ...state.stagedRecipes.map(r => `${r.title} — ${r.servings} servings`), '', ...state.warnings, '', ...state.items.filter(item => !item.have).map(item => `${item.checked ? '[x]' : '[ ]'} ${item.text}`)];
+  const lines = ['Shopping List', '', 'Recipes:', ...state.stagedRecipes.map(r => `${r.title} — ${r.servings} servings`), '', ...state.warnings, '', ...state.items.filter(item => !item.have).map(item => `${item.checked ? '[x]' : '[ ]'} ${item.text}`)];
   const url = URL.createObjectURL(new Blob([lines.join('\n') + '\n'], {type: 'text/plain;charset=utf-8'}));
   const link = document.createElement('a'); link.href = url; link.download = 'shopping-list.txt'; link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);

@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="intro"><p class="eyebrow">THE COLLECTION</p><h1>What sounds good?</h1><p>Find a familiar favorite or your next kitchen experiment.</p></section>
-<form class="filters" action="/" method="get" role="search">
-<label class="query">Find a recipe<input type="search" name="q" value="{{ q }}" maxlength="200" placeholder="Try chickpeas, lemon, or lunch"></label>
-<label>Category<select name="tag"><option value="">All categories</option>{% for item in tags %}<option value="{{ item }}" {% if tag == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
-<label>Ready within (minutes)<input type="number" name="max_minutes" value="{{ max_minutes }}" min="0" step="any" placeholder="Any time"></label><button type="submit">Find recipes</button>
+<section class="intro"><p class="eyebrow">THE COLLECTION</p><h1>What Sounds Good?</h1><p>Find a familiar favorite or your next kitchen experiment.</p></section>
+<form id="recipe-filters" class="finder" action="/" method="get" role="search">
+<fieldset class="categories"><legend class="visually-hidden">Category</legend>
+<label class="pill"><input type="radio" name="category" value="" {% if not filters.category %}checked{% endif %}><span>All Recipes</span></label>{% for value, label in CATEGORY_LABELS.items() %}<label class="pill"><input type="radio" name="category" value="{{ value }}" {% if filters.category == value %}checked{% endif %}><span>{{ label }}</span></label>{% endfor %}
+</fieldset>
+<div class="filters"><label class="query">Find a Recipe<input type="search" name="q" value="{{ q }}" maxlength="200" placeholder="Try chickpeas, lemon, or chili"></label><button type="submit" class="show-results">Show {{ results.total }} Recipe{% if results.total != 1 %}s{% endif %}</button></div>
+<details class="filter-panel" {% if active_filters %}open{% endif %}><summary>Filters{% if active_filters %} ({{ active_filters }} active){% endif %}</summary>
+<div class="filter-grid">
+<label>Ready Within (Minutes)<input type="number" name="max_minutes" value="{{ filters.max_minutes|number if filters.max_minutes is not none else '' }}" min="0" step="any" placeholder="Any time"></label>
+<label>Max Calories per Serving<input type="number" name="max_calories" value="{{ filters.max_calories|number if filters.max_calories is not none else '' }}" min="0" step="any" placeholder="Any"></label>
+<label>Min Protein per Serving (g)<input type="number" name="min_protein" value="{{ filters.min_protein|number if filters.min_protein is not none else '' }}" min="0" step="any" placeholder="Any"></label>
+<label>Recipe Rating<select name="min_rating"><option value="">Any rating</option>{% for n in range(5, 0, -1) %}<option value="{{ n }}" {% if filters.min_rating == n %}selected{% endif %}>{{ n }}/5{% if n < 5 %} or Higher{% endif %}</option>{% endfor %}</select></label>
+<label>Leftover Rating<select name="min_leftovers"><option value="">Any rating</option>{% for n in range(5, 0, -1) %}<option value="{{ n }}" {% if filters.min_leftovers == n %}selected{% endif %}>{{ n }}/5{% if n < 5 %} or Higher{% endif %}</option>{% endfor %}</select></label>
+<fieldset><legend>Served</legend>{% for value, label in SERVED_LABELS.items() %}<label class="pick"><input type="checkbox" name="served" value="{{ value }}" {% if value in filters.served %}checked{% endif %}>{{ label }}</label>{% endfor %}</fieldset>
+<fieldset class="tag-choices"><legend>Tags (Match All)</legend>{% for item in tags %}<label class="pick"><input type="checkbox" name="tag" value="{{ item }}" {% if item in filters.tags %}checked{% endif %}>{{ item|tag_label }}</label>{% endfor %}</fieldset>
+</div>
+<p class="muted">Calorie and protein filters use per-serving values; recipes without them, or without a recorded time, are left out while those filters are set.</p>
+</details>
 </form>
-<div class="results-heading"><h2>{{ results.total }} recipe{% if results.total != 1 %}s{% endif %}</h2>{% if q or tag or max_minutes %}<a href="/">Clear filters</a>{% endif %}</div>
-<div class="cards">{% for recipe in results['items'] %}<article class="card"><div class="tags">{% for tag in recipe.tags %}<span>{{ tag }}</span>{% endfor %}</div><h3><a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a></h3><p>{{ recipe.description or 'A recipe from your collection.' }}</p><div class="meta">{% if recipe.times.prep_minutes is not none and recipe.times.cook_minutes is not none %}{{ '%g'|format(recipe.times.prep_minutes + recipe.times.cook_minutes) }} min{% else %}Time not recorded{% endif %} · {{ '%g'|format(recipe.servings) }} servings</div></article>{% else %}<div class="empty"><h2>No recipes found</h2><p>Try fewer search words or remove a filter.</p><a href="/">Browse the collection</a></div>{% endfor %}</div>
+<div class="results-heading"><h2>{{ results.total }} Recipe{% if results.total != 1 %}s{% endif %}</h2>{% if q or filters.category or active_filters %}<a href="/">Clear Filters</a>{% endif %}</div>
+<div class="cards">{% for card in cards %}{% set recipe = card.recipe %}<article class="card"><p class="eyebrow">{{ CATEGORY_LABELS[recipe.category]|upper }}</p><div class="tags">{% for tag in recipe.tags %}<span>{{ tag|tag_label }}</span>{% endfor %}</div><h3><a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a></h3><p>{{ recipe.description or 'A recipe from your collection.' }}</p><div class="meta">{% if recipe.times.prep_minutes is not none and recipe.times.cook_minutes is not none %}{{ '%g'|format(recipe.times.prep_minutes + recipe.times.cook_minutes) }} min{% else %}Time not recorded{% endif %} · {{ '%g'|format(recipe.servings) }} servings{% if card.macros.calories_kcal is defined %} · ≈ {{ card.macros.calories_kcal|round|int }} kcal{% endif %}{% if card.macros.protein_g is defined %} · ≈ {{ card.macros.protein_g|round|int }} g protein{% endif %}</div>{% if card.rating %}<div class="meta">{% if card.rating.recipe %}Recipe {{ card.rating.recipe }}/5{% endif %}{% if card.rating.recipe and card.rating.leftovers %} · {% endif %}{% if card.rating.leftovers %}Leftovers {{ card.rating.leftovers }}/5{% endif %}</div>{% endif %}</article>{% else %}<div class="empty"><h2>No Recipes Found</h2><p>Try fewer search words or remove a filter.</p><a href="/">Browse the Collection</a></div>{% endfor %}</div>
 <nav class="pagination" aria-label="Results pages">{% if previous %}<a href="{{ previous }}">← Previous</a>{% endif %}{% if previous or next %}<span>Page {{ page }}</span>{% endif %}{% if next %}<a href="{{ next }}">Next →</a>{% endif %}</nav>
+<script src="{{ url_for('static', path='filters.js') }}" defer></script>
 {% endblock %}

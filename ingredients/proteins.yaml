@@ -1,0 +1,43 @@
+schema_version: 1
+ingredients:
+- id: chicken-breast
+  name: chicken breast, boneless and skinless, raw
+  category: poultry
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 120
+    protein_g: 22.5
+    carbohydrate_g: 0
+    fat_g: 2.6
+    source: Approximate typical values; not verified against a label.
+- id: ground-turkey-93
+  name: ground turkey, 93% lean, raw
+  category: poultry
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 152
+    protein_g: 18.8
+    carbohydrate_g: 0
+    fat_g: 8
+    source: Approximate typical 93/7 label values; fat percentage of your turkey unconfirmed.
+- id: chickpeas-cooked
+  name: chickpeas, cooked or canned, drained
+  category: legumes
+  grams_per_cup: 164
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 164
+    protein_g: 8.9
+    carbohydrate_g: 27.4
+    fat_g: 2.6
+    source: Approximate typical values; not verified against a label.
+- id: ground-beef-85
+  name: ground beef, 85% lean, raw
+  category: beef
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 215
+    protein_g: 18.6
+    carbohydrate_g: 0
+    fat_g: 15
+    source: Approximate typical 85/15 values; lean percentage of your beef unconfirmed.

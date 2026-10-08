@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "IngredientNutrition": {
+      "additionalProperties": false,
+      "description": "Macros per 100 g of the ingredient as measured in recipes.",
+      "properties": {
+        "status": {
+          "enum": [
+            "estimated",
+            "source_provided"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "calories_kcal": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calories Kcal"
+        },
+        "protein_g": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Protein G"
+        },
+        "carbohydrate_g": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Carbohydrate G"
+        },
+        "fat_g": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fat G"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "IngredientNutrition",
+      "type": "object"
+    },
+    "LibraryIngredient": {
+      "additionalProperties": false,
+      "description": "A shared ingredient entry, reused by every recipe that references it.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "grams_per_cup": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grams Per Cup"
+        },
+        "grams_each": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grams Each"
+        },
+        "nutrition_per_100g": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IngredientNutrition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "notes": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "LibraryIngredient",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "ingredients": {
+      "items": {
+        "$ref": "#/$defs/LibraryIngredient"
+      },
+      "minItems": 1,
+      "title": "Ingredients",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "ingredients"
+  ],
+  "title": "IngredientFile",
+  "type": "object"
+}

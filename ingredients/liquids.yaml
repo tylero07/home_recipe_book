@@ -1,0 +1,37 @@
+schema_version: 1
+ingredients:
+- id: bone-broth-label
+  name: bone broth (your brand)
+  category: broth
+  grams_per_cup: 240
+  notes:
+  - Carbohydrate and fat were not reported; macros that need them are marked incomplete.
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 18.75
+    protein_g: 3.75
+    source: 'User-reported label: 45 kcal and 9 g protein per 8 fl oz (240 g).'
+- id: beef-stock
+  name: beef stock or broth
+  category: broth
+  grams_per_cup: 240
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 7
+    protein_g: 1.1
+    carbohydrate_g: 0.4
+    fat_g: 0.2
+    source: Approximate typical values; varies widely by brand.
+- id: wheat-beer
+  name: wheat beer
+  category: alcohol
+  grams_per_cup: 240
+  notes:
+  - Calories include alcohol, part of which cooks off; protein, carbohydrate, and fat do not account for it.
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 45
+    protein_g: 0.5
+    carbohydrate_g: 3.6
+    fat_g: 0
+    source: Approximate typical values.

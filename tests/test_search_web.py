@@ -79,13 +79,14 @@ def test_read_only_api_and_html(library):
         home = client.get("/")
         assert home.status_code == 200
         assert "Lemon Chickpea Bowl" in home.text
-        assert client.get("/?q=missing").text.count("No recipes found") == 1
+        assert client.get("/?q=missing").text.count("No Recipes Found") == 1
         assert client.get("/?max_minutes=&tag=").status_code == 200
         assert client.get("/?max_minutes=nan").status_code == 422
         page = client.get("/recipe/lemon-chickpea-bowl?variation=extra-chickpeas")
         assert page.status_code == 200
         assert "360 g" in page.text
-        assert "Nutrition hasn’t been supplied" in page.text
+        assert "Estimated from the ingredient library" in page.text
+        assert "≈ 572 kcal" in page.text and "Salt (amount unknown)" in page.text
         assert client.get("/static/style.css").status_code == 200
 
 

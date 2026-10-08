@@ -6,6 +6,7 @@ DEFAULTS = {
     "preferences.yaml": "schema_version: 1\nfavorites: []\n",
     "pantry.yaml": "schema_version: 1\nitems: []\n",
     "meal-plan.yaml": "schema_version: 1\nmeals: []\n",
+    "ratings.yaml": "schema_version: 1\nratings: {}\n",
 }
 
 

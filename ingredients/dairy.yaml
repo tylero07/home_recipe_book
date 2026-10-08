@@ -1,0 +1,57 @@
+schema_version: 1
+ingredients:
+- id: butter
+  name: butter, salted or unsalted
+  category: dairy
+  grams_per_cup: 227
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 717
+    protein_g: 0.9
+    carbohydrate_g: 0.1
+    fat_g: 81.1
+    source: Approximate typical values; not verified against a label.
+- id: ultrafiltered-milk-2pct
+  name: ultra-filtered 2% milk
+  category: dairy
+  grams_per_cup: 246
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 48.8
+    protein_g: 5.3
+    carbohydrate_g: 2.4
+    fat_g: 1.8
+    source: Converted from typical label values of 120 kcal, 13 g protein, 6 g carbohydrate, and 4.5 g fat per cup.
+- id: cheddar-cheese
+  name: cheddar cheese, shredded
+  category: dairy
+  grams_per_cup: 113
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 403
+    protein_g: 24.9
+    carbohydrate_g: 1.3
+    fat_g: 33.1
+    source: Approximate typical values; not verified against a label.
+- id: sour-cream
+  name: sour cream
+  category: dairy
+  grams_per_cup: 230
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 198
+    protein_g: 2.4
+    carbohydrate_g: 4.6
+    fat_g: 19.4
+    source: Approximate typical values.
+- id: greek-yogurt-nonfat
+  name: nonfat plain Greek yogurt
+  category: dairy
+  grams_per_cup: 245
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 59
+    protein_g: 10.2
+    carbohydrate_g: 3.6
+    fat_g: 0.4
+    source: Approximate typical values.

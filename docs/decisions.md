@@ -55,3 +55,45 @@ remain open. None blocks validating shared recipes.
 - No personal dates, health information, or chat transcripts enter shared recipes.
 - Missing times are null, display as unknown, and are excluded by time filters.
 - Provisional macro estimates are not imported as numeric nutrition.
+
+## 2026-10-08 — Ingredient library and macro estimates
+
+Step 1 of [the customization design](customization-design.md).
+
+- Shared `ingredients/*.yaml` entries hold nutrition per 100 g plus
+  `grams_per_cup` and `grams_each` conversions. A missing directory is an empty
+  library; duplicate IDs fail validation.
+- Recipe ingredients gain optional `ref` and `uses`. Unknown refs fail catalog
+  validation, including refs in variation overrides. `uses` is a fixed vocabulary
+  reserved for substitution suitability.
+- Estimates are per serving and never presented as complete when they are not:
+  uncountable lines are listed by reason, and macros missing from a counted
+  ingredient name it. Hand-entered recipe nutrition still takes precedence.
+- Library values are approximate typical values marked `estimated`; the bone
+  broth uses the user-reported label as `source_provided`. Biscuit-mix box size
+  and nutrition remain unknown, so it is not counted.
+
+## 2026-10-08 — Categories, filters, ratings, and the chili rewrite
+
+- `category` is required and limited to Breakfast, Snacks & Apps, Lunch & Dinner,
+  and Dessert. Meal tags (lunch, dinner) were removed; other descriptors stay tags.
+  `served` (hot, cold, room temperature) supports the hot/cold filter.
+- The index stores category, served, and per-serving calories and protein (hand
+  nutrition first, else the ingredient estimate; incomplete macros are left
+  unset so filters never rely on an undercount). Tables are recreated on every
+  rebuild because the index is disposable.
+- Filters combine with AND; tags must all match, served values may match any.
+  The browser shows a live count through the JSON API and still works without
+  JavaScript.
+- Ratings are personal (`personal/ratings.yaml`), whole numbers 1–5 for the
+  recipe and its leftovers. This is the first personal write. The form is parsed
+  with the standard library to avoid a new dependency, rejects cross-origin
+  posts, and saves atomically.
+- Display uses Title Case for names, tags, and headings; stored data keeps its
+  original case. Measuring-spoon amounts always show fractions.
+- Ingredients gain `group` (section headings) and `quantity_max` (ranges).
+- The turkey/Shaoxing chili was replaced by the user-supplied Wheat Beer Chili.
+  Steps are paraphrased with a source link rather than copied. Servings, times,
+  beef lean percentage, beer bottle size, and chocolate disc weight are
+  provisional. Turkey-for-beef, nonfat Greek yogurt-for-sour cream, and dark
+  chocolate-for-Mexican chocolate are queued as the first substitution rules.

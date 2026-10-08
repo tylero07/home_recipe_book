@@ -1,13 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Shopping list · Recipe Library{% endblock %}
+{% block title %}Shopping List · Recipe Library{% endblock %}
 {% block content %}
-<section class="intro"><p class="eyebrow">PLAN YOUR NEXT COOK</p><h1>A little planning.<br>A simpler shop.</h1><p>Choose recipes and servings, then set aside what you already have.</p></section>
+<section class="intro"><p class="eyebrow">PLAN YOUR NEXT COOK</p><h1>A Little Planning.<br>A Simpler Shop.</h1><p>Choose recipes and servings, then set aside what you already have.</p></section>
 <noscript>This checklist needs JavaScript enabled.</noscript>
-<h2>Add recipes to your cart</h2>
-<div class="cards">{% for recipe in catalog %}<article class="card"><form class="add-recipe-form" data-recipe="{{ recipe.id }}" data-title="{{ recipe.title }}"><h3>{{ recipe.title }}</h3><label>Servings<input class="cart-servings" type="number" min="0.1" step="any" value="{{ recipe.servings }}" required></label><label>Version<select class="cart-version"><option value="">Original</option>{% for variant in recipe.variations %}<option value="{{ variant.id }}">{{ variant.title }}</option>{% endfor %}</select></label><button type="submit">Add to shopping list</button></form></article>{% endfor %}</div>
-<form id="selection-form"><label class="pick"><input id="optional" type="checkbox">Include optional ingredients</label><button id="generate">Generate list from cart</button><p>Generating a new list replaces the current checklist and resets its checks.</p></form>
+<h2>Add Recipes to Your Cart</h2>
+<div class="cards">{% for recipe in catalog %}<article class="card"><form class="add-recipe-form" data-recipe="{{ recipe.id }}" data-title="{{ recipe.title }}"><h3>{{ recipe.title }}</h3><label>Servings<input class="cart-servings" type="number" min="0.1" step="any" value="{{ recipe.servings }}" required></label><label>Version<select class="cart-version"><option value="">Original Recipe</option>{% for variant in recipe.variations %}<option value="{{ variant.id }}">{{ variant.title }}</option>{% endfor %}</select></label><button type="submit">Add to Shopping List</button></form></article>{% endfor %}</div>
+<form id="selection-form"><label class="pick"><input id="optional" type="checkbox">Include optional ingredients</label><button id="generate">Generate List from Cart</button><p>Generating a new list replaces the current checklist and resets its checks.</p></form>
 <p id="stale-warning" class="warning" hidden>Your cart has changed. Generate the list again before downloading.</p>
 <p id="status" role="status" aria-live="polite"></p>
-<section id="list-section" hidden><h2>Your shopping list</h2><p>“Already have” removes an item from the shopping export. “Got it” checks it off for this trip.</p><p>Checks are saved in this browser. Download the text before leaving home; offline app access and device sync are not included yet.</p><div id="warnings"></div><div id="items"></div><button id="export" type="button">Download checklist (.txt)</button></section>
+<section id="list-section" hidden><h2>Your Shopping List</h2><p>“Already have” removes an item from the shopping export. “Got it” checks it off for this trip.</p><p>Checks are saved in this browser. Download the text before leaving home; offline app access and device sync are not included yet.</p><div id="warnings"></div><div id="items"></div><button id="export" type="button">Download Checklist (.txt)</button></section>
 <script src="{{ url_for('static', path='shopping.js') }}" defer></script>
 {% endblock %}
