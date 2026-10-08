@@ -1,0 +1,499 @@
+{
+  "$defs": {
+    "Ingredient": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "ingredient": {
+          "minLength": 1,
+          "title": "Ingredient",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quantity"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "enum": [
+                "g",
+                "kg",
+                "mg",
+                "ml",
+                "l",
+                "tsp",
+                "tbsp",
+                "cup",
+                "oz",
+                "lb",
+                "count",
+                "fl_oz"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "preparation": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preparation"
+        },
+        "liquid": {
+          "default": false,
+          "title": "Liquid",
+          "type": "boolean"
+        },
+        "optional": {
+          "default": false,
+          "title": "Optional",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "ingredient"
+      ],
+      "title": "Ingredient",
+      "type": "object"
+    },
+    "IngredientOverride": {
+      "additionalProperties": false,
+      "properties": {
+        "ingredient": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ingredient"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quantity"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "enum": [
+                "g",
+                "kg",
+                "mg",
+                "ml",
+                "l",
+                "tsp",
+                "tbsp",
+                "cup",
+                "oz",
+                "lb",
+                "count",
+                "fl_oz"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "preparation": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preparation"
+        },
+        "liquid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Liquid"
+        },
+        "optional": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Optional"
+        }
+      },
+      "title": "IngredientOverride",
+      "type": "object"
+    },
+    "Nutrition": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "enum": [
+            "per_serving",
+            "whole_recipe"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "status": {
+          "default": "unknown",
+          "enum": [
+            "unknown",
+            "estimated",
+            "source_provided"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "calories_kcal": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calories Kcal"
+        },
+        "protein_g": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Protein G"
+        },
+        "carbohydrate_g": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Carbohydrate G"
+        },
+        "fat_g": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fat G"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        }
+      },
+      "required": [
+        "basis"
+      ],
+      "title": "Nutrition",
+      "type": "object"
+    },
+    "RecipeTimes": {
+      "additionalProperties": false,
+      "properties": {
+        "prep_minutes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prep Minutes"
+        },
+        "cook_minutes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cook Minutes"
+        }
+      },
+      "title": "RecipeTimes",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Variation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "ingredient_overrides": {
+          "patternProperties": {
+            "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+              "$ref": "#/$defs/IngredientOverride"
+            }
+          },
+          "title": "Ingredient Overrides",
+          "type": "object"
+        },
+        "instruction_notes": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Instruction Notes",
+          "type": "array"
+        },
+        "nutrition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Nutrition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ],
+      "title": "Variation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "id": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Description"
+    },
+    "servings": {
+      "exclusiveMinimum": 0,
+      "title": "Servings",
+      "type": "number"
+    },
+    "tags": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "times": {
+      "$ref": "#/$defs/RecipeTimes"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Source"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "ingredients": {
+      "items": {
+        "$ref": "#/$defs/Ingredient"
+      },
+      "minItems": 1,
+      "title": "Ingredients",
+      "type": "array"
+    },
+    "instructions": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Instructions",
+      "type": "array"
+    },
+    "nutrition": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Nutrition"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "variations": {
+      "items": {
+        "$ref": "#/$defs/Variation"
+      },
+      "title": "Variations",
+      "type": "array"
+    },
+    "notes": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "servings",
+    "ingredients",
+    "instructions"
+  ],
+  "title": "Recipe",
+  "type": "object"
+}

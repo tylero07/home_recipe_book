@@ -1,0 +1,101 @@
+schema_version: 1
+id: chicken-cheddar-bay-dumplings
+title: Chicken & Cheddar Bay Dumplings
+description: 'Your cooked version: extra vegetables, celery instead of peas, and no
+  finishing butter.'
+servings: 6
+tags:
+- dinner
+- chicken
+- comfort-food
+- needs-review
+times:
+  prep_minutes: null
+  cook_minutes: null
+source:
+  title: Chicken Dumpling Recipe — generated recipe and cooking follow-up
+ingredients:
+- id: chicken
+  ingredient: chicken breast
+  quantity: 2
+  unit: lb
+  preparation: null
+- id: broth
+  ingredient: bone broth
+  quantity: 5
+  unit: cup
+  preparation: 'label reported by user: 45 kcal and 9 g protein per 8 fl oz; 5 cups
+    totals 225 kcal and 45 g protein'
+  liquid: true
+- id: biscuit-mix
+  ingredient: Cheddar Bay Biscuit Mix
+  quantity: 1
+  unit: count
+  preparation: one full box; box size not recovered
+- id: butter
+  ingredient: butter
+  quantity: 4
+  unit: tbsp
+  preparation: for the vegetables and roux; no finishing butter
+- id: milk
+  ingredient: ultra-filtered 2% milk
+  quantity: 0.75
+  unit: cup
+  preparation: null
+  liquid: true
+- id: flour
+  ingredient: flour
+  quantity: 0.3333333333333333
+  unit: cup
+  preparation: 1/3 cup for the roux; assumed amount in the supplied macro discussion,
+    not separately confirmed
+- id: cheddar
+  ingredient: cheddar cheese
+  quantity: 0.5
+  unit: cup
+  preparation: added cheddar; assumed amount in the supplied macro discussion, not
+    separately confirmed
+- id: carrot
+  ingredient: carrot
+  quantity: 1.5
+  unit: cup
+  preparation: diced; estimated amount for the six-serving batch
+- id: onion
+  ingredient: onion
+  quantity: 1.5
+  unit: cup
+  preparation: diced; estimated amount for the six-serving batch
+- id: celery
+  ingredient: celery
+  quantity: 1.5
+  unit: cup
+  preparation: diced; estimated amount for the six-serving batch; replaces peas
+instructions:
+- 'Partial method recovered from the cooking discussion: use the butter for sautéing
+  the vegetables and making the roux.'
+- The Cheddar Bay dumplings were steamed directly in the broth. The original dough
+  preparation, chicken preparation, and cooking times are not present in the accessible
+  history; consult the original recipe before cooking.
+- Omit the finishing butter on the dumplings, matching the cooked version.
+notes:
+- 'Your cooked version: extra vegetables, celery instead of peas, and no finishing
+  butter.'
+- 'Incomplete method record: the available chat contains the final ingredient summary
+  and your modifications, not the initial generated recipe. Missing amounts are unknown,
+  not to taste.'
+- Six servings is the division used in the earlier discussion. No cooked-on date has
+  been inferred.
+- 'Historical estimate from the supplied conversation: approximately 500–550 kcal
+  and 45–50 g protein per serving when divided into six. This is not a newly verified
+  calculation; biscuit-box size and nutrition label remain unavailable.'
+- The earlier 511 kcal / 47 g protein / 40 g carbohydrate / 18 g fat estimate assumed
+  finishing butter had been included in the previous total. That inclusion was not
+  established, so those point estimates are not entered as verified nutrition.
+- The supplied excerpt recovers planned amounts of 1/3 cup flour and 1/2 cup added
+  cheddar. The complete original method is still missing.
+- 'Vegetables estimated at the user’s request: 1½ cups each of diced carrot, onion,
+  and celery (4½ cups total) for six servings. These are practical starting amounts
+  for the extra-vegetable version, not recovered measurements from the original batch.'
+nutrition:
+  basis: per_serving
+  status: unknown

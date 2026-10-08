@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# User-owned records and rebuildable indexes
+/personal/
+/data/
+
+/work/

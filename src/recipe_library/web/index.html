@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="intro"><p class="eyebrow">THE COLLECTION</p><h1>What sounds good?</h1><p>Find a familiar favorite or your next kitchen experiment.</p></section>
+<form class="filters" action="/" method="get" role="search">
+<label class="query">Find a recipe<input type="search" name="q" value="{{ q }}" maxlength="200" placeholder="Try chickpeas, lemon, or lunch"></label>
+<label>Category<select name="tag"><option value="">All categories</option>{% for item in tags %}<option value="{{ item }}" {% if tag == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+<label>Ready within (minutes)<input type="number" name="max_minutes" value="{{ max_minutes }}" min="0" step="any" placeholder="Any time"></label><button type="submit">Find recipes</button>
+</form>
+<div class="results-heading"><h2>{{ results.total }} recipe{% if results.total != 1 %}s{% endif %}</h2>{% if q or tag or max_minutes %}<a href="/">Clear filters</a>{% endif %}</div>
+<div class="cards">{% for recipe in results['items'] %}<article class="card"><div class="tags">{% for tag in recipe.tags %}<span>{{ tag }}</span>{% endfor %}</div><h3><a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a></h3><p>{{ recipe.description or 'A recipe from your collection.' }}</p><div class="meta">{% if recipe.times.prep_minutes is not none and recipe.times.cook_minutes is not none %}{{ '%g'|format(recipe.times.prep_minutes + recipe.times.cook_minutes) }} min{% else %}Time not recorded{% endif %} · {{ '%g'|format(recipe.servings) }} servings</div></article>{% else %}<div class="empty"><h2>No recipes found</h2><p>Try fewer search words or remove a filter.</p><a href="/">Browse the collection</a></div>{% endfor %}</div>
+<nav class="pagination" aria-label="Results pages">{% if previous %}<a href="{{ previous }}">← Previous</a>{% endif %}{% if previous or next %}<span>Page {{ page }}</span>{% endif %}{% if next %}<a href="{{ next }}">Next →</a>{% endif %}</nav>
+{% endblock %}

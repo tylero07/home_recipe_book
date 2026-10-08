@@ -1,0 +1,62 @@
+schema_version: 1
+id: lemon-chickpea-bowl
+title: Lemon Chickpea Bowl
+description: A simple grain bowl with chickpeas and lemon.
+servings: 2
+tags:
+- vegetarian
+- lunch
+- quick
+times:
+  prep_minutes: 10
+  cook_minutes: 15
+source:
+  title: Original recipe
+  url: null
+ingredients:
+- id: chickpeas
+  ingredient: chickpeas
+  quantity: 240
+  unit: g
+  preparation: cooked and drained
+  optional: false
+- id: rice
+  ingredient: rice
+  quantity: 150
+  unit: g
+  preparation: dry
+  optional: false
+- id: lemon-juice
+  ingredient: lemon juice
+  quantity: 30
+  unit: ml
+  optional: false
+  liquid: true
+- id: salt
+  ingredient: salt
+  quantity: null
+  unit: null
+  preparation: to taste
+  optional: false
+instructions:
+- Cook the rice.
+- Warm the chickpeas and combine with the rice.
+- Add lemon juice and season to taste.
+nutrition:
+  basis: per_serving
+  status: unknown
+  calories_kcal: null
+  protein_g: null
+  carbohydrate_g: null
+  fat_g: null
+  source: null
+variations:
+- id: extra-chickpeas
+  title: Extra chickpeas
+  ingredient_overrides:
+    chickpeas:
+      quantity: 360
+  instruction_notes:
+  - Use the larger chickpea quantity; otherwise follow the base method.
+  nutrition: null
+notes: []
