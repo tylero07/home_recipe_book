@@ -86,7 +86,7 @@ ingredients:
 - id: olive-oil
   ingredient: olive oil
   ref: olive-oil
-  uses: [fat-for-cooking]
+  uses: [fat-for-cooking, seared]
   preparation: enough to coat the pan
 - id: tomato-paste
   ingredient: tomato paste

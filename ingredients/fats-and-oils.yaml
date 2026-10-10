@@ -1,0 +1,327 @@
+schema_version: 1
+ingredients:
+- id: light-olive-oil
+  name: light (refined) olive oil
+  category: oil
+  grams_per_cup: 216.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171413: Oil, olive, salad or cooking'
+  usda:
+    fdc_id: 171413
+    dataset: SR Legacy
+    description: Oil, olive, salad or cooking
+  notes:
+  - Refined olive oil has the same macros as extra-virgin; USDA lists one olive oil.
+  - Cup weight from USDA portion '1 cup' (216 g).
+- id: soybean-oil
+  name: vegetable oil (soybean)
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171411: Oil, soybean, salad or cooking'
+  usda:
+    fdc_id: 171411
+    dataset: SR Legacy
+    description: Oil, soybean, salad or cooking
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: corn-oil
+  name: corn oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 900.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171029: Oil, corn, industrial and retail, all purpose
+      salad or cooking'
+  usda:
+    fdc_id: 171029
+    dataset: SR Legacy
+    description: Oil, corn, industrial and retail, all purpose salad or cooking
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: peanut-oil
+  name: peanut oil
+  category: oil
+  grams_per_cup: 216.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171410: Oil, peanut, salad or cooking'
+  usda:
+    fdc_id: 171410
+    dataset: SR Legacy
+    description: Oil, peanut, salad or cooking
+  notes:
+  - Cup weight from USDA portion '1 cup' (216 g).
+- id: sunflower-oil
+  name: sunflower oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171025: Oil, sunflower, linoleic, (approx. 65%)'
+  usda:
+    fdc_id: 171025
+    dataset: SR Legacy
+    description: Oil, sunflower, linoleic, (approx. 65%)
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: safflower-oil
+  name: safflower oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171026: Oil, safflower, salad or cooking, linoleic,
+      (over 70%)'
+  usda:
+    fdc_id: 171026
+    dataset: SR Legacy
+    description: Oil, safflower, salad or cooking, linoleic, (over 70%)
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: grapeseed-oil
+  name: grapeseed oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171028: Oil, grapeseed'
+  usda:
+    fdc_id: 171028
+    dataset: SR Legacy
+    description: Oil, grapeseed
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: sesame-oil
+  name: sesame oil (plain, untoasted)
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171016: Oil, sesame, salad or cooking'
+  usda:
+    fdc_id: 171016
+    dataset: SR Legacy
+    description: Oil, sesame, salad or cooking
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: toasted-sesame-oil
+  name: toasted sesame oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171016: Oil, sesame, salad or cooking'
+  usda:
+    fdc_id: 171016
+    dataset: SR Legacy
+    description: Oil, sesame, salad or cooking
+  notes:
+  - USDA lists one sesame oil; toasting changes flavor, not macros.
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: coconut-oil
+  name: coconut oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 892.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 99.1
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171412: Oil, coconut'
+  usda:
+    fdc_id: 171412
+    dataset: SR Legacy
+    description: Oil, coconut
+  notes:
+  - Solid below about 76°F; the cup weight is for melted oil, from USDA portion '1 cup' (218 g).
+- id: flaxseed-oil
+  name: flaxseed oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.11
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 167702: Oil, flaxseed, cold pressed'
+  usda:
+    fdc_id: 167702
+    dataset: SR Legacy
+    description: Oil, flaxseed, cold pressed
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: walnut-oil
+  name: walnut oil
+  category: oil
+  grams_per_cup: 218.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171030: Oil, walnut'
+  usda:
+    fdc_id: 171030
+    dataset: SR Legacy
+    description: Oil, walnut
+  notes:
+  - Cup weight from USDA portion '1 cup' (218 g).
+- id: ghee
+  name: ghee (clarified butter)
+  category: animal fat
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 900.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171314: Butter, Clarified butter (ghee)'
+  usda:
+    fdc_id: 171314
+    dataset: SR Legacy
+    description: Butter, Clarified butter (ghee)
+  notes:
+  - USDA gives no cup weight for ghee; 205 g is the USDA cup weight for lard and tallow.
+- id: lard
+  name: lard
+  category: animal fat
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 902.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171401: Lard'
+  usda:
+    fdc_id: 171401
+    dataset: SR Legacy
+    description: Lard
+  notes:
+  - Cup weight from USDA portion '1 cup' (205 g).
+- id: beef-tallow
+  name: beef tallow
+  category: animal fat
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 902.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171400: Fat, beef tallow'
+  usda:
+    fdc_id: 171400
+    dataset: SR Legacy
+    description: Fat, beef tallow
+  notes:
+  - Cup weight from USDA portion '1 cup' (205 g).
+- id: chicken-fat
+  name: chicken fat (schmaltz)
+  category: animal fat
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 900.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 99.8
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173564: Fat, chicken'
+  usda:
+    fdc_id: 173564
+    dataset: SR Legacy
+    description: Fat, chicken
+  notes:
+  - Cup weight from USDA portion '1 cup' (205 g).
+- id: bacon-grease
+  name: bacon grease
+  category: animal fat
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 897.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 99.5
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 172345: Animal fat, bacon grease'
+  usda:
+    fdc_id: 172345
+    dataset: SR Legacy
+    description: Animal fat, bacon grease
+  notes:
+  - USDA lists only a teaspoon (4.3 g) for bacon grease; the cup weight uses lard's 205 g.
+- id: vegetable-shortening
+  name: vegetable shortening
+  category: shortening
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 884.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 100.0
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173574: Shortening, special purpose for cakes and frostings,
+      soybean (hydrogenated)'
+  usda:
+    fdc_id: 173574
+    dataset: SR Legacy
+    description: Shortening, special purpose for cakes and frostings, soybean (hydrogenated)
+  notes:
+  - Cup weight from USDA portion '1 cup' (205 g).
+- id: duck-fat
+  name: duck fat
+  category: animal fat
+  grams_per_cup: 205.0
+  nutrition_per_100g:
+    status: estimated
+    calories_kcal: 882.0
+    protein_g: 0.0
+    carbohydrate_g: 0.0
+    fat_g: 99.8
+    source: USDA SR Legacy 'Fat, duck' (NDB 04574), from its published 1 cup = 1808 kcal, 204.6 g fat; FDC
+      ID not confirmed.
+  notes:
+  - Cup weight assumed 205 g, like the other USDA poultry fats.

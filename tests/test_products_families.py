@@ -119,7 +119,7 @@ def test_page_product_picker_and_not_counted_sections(client):
     page = client.get("/recipe/wheat-beer-chili").text
     assert "Choose a Product to Count Nutrition" in page
     assert 'href="#product-beer">Wheat Beer</a>' in page and "Mexican Chocolate" in page
-    assert "Not counted because the recipe gives no amount:</strong> Olive Oil, Corn Tortillas, Oil for Frying." in page
+    assert "Not counted because the recipe gives no amount:</strong> Corn Tortillas, Oil for Frying." in page
     assert "Salt, Black Pepper, Sumac, Cinnamon, Fresh Cilantro" in page  # each name once
     assert "17 Swaps Available" in page
     chosen = client.get("/recipe/wheat-beer-chili", params={"p.beer": "blue-moon-belgian-white"}).text
@@ -137,3 +137,36 @@ def test_shopping_list_names_chosen_products(client):
     assert any("Mexican Chocolate (Nestlé Abuelita)" in text for text in items)
     bad = {**selection, "products": {"beer": "abuelita"}}
     assert client.post("/shopping/generate", json={"selections": [bad]}).status_code == 422
+
+
+def test_searing_fat_without_amount_starts_at_one_tablespoon():
+    base = {"id": "oil", "ingredient": "olive oil", "uses": ["fat-for-cooking", "seared"]}
+    oil = Recipe.model_validate({**recipe().model_dump(), "ingredients": [base]}).ingredients[0]
+    assert (oil.quantity, oil.unit, oil.preparation) == (1, "tbsp", "adjust as needed")
+    coated = Recipe.model_validate({**recipe().model_dump(), "ingredients": [
+        {**base, "preparation": "enough to coat the pan"}]}).ingredients[0]
+    assert coated.preparation == "enough to coat the pan, adjust as needed"
+    given = Recipe.model_validate({**recipe().model_dump(), "ingredients": [
+        {**base, "quantity": 2, "unit": "tbsp"}]}).ingredients[0]
+    assert (given.quantity, given.preparation) == (2, None)
+    frying = Recipe.model_validate({**recipe().model_dump(), "ingredients": [
+        {**base, "uses": ["fat-for-cooking"]}]}).ingredients[0]
+    assert frying.quantity is None  # deep-frying oil isn't a searing amount
+
+
+def test_poultry_and_oil_families_offer_swaps_rated_for_searing():
+    library = load_ingredients(ROOT / "ingredients")
+    rules = load_substitutions(ROOT / "substitutions", library)
+    chicken = recipe().ingredients[0].model_copy(update={"ref": "chicken-breast", "uses": ["seared", "simmered"]})
+    found = {o["rule"].with_[0].ref: o for o in options(chicken, rules, library)}
+    assert {"chicken-thigh", "chicken-tenderloin", "turkey-breast", "turkey-thigh"} <= set(found)
+    assert {o["rating"] for o in found.values()} == {"works"}
+    oil = recipe().ingredients[4].model_copy(update={"ref": "vegetable-oil", "uses": ["fat-for-cooking", "seared"],
+                                                    "quantity": 1, "unit": "tbsp"})
+    rated = {o["rule"].with_[0].ref: o["rating"] for o in options(oil, rules, library)}
+    assert rated["beef-tallow"] == rated["avocado-oil"] == "works"
+    assert rated["olive-oil"] == "caution"
+    assert rated["flaxseed-oil"] == rated["toasted-sesame-oil"] == "unsuitable"
+    swapped, _ = customize(recipe().model_copy(update={"ingredients": [oil]}), {}, {"oil": "vegetable-oil-to-lard"},
+                           library, rules)
+    assert (swapped.ingredients[0].ingredient, swapped.ingredients[0].quantity) == ("lard", 1)

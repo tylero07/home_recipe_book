@@ -143,25 +143,226 @@ families:
     ingredient: whole-milk plain yogurt
     effects: Thinner and tangier; strain it for a thicker topping.
 - id: cooking-oils
-  title: Cooking Oils
+  title: Cooking Oils and Fats
   ratio_basis: volume
   suitability:
     fat-for-cooking: works
+    seared: works
+    raw: caution
     finishing: caution
+    emulsion: caution
     baked-structure: caution
   reasons:
-    finishing: Flavors differ noticeably when the oil isn't cooked.
-    baked-structure: Flavor carries into baked goods.
+    raw: Flavors differ noticeably when the fat isn't cooked.
+    finishing: Flavors differ noticeably when the fat isn't cooked.
+    emulsion: Strong-flavored or solid fats change a dressing or mayo.
+    baked-structure: Solid and liquid fats aren't interchangeable in baking, and flavor carries through.
   members:
-  - ref: olive-oil
-    title: Olive Oil
-    ingredient: olive oil
-    effects: Fruity flavor; extra-virgin smokes at high heat.
-  - ref: vegetable-oil
-    title: Canola Oil
-    ingredient: canola oil
-    effects: Neutral flavor and a high smoke point.
+  # Neutral, high-heat oils
   - ref: avocado-oil
     title: Avocado Oil
     ingredient: avocado oil
-    effects: Neutral flavor and the highest smoke point.
+    effects: Neutral flavor and the highest smoke point (about 520°F).
+  - ref: vegetable-oil
+    title: Canola Oil
+    ingredient: canola oil
+    effects: Neutral flavor and a high smoke point (about 400–450°F).
+  - ref: soybean-oil
+    title: Vegetable Oil (Soybean)
+    ingredient: vegetable oil
+    effects: Neutral flavor and a high smoke point (about 450°F).
+  - ref: corn-oil
+    title: Corn Oil
+    ingredient: corn oil
+    effects: Nearly neutral flavor and a high smoke point (about 450°F).
+  - ref: peanut-oil
+    title: Peanut Oil
+    ingredient: peanut oil
+    effects: Mild, slightly nutty, with a high smoke point (about 450°F). Avoid for anyone with a peanut allergy.
+  - ref: sunflower-oil
+    title: Sunflower Oil
+    ingredient: sunflower oil
+    effects: Neutral flavor and a high smoke point (about 450°F).
+  - ref: safflower-oil
+    title: Safflower Oil
+    ingredient: safflower oil
+    effects: Neutral flavor and a very high smoke point (about 500°F).
+  - ref: grapeseed-oil
+    title: Grapeseed Oil
+    ingredient: grapeseed oil
+    effects: Clean, light flavor and a fairly high smoke point (about 420°F).
+  - ref: light-olive-oil
+    title: Light (Refined) Olive Oil
+    ingredient: light olive oil
+    effects: Mild olive flavor and a high smoke point (about 465°F).
+  - ref: sesame-oil
+    title: Sesame Oil (Plain)
+    ingredient: sesame oil
+    effects: Light, faintly nutty flavor; refined sesame oil handles high heat (about 410°F).
+  # Flavorful oils
+  - ref: olive-oil
+    title: Olive Oil
+    ingredient: olive oil
+    suitability:
+      raw: works
+      finishing: works
+      seared: caution
+    reasons:
+      seared: Extra-virgin olive oil smokes around 375–405°F; sear at medium-high, not maximum heat.
+    effects: Fruity, peppery flavor; extra-virgin smokes at high heat.
+  - ref: coconut-oil
+    title: Coconut Oil
+    ingredient: coconut oil
+    suitability:
+      raw: unsuitable
+    reasons:
+      raw: Solid below about 76°F, so it hardens in cold dishes.
+    effects: Refined is neutral and takes high heat (about 400°F); virgin tastes of coconut and smokes
+      sooner (about 350°F). Solid at room temperature; measure it melted.
+  - ref: toasted-sesame-oil
+    title: Toasted Sesame Oil
+    ingredient: toasted sesame oil
+    suitability:
+      raw: works
+      finishing: works
+      fat-for-cooking: caution
+      seared: unsuitable
+    reasons:
+      fat-for-cooking: Strong flavor and a lower smoke point; use it over medium heat or mix it with a neutral
+        oil.
+      seared: It burns and turns bitter at searing heat; drizzle a little in at the end instead.
+    effects: Intensely nutty, roasted flavor. A little goes a long way.
+  - ref: walnut-oil
+    title: Walnut Oil
+    ingredient: walnut oil
+    suitability:
+      raw: works
+      finishing: works
+      fat-for-cooking: caution
+      seared: unsuitable
+    reasons:
+      fat-for-cooking: Low smoke point, and heat dulls the walnut flavor.
+      seared: It smokes and turns bitter at searing heat.
+    effects: Rich, nutty flavor that's best uncooked. Avoid for anyone with a tree nut allergy.
+  - ref: flaxseed-oil
+    title: Flaxseed Oil
+    ingredient: flaxseed oil
+    suitability:
+      raw: works
+      finishing: works
+      fat-for-cooking: unsuitable
+      seared: unsuitable
+    reasons:
+      fat-for-cooking: Flaxseed oil smokes around 225°F and breaks down with heat; use it only uncooked.
+      seared: Flaxseed oil smokes around 225°F and breaks down with heat; use it only uncooked.
+    effects: Earthy, slightly bitter flavor and a lot of omega-3. Keep it cold and use it uncooked.
+  # Solid fats: measure melted
+  - ref: ghee
+    title: Ghee (Clarified Butter)
+    ingredient: ghee
+    suitability: &solid-fat
+      raw: unsuitable
+      emulsion: unsuitable
+    reasons: &solid-fat-reasons
+      raw: It's solid at room temperature and congeals in cold dishes.
+      emulsion: It's solid at room temperature and sets up in a cold dressing.
+    effects: Buttery, nutty flavor with a very high smoke point (about 485°F). Measure it melted.
+  - ref: beef-tallow
+    title: Beef Tallow
+    ingredient: beef tallow
+    suitability: *solid-fat
+    reasons: *solid-fat-reasons
+    effects: Rich, beefy flavor and a high smoke point (about 400°F); great for searing. Measure it melted.
+  - ref: lard
+    title: Lard
+    ingredient: lard
+    suitability: *solid-fat
+    reasons: *solid-fat-reasons
+    effects: Mild pork flavor and a medium-high smoke point (about 370°F). Measure it melted.
+  - ref: chicken-fat
+    title: Chicken Fat (Schmaltz)
+    ingredient: chicken fat
+    suitability: *solid-fat
+    reasons: *solid-fat-reasons
+    effects: Savory chicken flavor and a medium-high smoke point (about 375°F). Measure it melted.
+  - ref: duck-fat
+    title: Duck Fat
+    ingredient: duck fat
+    suitability: *solid-fat
+    reasons: *solid-fat-reasons
+    effects: Rich, savory flavor and a medium-high smoke point (about 375°F). Measure it melted.
+  - ref: bacon-grease
+    title: Bacon Grease
+    ingredient: bacon grease
+    suitability: *solid-fat
+    reasons: *solid-fat-reasons
+    effects: Smoky and salty, so cut back on salt. Smokes sooner than other fats (about 325–375°F); keep
+      the heat at medium-high. Measure it melted.
+  - ref: vegetable-shortening
+    title: Vegetable Shortening
+    ingredient: vegetable shortening
+    suitability: *solid-fat
+    reasons: *solid-fat-reasons
+    effects: Neutral flavor and a medium-high smoke point (about 360°F). Measure it melted.
+- id: poultry-cuts
+  title: Chicken and Turkey
+  ratio_basis: weight
+  suitability:
+    seared: works
+    simmered: works
+    marinade: works
+    raw: unsuitable
+  reasons:
+    raw: Poultry must be fully cooked.
+  members:
+  - ref: chicken-breast
+    title: Chicken Breast
+    ingredient: boneless skinless chicken breast
+    instruction_notes:
+      simmered: Breast is lean and dries out with long cooking; pull it at 165°F.
+    effects: Lean and mild.
+  - ref: chicken-tenderloin
+    title: Chicken Tenderloins
+    ingredient: chicken tenderloins
+    instruction_notes:
+      seared: Tenderloins are thin; sear them 1–2 minutes per side.
+      simmered: Tenderloins are thin and cook through quickly; check them a few minutes early.
+    effects: Same lean meat as breast in small, quick-cooking pieces.
+  - ref: chicken-thigh
+    title: Chicken Thighs (Boneless, Skinless)
+    ingredient: boneless skinless chicken thighs
+    instruction_notes:
+      seared: Sear 3–4 minutes per side; thighs take a little longer to brown.
+      simmered: Thighs stay juicy with longer cooking; cook to 175°F for the most tender result.
+    effects: Juicier and richer than breast, with a little more fat and slightly less protein.
+  - ref: chicken-thigh-skin-on
+    title: Chicken Thighs (Skin-On)
+    ingredient: skin-on chicken thighs
+    instruction_notes:
+      seared: Sear skin side down until the fat renders and the skin crisps, about 5–7 minutes; spoon off
+        extra fat.
+      simmered: Thighs stay juicy with longer cooking; cook to 175°F, and remove the skin before shredding
+        if you like.
+    effects: Much richer, with about four times the fat of breast. The amount is the meat and skin without
+      the bone.
+  - ref: turkey-breast
+    title: Turkey Breast
+    ingredient: boneless skinless turkey breast
+    instruction_notes:
+      seared: Cut it into cutlets or chunks first; a whole turkey breast is too thick to sear and simmer
+        through quickly.
+      simmered: Lean like chicken breast; pull it at 165°F so it stays moist.
+    effects: Lean, mild, and slightly firmer than chicken breast, with a bit more protein.
+  - ref: turkey-tenderloin
+    title: Turkey Tenderloin
+    ingredient: turkey tenderloin
+    instruction_notes:
+      simmered: Tenderloins are thicker than chicken breast; allow a few extra minutes and check for 165°F.
+    effects: Lean and mild, like turkey breast.
+  - ref: turkey-thigh
+    title: Turkey Thighs (Boneless, Skinless)
+    ingredient: boneless skinless turkey thighs
+    instruction_notes:
+      seared: Cut into large chunks so they cook through in the pot.
+      simmered: Turkey thigh is firmer and takes longer to get tender; simmer to 175°F or a little longer.
+    effects: Rich, dark-meat flavor, a bit firmer than chicken thigh, and still lean.

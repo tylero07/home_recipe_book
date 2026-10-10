@@ -163,3 +163,26 @@ Steps 2 and 3 of [the customization design](customization-design.md).
   per serving guessed at the biscuit mix; the library estimate uses its label
   and comes out near 626 kcal / 50 g protein per serving.
 - The `needs-review` tag was dropped since the method is now complete.
+
+## 2026-10-08 — Poultry swaps, cooking fats, and searing amounts
+
+- New **Chicken and Turkey** family: chicken breast, tenderloins, boneless and
+  skin-on thighs, turkey breast, tenderloin, and boneless thighs, swapped by
+  weight. Thighs get notes to cook to 175°F; thin and thick cuts get timing
+  notes. Skin-on thigh values are meat and skin without the bone. Tenderloins
+  reuse the breast nutrition.
+- **Cooking Oils** became **Cooking Oils and Fats** with 22 members, all with
+  USDA SR Legacy macros (duck fat is an estimate; its FDC ID wasn't confirmed).
+  Each member's effects give flavor and an approximate smoke point.
+- Ratings follow heat: flaxseed is unsuitable for any cooking; toasted sesame
+  and walnut are unsuitable for searing and caution for other cooking;
+  extra-virgin olive oil is caution for searing. Solid fats (tallow, lard,
+  schmaltz, duck fat, bacon grease, ghee, shortening, coconut) are unsuitable
+  raw or in emulsions and are measured melted, one-for-one by volume.
+- Butter stays out of the family: it's about 20% water, so it keeps its own
+  0.75 ratio rule.
+- A line used for both `fat-for-cooking` and `seared` with no amount now
+  starts at **1 tbsp**, with "adjust as needed" added to its preparation, so
+  it can be edited and is counted in nutrition. Frying oil and other cooking
+  fats without `seared` stay uncounted, since 1 tbsp would be wrong for deep
+  frying. The chili's olive oil is now tagged `seared` and counted.

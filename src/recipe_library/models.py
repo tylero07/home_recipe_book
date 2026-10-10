@@ -19,6 +19,7 @@ CATEGORY_LABELS = {"breakfast": "Breakfast", "snacks-apps": "Snacks & Apps",
                    "lunch-dinner": "Lunch & Dinner", "dessert": "Dessert"}
 Served = Literal["hot", "cold", "room-temperature"]
 Suitability = Literal["works", "caution", "unsuitable"]
+DEFAULT_SEARING_FAT = (1.0, "tbsp")  # Starting amount for a searing-fat line that gives none
 PLACEHOLDER = re.compile(r"\{([a-z0-9]+(?:-[a-z0-9]+)*)\}")
 
 
@@ -70,6 +71,15 @@ class Ingredient(Model):
         if self.quantity_max is not None and (self.quantity is None or self.quantity_max <= self.quantity):
             raise ValueError("quantity_max must be greater than quantity")
         _unique_uses(self.uses)
+        return self
+
+    @model_validator(mode="after")
+    def default_searing_fat(self) -> Self:
+        """Searing fat with no amount starts at 1 tbsp, so it can be edited and counted.
+        Frying oil and other cooking fats without an amount stay uncounted."""
+        if self.quantity is None and {"fat-for-cooking", "seared"} <= set(self.uses):
+            self.quantity, self.unit = DEFAULT_SEARING_FAT
+            self.preparation = f"{self.preparation}, adjust as needed" if self.preparation else "adjust as needed"
         return self
 
     @property

@@ -41,8 +41,8 @@ ingredients:
   group: Stew
   ingredient: vegetable oil
   ref: vegetable-oil
-  uses: [fat-for-cooking]
-  preparation: a little, for searing
+  uses: [fat-for-cooking, seared]
+  preparation: for searing
 - id: butter
   group: Stew
   ingredient: butter
@@ -149,8 +149,8 @@ ingredients:
   unit: cup
   preparation: shredded
 instructions:
-- Season the chicken breasts with salt and pepper. Sear in a little oil over medium-high
-  heat for 2–3 minutes per side until golden, then remove. They don't need to be cooked
+- Season the {chicken} with salt and pepper. Sear in the {oil} over medium-high heat
+  for 2–3 minutes per side until golden, then remove. They don't need to be cooked
   through yet.
 - Melt the butter in the same pot. Add the onion, carrots, and celery and cook 5–7 minutes,
   then add the garlic, thyme, and rosemary.

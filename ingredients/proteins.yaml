@@ -291,3 +291,99 @@ ingredients:
     carbohydrate_g: 0.05
     fat_g: 7.21
     source: 'USDA FoodData Central (SR Legacy), FDC ID 175293: Bison, ground, grass-fed, raw'
+- id: chicken-tenderloin
+  name: chicken tenderloins, raw
+  category: poultry
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 120.0
+    protein_g: 22.5
+    carbohydrate_g: 0.0
+    fat_g: 2.62
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 171077: Chicken, broiler or fryers, breast, skinless,
+      boneless, meat only, raw'
+  usda:
+    fdc_id: 171077
+    dataset: SR Legacy
+    description: Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw
+  notes:
+  - Tenderloins are breast meat, so they use the breast values.
+- id: chicken-thigh
+  name: chicken thigh, boneless and skinless, raw
+  category: poultry
+  grams_each: 149
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 121.0
+    protein_g: 19.7
+    carbohydrate_g: 0.0
+    fat_g: 4.12
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 173627: Chicken, broilers or fryers, dark meat, thigh,
+      meat only, raw'
+  usda:
+    fdc_id: 173627
+    dataset: SR Legacy
+    description: Chicken, broilers or fryers, dark meat, thigh, meat only, raw
+  notes:
+  - Weight of one thigh from USDA portion '1 thigh without skin' (149 g).
+- id: chicken-thigh-skin-on
+  name: chicken thigh, skin on, raw (weighed without the bone)
+  category: poultry
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 221.0
+    protein_g: 16.5
+    carbohydrate_g: 0.25
+    fat_g: 16.6
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 172385: Chicken, broilers or fryers, thigh, meat and
+      skin, raw'
+  usda:
+    fdc_id: 172385
+    dataset: SR Legacy
+    description: Chicken, broilers or fryers, thigh, meat and skin, raw
+  notes:
+  - Values are for meat and skin only. Bone-in thighs weigh more per thigh than the meat you get.
+- id: turkey-breast
+  name: turkey breast, boneless and skinless, raw
+  category: poultry
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 114.0
+    protein_g: 23.3
+    carbohydrate_g: 0.0
+    fat_g: 2.33
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174515: Turkey, retail parts, breast, meat only, raw'
+  usda:
+    fdc_id: 174515
+    dataset: SR Legacy
+    description: Turkey, retail parts, breast, meat only, raw
+- id: turkey-tenderloin
+  name: turkey tenderloin, raw
+  category: poultry
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 114.0
+    protein_g: 23.3
+    carbohydrate_g: 0.0
+    fat_g: 2.33
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174515: Turkey, retail parts, breast, meat only, raw'
+  usda:
+    fdc_id: 174515
+    dataset: SR Legacy
+    description: Turkey, retail parts, breast, meat only, raw
+  notes:
+  - Tenderloins are breast meat, so they use the breast values.
+- id: turkey-thigh
+  name: turkey thigh, boneless and skinless, raw
+  category: poultry
+  nutrition_per_100g:
+    status: source_provided
+    calories_kcal: 116.0
+    protein_g: 20.6
+    carbohydrate_g: 0.0
+    fat_g: 3.69
+    source: 'USDA FoodData Central (SR Legacy), FDC ID 174518: Turkey, retail parts, thigh, meat only, raw'
+  usda:
+    fdc_id: 174518
+    dataset: SR Legacy
+    description: Turkey, retail parts, thigh, meat only, raw
