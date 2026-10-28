@@ -374,6 +374,8 @@ The last assistant recommendation was to create the repository skeleton and Pyda
 10. **Pantry:** Simple availability flags or quantitative inventory? Should any consumption ever be automatic?
 11. **Sync:** Is one-device storage sufficient initially? If not, what store, conflict rules, and backup/restore behavior are acceptable?
 12. **Shared content:** What attribution and publication rules should apply to imported recipes?
+13. **Printable:** For freezer style recipes and day of can we print date prepped, macros, and name of
+meal via formatted sticker/zebra printer style labels
 
 ## 16. Scope guardrails
 
